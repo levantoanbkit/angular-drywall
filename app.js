@@ -23,6 +23,9 @@ app.config = config;
 //setup the web server
 app.server = http.createServer(app);
 
+// setup socket.io
+
+
 //setup mongoose
 app.db = mongoose.createConnection(config.mongodb.uri);
 app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
@@ -91,4 +94,15 @@ app.utility.workflow = require('./util/workflow');
 //listen up
 app.server.listen(app.config.port, function(){
   //and... we're live
+  console.log("server listening on port : ", app.config.port);
+});
+
+var io = require('socket.io').listen(app.server);
+
+io.on('connection', function(socket){
+  console.log("socket connected : ", socket.id);
+  socket.emit("call-client", {msg:"My name is Server, I AM LE VAN TOAN"});
+  socket.on("call-server", function(data){
+    console.log("socket data of client call server: " + data);
+  });
 });
