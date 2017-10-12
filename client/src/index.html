@@ -30,10 +30,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
         let socket = io.connect(window.location.href);
-        socket.on('call-client', function (data) {
-            console.log(data);
-            // socket.emit('respond', "Hello to you too, Mr.Server!");
-        });
     });
 </script>
 <!-- endbuild -->
