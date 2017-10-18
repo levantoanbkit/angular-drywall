@@ -94,13 +94,5 @@ app.server.listen(app.config.port, function(){
 });
 
 var tcpSocketManagement = require('./socket/tcp-socket');
-
-var io = require('socket.io').listen(app.server);
-
-io.on('connection', function(socket){
-  console.log("socket connected : ", socket.id);
-  socket.emit("My name is Server I AM LE VAN TOAN");
-  socket.on("call-server", function(data){
-    console.log("socket data of client call server: " + data);
-  });
-});
+app.io = require('socket.io').listen(app.server);
+require('./socket/socket-io')(app.io);
