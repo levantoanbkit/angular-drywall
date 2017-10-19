@@ -32,7 +32,7 @@ function handleConnection(connection) {
       saveConnectionInfo(connection, parseDataObject);
       serverAnswerClient(connection, data);
       // just demo for call remoteControlCommand
-      makeRemoteControlCommand(parseDataObject.deviceName, 'MODE', {});
+      // makeRemoteControlCommand(parseDataObject.deviceName, 'MODE', {});
     } else {
       forceEndConnection(connection, parseDataObject);
     }
@@ -145,52 +145,71 @@ function parseDataToObject(connection, data) {
   return parseDataObject;
 }
 
-function getControlCommand(deviceName, cmdName, params) {
+function buildControlCommand(deviceName, cmdName, params) {
   var command = deviceName + ',' + cmdName;
+  var isValidCommand = false;
+  var passOfBox = 'dkb2017hcm';
   switch(cmdName) {
     case 'KT':
-      command += ',' + params.sttDevice + '\r\n';
+      if (params.sttDevice > 0) {
+        command += ',' + params.sttDevice + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'MODE':
-      command += ',' + params.modeBox + '\r\n';
+      if (params.modeBox == 0 || params.modeBox == 1) {
+        command += ',' + params.modeBox + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'DK':
-      command += ',' + params.sttDevice + ',' + params.valueControl + '\r\n';
+      if (params.sttDevice > 0 && (params.valueControl == 0 || params.valueControl == 1)) {
+        command += ',' + params.sttDevice + ',' + params.valueControl + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'XO':
-      command += ',' + params.sttDevice + '\r\n';
+      if (params.sttDevice) {
+        command += ',' + params.sttDevice + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'ID':
-      command += ',' + params.newDeviceName + ',' + params.passOfBox + '\r\n';
+      if (params.newDeviceName && params.passOfBox == passOfBox) {
+        command += ',' + params.newDeviceName + ',' + params.passOfBox + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'IPS':
-      command += ',' + params.newIPServer + ',' + params.passOfBox + '\r\n';
+      if (params.newIPServer && params.passOfBox == passOfBox) {
+        command += ',' + params.newIPServer + ',' + params.passOfBox + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'PORTS':
-      command += ',' + params.newPortServer + ',' + params.passOfBox + '\r\n';
+      if (params.newPortServer && params.passOfBox == passOfBox) {
+        command += ',' + params.newPortServer + ',' + params.passOfBox + '\r\n';
+        isValidCommand = true;
+      }
       break;
     case 'RSTPW':
-      command += ',' + params.passOfBox + '\r\n';
-      break;
-    default:
-      command += '\r\n';
+      if (params.passOfBox == passOfBox) {
+        command += ',' + params.passOfBox + '\r\n';
+        isValidCommand = true;
+      }
       break;
   }
-  return command;
+  return isValidCommand ? command : '';
 }
 
 function makeRemoteControlCommand(deviceName, cmdName, params) {
-  // Get current socket connection of device has name is deviceName
-  params = {
-    modeBox: 1,
-    sttDevice: 1
-  };
+  // Get current tcpsocket connection of device has name is deviceName
   var connection = connections[deviceName];
-  if (connection) {
-    var commandData = getControlCommand(deviceName, cmdName, params);
-    serverAnswerClient(connection, commandData);
+  var commandString = buildControlCommand(deviceName, cmdName, params);
+  if (connection && commandString) {
+    serverAnswerClient(connection, commandString);
   } else {
-    console.log('Connection of deviceName %s is not exist', deviceName);
+    console.log('Connection of deviceName %s is not exist or command is not valid', deviceName);
   }
 }
 
