@@ -3,8 +3,8 @@
     <div class="container">
         <div class="navbar-header">
             <a href="/" class="navbar-brand">
-                <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
-                <span class="navbar-brand-label">Remote Control System</span>
+                <img src="/img/iot.png" class="navbar-logo">
+                <span class="navbar-brand-label">Smart Control System</span>
             </a>
             <button class="navbar-toggle btn navbar-btn" ng-init="menuCollapsed = true" ng-click="menuCollapsed = !menuCollapsed">
                 <span class="icon-bar"></span>
@@ -15,15 +15,15 @@
         <div class="navbar-collapse collapse" collapse="menuCollapsed" ng-click="menuCollapsed = true">
             <ul class="nav navbar-nav">
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/')}"><a href="/">Home</a></li>
-                <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/about')}"><a href="/about">About</a></li>
-                <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign Up</a></li>
-                <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/contact')}"><a href="/contact">Contact</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">My Account</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Settings</a></li>
+                <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/about')}"><a href="/about">Tính năng</a></li>
+                <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/signup')}"><a href="/signup">Đăng ký</a></li>
+                <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/contact')}"><a href="/contact">Liên hệ</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">Thông tin tài khoản</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Cấu hình tài khoản</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="!isAuthenticated()"><a href="/login"><i class="fa fa-user"></i> Sign In</a></li>
-                <li ng-if="isAuthenticated()"><a href="" ng-click="logout()"><i class="fa fa-user"></i> Sign Out</a></li>
+                <li ng-if="!isAuthenticated()"><a href="/login"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                <li ng-if="isAuthenticated()"><a href="" ng-click="logout()"><i class="fa fa-user"></i> Đăng xuất</a></li>
             </ul>
         </div>
     </div>
@@ -32,8 +32,8 @@
     <div class="container">
         <div class="navbar-header">
             <a href="/admin/" class="navbar-brand-admin">
-                <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
-                <span class="navbar-brand-label">Remote Control System</span>
+                <img src="/img/iot.png" class="navbar-logo">
+                <span class="navbar-brand-label">Smart Control System</span>
             </a>
             <button class="navbar-toggle btn navbar-btn" ng-click="toggleAdminMenu()">
                 <span class="icon-bar"></span>
@@ -44,13 +44,13 @@
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>System&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>Trang Quản Trị&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Pivoted Settings</li>
+                        <li class="dropdown-header">Thiết lập</li>
                         <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
                         <li><a href="/admin/categories" ng-click="closeAdminMenu()">Categories</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">User Admin</li>
+                        <li class="dropdown-header">Quản lý người dùng</li>
                         <li><a href="/admin/users" ng-click="closeAdminMenu()">Users</a></li>
                         <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Accounts</a></li>
                         <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Administrators</a></li>

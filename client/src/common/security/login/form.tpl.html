@@ -1,21 +1,21 @@
 <form name="form" novalidate class="login-form">
     <div class="modal-header">
-        <h4>Sign in</h4>
+        <h4>Đăng Nhập</h4>
     </div>
     <div class="modal-body">
         <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         <div class="form-group">
-            <label class="control-label" for="login">Username or Email:</label>
+            <label class="control-label" for="login">Tên đăng nhập hoặc Email:</label>
             <input class="form-control" type="text" name="login" id="login" ng-model="user.email" required autofocus>
         </div>
         <div class="form-group">
-            <label class="control-label" for="pass">Password:</label>
+            <label class="control-label" for="pass">Mật khẩu:</label>
             <input class="form-control" type="password" name="pass" id="pass" ng-model="user.password" required>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary login" ng-click="login()" ng-disabled='form.$invalid'>Sign in</button>
-        <button class="btn clear" ng-click="clearForm()">Clear</button>
-        <button class="btn btn-warning cancel" ng-click="cancelLogin()">Cancel</button>
+        <button class="btn btn-primary login" ng-click="login()" ng-disabled='form.$invalid'>Đăng nhập</button>
+        <button class="btn clear" ng-click="clearForm()">Làm mới</button>
+        <button class="btn btn-warning cancel" ng-click="cancelLogin()">Huỷ</button>
     </div>
 </form>

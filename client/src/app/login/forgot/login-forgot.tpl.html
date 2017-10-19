@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-sm-6">
-        <div class="page-header"><h1>Forgot Your Password?</h1></div>
+        <div class="page-header"><h1>Bạn đang quên mật khẩu?</h1></div>
         <form name="loginForgotForm">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(loginForgotForm.email)}">
-                <label class="control-label" for="email">Enter Your Email:</label>
+                <label class="control-label" for="email">Nhập Email :</label>
                 <input type="email" name="email" id="email" class="form-control" ng-model="user.email" required>
-                <span class="help-block" ng-show="showError(loginForgotForm.email, 'required')">This field is required</span>
-                <span class="help-block" ng-show="showError(loginForgotForm.email, 'email')">Please enter a valid email</span>
+                <span class="help-block" ng-show="showError(loginForgotForm.email, 'required')">Email là yêu cầu</span>
+                <span class="help-block" ng-show="showError(loginForgotForm.email, 'email')">Vui lòng cung cấp Email hợp lệ</span>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-forgot" ng-disabled="!canSave(loginForgotForm)" ng-click="submit()">Send Reset</button>
-                &nbsp;<a href="/login" class="btn btn-link">Back to Login</a>
+                <button type="button" class="btn btn-primary btn-forgot" ng-disabled="!canSave(loginForgotForm)" ng-click="submit()">Tạo lại mật khẩu</button>
+                &nbsp;<a href="/login" class="btn btn-link">Quay lại Đăng Nhập</a>
             </div>
         </form>
     </div>
