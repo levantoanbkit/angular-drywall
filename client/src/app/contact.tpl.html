@@ -1,32 +1,32 @@
 <div class="row">
     <div class="col-sm-6">
-        <div class="page-header"><h1>Send A Message</h1></div>
+        <div class="page-header"><h1>Gửi thông điệp</h1></div>
         <form name="msgForm">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(msgForm.name)}">
-                <label class="control-label" for="name">Your Name:</label>
+                <label class="control-label" for="name">Họ và Tên:</label>
                 <input type="text" name="name" id="name" class="form-control" ng-model="msg.name" required>
                 <span class="help-block" ng-show="showError(msgForm.name, 'required')">This field is required</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(msgForm.email)}">
-                <label class="control-label" for="email">Your Email:</label>
+                <label class="control-label" for="email">Email:</label>
                 <input type="email" name="email" id="email" class="form-control" ng-model="msg.email" required>
-                <span class="help-block" ng-show="showError(msgForm.email, 'required')">This field is required</span>
-                <span class="help-block" ng-show="showError(msgForm.email, 'email')">Please enter a valid email</span>
+                <span class="help-block" ng-show="showError(msgForm.email, 'required')">Email là yêu cầu</span>
+                <span class="help-block" ng-show="showError(msgForm.email, 'email')">Vui lòng nhập đúng email hợp lệ</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(msgForm.message)}">
-                <label class="control-label" for="message">Message:</label>
+                <label class="control-label" for="message">Nội dung:</label>
                 <textarea name="message" id="message" rows="5" class="form-control" ng-model="msg.message" required></textarea>
-                <span class="help-block" ng-show="showError(msgForm.message, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(msgForm.message, 'required')">Nội dung thông điệp là yêu cầu</span>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-contact" ng-disabled="!canSave(msgForm)" ng-click="submit()">Send Message</button>
+                <button type="button" class="btn btn-primary btn-contact" ng-disabled="!canSave(msgForm)" ng-click="submit()">Gửi</button>
             </div>
         </form>
     </div>
     <div class="col-sm-6 special">
-        <div class="page-header"><h1>Contact Us</h1></div>
-        <p class="lead">Freddy can't wait to hear from you.</p><i class="fa fa-reply-all super-awesome"></i>
-        <address>Tầng 14, tòa nhà IPH, số 241 Xuân Thuỷ, Phường Dịch Vọng, Quận Cầu Giấy, TP.Hà Nội</address>
+        <div class="page-header"><h1>Thông tin liên hệ</h1></div>
+        <p class="lead">Email : levantoanbkit@gmail.com<br>SĐT: +841656228857</p>
+        <i class="fa fa-envelope-o super-awesome" aria-hidden="true"></i> 
     </div>
 </div>

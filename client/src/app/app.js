@@ -33,11 +33,11 @@ angular.module('app').config(['$routeProvider', '$locationProvider', function ($
     .when('/contact', {
       templateUrl: 'contact.tpl.html',
       controller: 'ContactCtrl',
-      title: 'Contact Us'
+      title: 'Liên hệ'
     })
     .when('/about', {
       templateUrl: 'about.tpl.html',
-      title: 'About Us'
+      title: 'Tính năng'
     })
     .otherwise({
       templateUrl: '404.tpl.html',
@@ -52,7 +52,7 @@ angular.module('app').run(['$location', '$rootScope', 'security', function($loca
 
   // add a listener to $routeChangeSuccess
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-    $rootScope.title = current.$$route && current.$$route.title? current.$$route.title: 'System is Running';
+    $rootScope.title = current.$$route && current.$$route.title? current.$$route.title: 'IoT remote control system';
   });
 }]);
 
