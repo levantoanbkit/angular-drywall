@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-6">
-        <div class="page-header"><h1>Gửi thông điệp</h1></div>
+        <div class="page-header"><h3>Gửi thông điệp</h3></div>
         <form name="msgForm">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(msgForm.name)}">
@@ -25,7 +25,7 @@
         </form>
     </div>
     <div class="col-sm-6 special">
-        <div class="page-header"><h1>Thông tin liên hệ</h1></div>
+        <div class="page-header"><h3>Thông tin liên hệ</h3></div>
         <p class="lead">Email : levantoanbkit@gmail.com<br>SĐT: +841656228857</p>
         <i class="fa fa-envelope-o super-awesome" aria-hidden="true"></i> 
     </div>

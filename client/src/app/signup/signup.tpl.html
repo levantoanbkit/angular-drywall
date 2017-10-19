@@ -1,6 +1,6 @@
 <div class="row" id="signup">
     <div class="col-sm-6">
-        <div class="page-header"><h1>Đăng Ký</h1></div>
+        <div class="page-header"><h3>Đăng Ký</h3></div>
         <form name="signupForm">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(signupForm.username)}">
@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="col-sm-6 marketing">
-        <div class="page-header"><h1>Chào mừng bạn!</h1></div>
+        <div class="page-header"><h3>Chào mừng bạn!</h3></div>
         <p class="lead">Bạn đã sẵn sàng sử dụng hệ thống? Let's go!</p>
         <img src="/img/welcome_register.png">
     </div>

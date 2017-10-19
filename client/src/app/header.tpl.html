@@ -28,7 +28,7 @@
         </div>
     </div>
 </div>
-<div class="navbar navbar-inverse navbar-fixed-top" ng-if="isAdmin()" ng-controller="AdminHeaderCtrl">
+<div class="navbar navbar-inverse navbar-fixed-top" ng-if="isAdmin()" ng-controller="AdminHeaderCtrl" style="background-image: linear-gradient(to bottom, #4CAF50 0%, #4CAF50 100%);">
     <div class="container">
         <div class="navbar-header">
             <a href="/admin/" class="navbar-brand-admin">
@@ -44,7 +44,7 @@
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>Trang Quản Trị&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle style="color:#ffffff">Trang Quản Trị&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Thiết lập</li>
                         <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
@@ -60,9 +60,9 @@
             </ul>
             <form name="form" class="navbar-form navbar-right">
                 <div class="dropdown" dropdown is-open="resultIsOpen">
-                    <input name="search" type="text" placeholder="search" class="form-control" ng-model="query" ng-model-options="{ debounce: 500 }" ng-change="update()">
+                    <input name="search" type="text" placeholder="Tìm kiếm" class="form-control" ng-model="query" ng-model-options="{ debounce: 500 }" ng-change="update()">
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">no docs matched</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">Không có kết quả khớp</li>
                         <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Users</li>
                         <li ng-repeat="user in result.users">
                             <a ng-bind="user.username" ng-href="/admin/users/{{user._id}}" ng-click="closeAdminMenu()"></a>

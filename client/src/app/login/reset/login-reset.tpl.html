@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col-sm-6">
-        <div class="page-header"><h1>Reset Your Password</h1></div>
+        <div class="page-header"><h3>Đặt lại mật khẩu</h3></div>
         <form name="resetForm">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(resetForm.password)}" ng-show="(id && email && !success)">
-                <label class="control-label" for="password">New Password:</label>
+                <label class="control-label" for="password">Mật khẩu mới:</label>
                 <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required>
-                <span class="help-block" ng-show="showError(resetForm.password, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(resetForm.password, 'required')">Mật khẩu mới là yêu cầu</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(resetForm.confirm)}" ng-show="(id && email && !success)">
-                <label class="control-label" for="confirm">Confirm Password:</label>
+                <label class="control-label" for="confirm">Xác nhận mật khẩu:</label>
                 <input type="password" name="confirm" id="confirm" class="form-control" ng-model="user.confirm" required>
-                <span class="help-block" ng-show="showError(resetForm.confirm, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(resetForm.confirm, 'required')">Xác nhận mật khẩu là yêu cầu</span>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-reset" ng-show="(id && email && !success)" ng-disabled="!canSave(resetForm)" ng-click="submit()">Set Password</button>
-                &nbsp;<a href="/login" class="btn btn-link">Back to Login</a>
+                <button type="button" class="btn btn-primary btn-reset" ng-show="(id && email && !success)" ng-disabled="!canSave(resetForm)" ng-click="submit()">Đặt mật khẩu</button>
+                &nbsp;<a href="/login" class="btn btn-link">Quay về Đăng nhập</a>
             </div>
         </form>
     </div>
