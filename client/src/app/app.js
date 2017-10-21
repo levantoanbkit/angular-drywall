@@ -69,7 +69,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
       var clickOver = angular.element(event.target);          
       var opened = angular.element(".navbar-collapse").hasClass("in");
       if (opened === true && !clickOver.hasClass("navbar-toggle")) {
-          angular.element("button.navbar-toggle").click();
+          angular.element("button.navbar-toggle.xs").click();
       }
     });
   };
