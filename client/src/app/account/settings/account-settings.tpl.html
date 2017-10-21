@@ -1,85 +1,85 @@
 <div class="row">
     <div class="col-xs-12">
-        <div class="page-header"><h3>Account Settings</h3></div>
+        <div class="page-header"><h3>Cấu hình tài khoản</h3></div>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-9">
         <form name="detailForm">
-            <legend>Contact Info</legend>
+            <legend>Thông tin liên hệ</legend>
             <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(detailForm.first)}">
-                <label class="control-label" for="first">First Name:</label>
+                <label class="control-label" for="first">Họ:</label>
                 <input type="text" name="first" id="first" class="form-control" ng-model="userDetail.first" required>
-                <span class="help-block" ng-show="showError(detailForm.first, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(detailForm.first, 'required')">Bạn cần nhập Họ</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(detailForm.middle)}">
-                <label class="control-label" for="middle">Middle Name:</label>
+                <label class="control-label" for="middle">Tên đệm:</label>
                 <input type="text" name="middle" id="middle" class="form-control" ng-model="userDetail.middle">
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(detailForm.last)}">
-                <label class="control-label" for="last">Last Name:</label>
+                <label class="control-label" for="last">Tên:</label>
                 <input type="text" name="last" id="last" class="form-control" ng-model="userDetail.last" required>
-                <span class="help-block" ng-show="showError(detailForm.last, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(detailForm.last, 'required')">Bạn cần nhập Tên</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(detailForm.company)}">
-                <label class="control-label" for="company">Company Name:</label>
+                <label class="control-label" for="company">Tên công ty:</label>
                 <input type="text" name="company" id="company" class="form-control" ng-model="userDetail.company">
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
-                <label class="control-label" for="phone">Phone:</label>
+                <label class="control-label" for="phone">Số điện thoại:</label>
                 <input type="text" name="phone" id="phone" class="form-control" ng-model="userDetail.phone">
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(detailForm.zip)}">
-                <label class="control-label" for="zip">Zip:</label>
+                <label class="control-label" for="zip">Mã bưu chính:</label>
                 <input type="text" name="zip" id="zip" class="form-control" ng-model="userDetail.zip">
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-update" ng-disabled="!canSave(detailForm)" ng-click="submit(detailForm)">Update</button>
+                <button type="button" class="btn btn-primary btn-update" ng-disabled="!canSave(detailForm)" ng-click="submit(detailForm)">Cập nhật</button>
             </div>
         </form>
         <form name="identityForm">
-            <legend>Identity</legend>
+            <legend>Định danh</legend>
             <alert ng-repeat="alert in alerts.identity" type="{{alert.type}}" close="closeAlert('identity', $index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(identityForm.username)}">
-                <label class="control-label" for="username">Username:</label>
+                <label class="control-label" for="username">Tên đăng nhập:</label>
                 <input type="text" name="username" id="username" class="form-control" ng-model="user.username" required server-error>
-                <span class="help-block" ng-show="showError(identityForm.username, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(identityForm.username, 'required')">Tên đăng nhập là yêu cầu</span>
                 <span class="help-block" ng-show="showError(identityForm.username, 'server')">{{errfor.username}}</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(identityForm.email)}">
                 <label class="control-label" for="email">Email:</label>
                 <input type="email" name="email" id="email" class="form-control" ng-model="user.email" required server-error>
-                <span class="help-block" ng-show="showError(identityForm.email, 'required')">This field is required</span>
-                <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
+                <span class="help-block" ng-show="showError(identityForm.email, 'required')">Email là yêu cầu</span>
+                <span class="help-block" ng-show="showError(identityForm.email, 'email')">Vui lòng nhập Email hợp lệ</span>
                 <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-update" ng-disabled="!canSave(identityForm)" ng-click="submit(identityForm)">Update</button>
+                <button type="button" class="btn btn-primary btn-update" ng-disabled="!canSave(identityForm)" ng-click="submit(identityForm)">Cập nhật</button>
             </div>
         </form>
         <form name="passwordForm">
-            <legend>Set Password</legend>
+            <legend>Thiết đặt mật khẩu</legend>
             <alert ng-repeat="alert in alerts.pass" type="{{alert.type}}" close="closeAlert('pass', $index)">{{alert.msg}}</alert>
             <div class="form-group" ng-class="{'has-error': hasError(passwordForm.password)}">
-                <label class="control-label" for="password">New Password:</label>
+                <label class="control-label" for="password">Mật khẩu mới:</label>
                 <input type="password" name="password" id="password" class="form-control" ng-model="pass.newPassword" required>
-                <span class="help-block" ng-show="showError(passwordForm.password, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(passwordForm.password, 'required')">Mật khẩu mới là yêu cầu</span>
             </div>
             <div class="form-group" ng-class="{'has-error': hasError(passwordForm.confirm)}">
-                <label class="control-label" for="confirm">Confirm Password:</label>
+                <label class="control-label" for="confirm">Xác nhận mật khẩu:</label>
                 <input type="password" name="confirm" id="confirm" class="form-control" ng-model="pass.confirm" required>
-                <span class="help-block" ng-show="showError(passwordForm.confirm, 'required')">This field is required</span>
+                <span class="help-block" ng-show="showError(passwordForm.confirm, 'required')">Bạn cần nhập giống với Mật khẩu mới</span>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-password" ng-disabled="!canSave(passwordForm)" ng-click="submit(passwordForm)">Set Password</button>
+                <button type="button" class="btn btn-primary btn-password" ng-disabled="!canSave(passwordForm)" ng-click="submit(passwordForm)">Đặt mật khẩu</button>
             </div>
         </form>
     </div>
     <div class="col-sm-3" ng-if="social">
-        <legend>Social Connections</legend>
+        <legend>Mạng xã hội</legend>
         <alert ng-repeat="alert in socialAlerts" type="{{alert.type}}" close="closeSocialAlert($index)">{{alert.msg}}</alert>
-        <a ng-repeat-start="(provider, property) in social" ng-if="property.connected" ng-click="disconnect(provider)" class="btn btn-block btn-danger"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Disconnect {{property.text}}</a>
-        <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Connect {{property.text}}</a>
+        <a ng-repeat-start="(provider, property) in social" ng-if="property.connected" ng-click="disconnect(provider)" class="btn btn-block btn-danger"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Ngắt kết nối {{property.text}}</a>
+        <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Kết nối {{property.text}}</a>
     </div>
 </div>
