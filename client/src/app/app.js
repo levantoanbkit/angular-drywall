@@ -60,6 +60,20 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
 
   $scope.notifications = i18nNotifications;
 
+  angular.element(document).ready(function () {
+    $scope.closeToggleWhenClickOutside();
+  });
+
+  $scope.closeToggleWhenClickOutside = function() {
+    angular.element(document).click(function (event) {
+      var clickOver = angular.element(event.target);          
+      var opened = angular.element(".navbar-collapse").hasClass("in");
+      if (opened === true && !clickOver.hasClass("navbar-toggle")) {
+          angular.element("button.navbar-toggle").click();
+      }
+    });
+  };
+
   $scope.removeNotification = function (notification) {
     i18nNotifications.remove(notification);
   };
