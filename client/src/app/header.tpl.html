@@ -1,7 +1,7 @@
 <div ng-controller="HeaderCtrl">
 <div class="navbar navbar-default navbar-fixed-top" ng-if="!isAdmin()">
-    <div class="container">
-        <div class="navbar-header">
+    <div class="container xs">
+        <div class="navbar-header xs">
             <a href="/" class="navbar-brand">
                 <img src="/img/iot.png" class="navbar-logo">
                 <span class="navbar-brand-label">Smart Control System</span>
@@ -29,7 +29,7 @@
     </div>
 </div>
 <div class="navbar navbar-inverse navbar-fixed-top hidden-xs" ng-if="isAdmin()" ng-controller="AdminHeaderCtrl" style="background-image: linear-gradient(to bottom, green 0%, green 100%);">
-    <div class="container">
+    <div class="container header">
         <div class="navbar-header">
             <a href="/admin/" class="navbar-brand-admin">
                 <img src="/img/iot.png" class="navbar-logo">
@@ -82,8 +82,8 @@
     </div>
 </div>
 <div class="navbar navbar-inverse navbar-fixed-top visible-xs" ng-if="isAdmin()" ng-controller="AdminHeaderCtrl">
-    <div class="container">
-        <div class="navbar-header" style="background-color: green;">
+    <div class="container xs">
+        <div class="navbar-header xs" style="background-color: green;">
             <a href="/admin/" class="navbar-brand-admin">
                 <img src="/img/iot.png" class="navbar-logo">
                 <span class="navbar-brand-label">Smart Control System</span>
@@ -97,7 +97,7 @@
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle style="color:#ffffff">Trang Quản Trị&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin xs" dropdown-toggle style="color:#ffffff">Trang Quản Trị&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Thiết lập</li>
                         <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>

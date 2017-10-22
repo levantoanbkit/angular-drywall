@@ -68,8 +68,16 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
     angular.element(document).click(function (event) {
       var clickOver = angular.element(event.target);          
       var opened = angular.element(".navbar-collapse").hasClass("in");
-      if (opened === true && !clickOver.hasClass("navbar-toggle")) {
-          angular.element("button.navbar-toggle.xs").click();
+      var parentNode = clickOver.eq(0).parent();
+      var invalidParentNode = parentNode.hasClass("dropdown") || 
+                              parentNode.hasClass("dropdown-toggle navbar-dropdown-admin xs") || 
+                              parentNode.hasClass("container xs") || 
+                              parentNode.hasClass("navbar-header xs") ||
+                              parentNode.hasClass("navbar-collapse collapse in") ||
+                              parentNode.hasClass("dropdown-menu");
+
+      if (opened === true && !clickOver.hasClass("navbar-toggle") && !invalidParentNode) {
+        angular.element("button.navbar-toggle.xs").click();
       }
     });
   };
