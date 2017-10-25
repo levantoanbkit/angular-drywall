@@ -46,11 +46,12 @@ app.use(require('method-override')());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(config.cryptoKey));
+var sessionStore = new mongoStore({ url: config.mongodb.uri });
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: config.cryptoKey,
-  store: new mongoStore({ url: config.mongodb.uri })
+  store: sessionStore
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -93,6 +94,21 @@ app.server.listen(app.config.port, function(){
   console.log("server listening on port : ", app.config.port);
 });
 
-var tcpSocketManagement = require('./socket/tcp-socket');
-app.io = require('socket.io').listen(app.server);
-require('./socket/socket-io')(app.io);
+//TCP-Socket
+app.tcpConnections = {};
+require('./socket/tcp-socket')(app);
+
+//Socket.io
+var io = require('socket.io').listen(app.server);
+var passportSocketIo = require("passport.socketio");
+var socketIOService  = require('./socket/socket-io.service');
+io.use(passportSocketIo.authorize({
+  cookieParser: cookieParser,       // the same middleware you registrer in express 
+  secret:       config.cryptoKey,    // the session_secret to parse the cookie 
+  store:        sessionStore,        // we NEED to use a sessionstore. no memorystore please 
+  success:      socketIOService.onAuthorizeSuccess,  // *optional* callback on success - read more below 
+  fail:         socketIOService.onAuthorizeFail,     // *optional* callback on fail/error - read more below 
+}));
+
+app.socketIOConnections = {};
+require('./socket/socket-io')(app, io, passportSocketIo, socketIOService);

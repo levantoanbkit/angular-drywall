@@ -7,7 +7,7 @@ exports.mongodb = {
   uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/socketdb'
 };
 exports.companyName = 'levantoanbkit@gmail.com';
-exports.projectName = 'Socket Project';
+exports.projectName = 'IoT System Project';
 exports.systemEmail = 'levantoanbkit@gmail.com';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
@@ -18,7 +18,7 @@ exports.loginAttempts = {
 exports.requireAccountVerification = false;
 exports.smtp = {
   from: {
-    name: process.env.SMTP_FROM_NAME || exports.projectName +' Website',
+    name: process.env.SMTP_FROM_NAME || exports.projectName +' IoT System',
     address: process.env.SMTP_FROM_ADDRESS || 'levantoanbkit@gmail.com'
   },
   credentials: {

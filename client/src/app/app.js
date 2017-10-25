@@ -52,14 +52,13 @@ angular.module('app').run(['$location', '$rootScope', 'security', function($loca
 
   // add a listener to $routeChangeSuccess
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-    $rootScope.title = current.$$route && current.$$route.title? current.$$route.title: 'IoT remote control system';
+    $rootScope.title = current.$$route && current.$$route.title? current.$$route.title: 'IoT system';
   });
 }]);
 
 angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'localizedMessages', function($scope, i18nNotifications, localizedMessages) {
 
   $scope.notifications = i18nNotifications;
-
   angular.element(document).ready(function () {
     $scope.closeToggleWhenClickOutside();
   });
@@ -90,8 +89,3 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
     i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
   });
 }]);
-
-// let socket = io.connect(window.location.href);
-// socket.on('webappclient', function(data) {
-//   console.log(data);
-// });

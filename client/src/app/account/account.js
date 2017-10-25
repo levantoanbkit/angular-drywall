@@ -4,7 +4,7 @@ angular.module('account.index').config(['$routeProvider', 'securityAuthorization
     .when('/account', {
       templateUrl: 'account/account.tpl.html',
       controller: 'AccountCtrl',
-      title: 'Trang quản trị',
+      title: 'Trang dành cho người dùng thường',
       resolve: {
         authenticatedUser: securityAuthorizationProvider.requireAuthenticatedUser
       }
@@ -12,6 +12,10 @@ angular.module('account.index').config(['$routeProvider', 'securityAuthorization
 }]);
 angular.module('account.index').controller('AccountCtrl', [ '$scope',
   function($scope){
+    var socket = io.connect();
+    socket.on('data', function(obj) {
+      socket.emit('data', 'hello server');
+    });
     $scope.dayOfYear = moment().format('DDD');
     $scope.dayOfMonth = moment().format('D');
     $scope.weekOfYear = moment().format('w');

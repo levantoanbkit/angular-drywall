@@ -27,6 +27,11 @@ angular.module('admin.index').config(['$routeProvider', function($routeProvider)
 }]);
 angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats',
   function($scope, $log, stats){
+    var socket = io.connect();
+    socket.on('data', function(obj) {
+      console.log('hello:', obj);
+      socket.emit('data', 'hello server');
+    });
     $scope.user = {
       users: stats['User'],
       accounts: stats['Account'],
@@ -37,4 +42,5 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
       categories: stats['Category'],
       statuses: stats['Status']
     };
-  }]);
+  }
+]);
