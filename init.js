@@ -62,7 +62,7 @@ workflow.on('collectUserInput', function(){
         database: {
           description: 'MongoDB database',
           type: 'string',
-          default: 'angular-drywall'
+          default: 'iotdb'
         },
         user: {
           description: 'MongoDB user',

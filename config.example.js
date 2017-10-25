@@ -2,11 +2,12 @@
 
 exports.hostname = process.env.hostname || 'localhost';
 exports.port = process.env.PORT || 3000;
+exports.tcpSocketPort = process.env.PORT || 9000;
 exports.mongodb = {
   uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || '{{MONGO_URI}}'
 };
-exports.companyName = 'Arthur Kao';
-exports.projectName = 'Angular Drywall';
+exports.companyName = 'bktechteam';
+exports.projectName = 'IoT Project';
 exports.systemEmail = '{{ADMIN_EMAIL}}';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
@@ -17,7 +18,7 @@ exports.loginAttempts = {
 exports.requireAccountVerification = false;
 exports.smtp = {
   from: {
-    name: process.env.SMTP_FROM_NAME || exports.projectName +' Website',
+    name: process.env.SMTP_FROM_NAME || exports.projectName +' IoT System',
     address: process.env.SMTP_FROM_ADDRESS || '{{ADMIN_EMAIL}}'
   },
   credentials: {
