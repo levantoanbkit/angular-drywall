@@ -1,115 +1,43 @@
-<div class="row" id="admin">
-    <div class="col-sm-12">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mt4">Hệ thống điều khiển trung tâm</h3>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="page-header"><h3>Quản Trị Hệ Thống</h3></div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="stat-block stat-bg">
+                    <div class="stat-value" ng-bind="user.users"></div>
+                    <div class="stat-label">Người dùng</div>
                 </div>
-                <div class="col-sm-6">
-                    <input name="deviceSearch" type="text" class="form-control device-search" placeholder="Dự án">
-                    <i class="fa fa-search" aria-hidden="true" id="device-search-icon"></i>
+            </div>
+            <div class="col-sm-4">
+                <div class="stat-block stat-bg">
+                    <div class="stat-value" ng-bind="user.accounts"></div>
+                    <div class="stat-label">Tài khoản</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="stat-block stat-bg">
+                    <div class="stat-value" ng-bind="user.admins"></div>
+                    <div class="stat-label">Quản trị viên</div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 1</div>
-                    <div class="project-label">(Dự án Tây Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
+            <div class="col-sm-4">
+                <div class="stat-block stat-bg">
+                    <div class="stat-value">30</div>
+                    <div class="stat-label">Thiết bị</div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block green-bg">
-                    <div class="device-label">Tủ 2</div>
-                    <div class="project-label">(Dự án Tây Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary active btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
+            <div class="col-sm-4">
+                <div class="stat-block stat-bg">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Dự án</div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 3</div>
-                    <div class="project-label">(Dự án Tây Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 4</div>
-                    <div class="project-label">(Dự án Tây Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block green-bg">
-                    <div class="device-label">Tủ 5</div>
-                    <div class="project-label">(Dự án trung tâm Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary active btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 6</div>
-                    <div class="project-label">(Dự án trung tâm Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 7</div>
-                    <div class="project-label">(Dự án trung tâm Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block green-bg">
-                    <div class="device-label">Tủ 8</div>
-                    <div class="project-label">(Dự án trung tâm Hồ Chí Minh)</div>
-                    <button type="button" class="btn btn-primary active btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 9</div>
-                    <div class="project-label">(Dự án Bình Dương)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block green-bg">
-                    <div class="device-label">Tủ 10</div>
-                    <div class="project-label">(Dự án Bình Dương)</div>
-                    <button type="button" class="btn btn-primary active btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block gray-bg">
-                    <div class="device-label">Tủ 11</div>
-                    <div class="project-label">(Dự án Đồng Nai)</div>
-                    <button type="button" class="btn btn-primary disabled btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="device-block green-bg">
-                    <div class="device-label">Tủ 12</div>
-                    <div class="project-label">(Dự án Đồng Nai)</div>
-                    <button type="button" class="btn btn-primary active btn-device-action">Điều khiển</button>
-                    <button type="button" class="btn btn-primary active btn-device-action">Lịch sử</button>
+            <div class="col-sm-4">
+                <div class="stat-block stat-bg">
+                    <div class="stat-value" ng-bind="pivoted.groups">0</div>
+                    <div class="stat-label">Nhóm người dùng</div>
                 </div>
             </div>
         </div>

@@ -5,11 +5,12 @@ angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'securit
       return security.isAuthenticated();
     };
     $scope.isAdmin = function(){
-      if($location.path().indexOf('/admin') === -1){
-        return false;
-      }else{
-        return security.isAdmin();
-      }
+      // if($location.path().indexOf('/admin') === -1){
+      //   return false;
+      // }else{
+      //   return security.isAdmin();
+      // }
+      return security.isAdmin();
     };
     $scope.logout = function(){
       return security.logout();

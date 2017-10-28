@@ -1,47 +1,5 @@
 #admin{
-  .device-label {
-    font-size: 2em;
-    font-weight: bold;
-    letter-spacing: -1px;
-    margin-top: 10px;
-  }
-  .project-label {
-    font-size: 1.2em;
-  }
-  .device-block {
-    text-align: center;
-    padding-left: 0;
-    padding-right: 0;
-    border: 1px solid black;
-    color: black;
-    height: 150px;
-    margin-top: 10px;
-  }
-  .gray-bg {
-    background-color: #cccccc;
-  }
-  .green-bg {
-    background-color: #37c00f;
-  }
-  .btn-device-action {
-    margin-top: 10px;
-    width: 100px;
-  }
-  .mt4 {
-    margin-top: 4px;
-  }
-  .device-search {
-    width: 260px;
-  }
-  #device-search-icon {
-    position: relative;
-    z-index: 1;
-    left: 242px;
-    top: -26px;
-    color: #7B7B7B;
-    cursor: pointer;
-    width: 0;
-  }
+
 }
 #admin-users-index{
   .input-group {

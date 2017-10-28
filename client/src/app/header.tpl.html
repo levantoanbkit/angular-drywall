@@ -18,6 +18,7 @@
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/about')}"><a href="/about">Tính năng</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/signup')}"><a href="/signup">Đăng ký</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/contact')}"><a href="/contact">Liên hệ</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="/devices">Trạng thái điều khiển</a></li>
                 <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">Thông tin tài khoản</a></li>
                 <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Cấu hình tài khoản</a></li>
             </ul>
@@ -43,35 +44,42 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
+                <li ng-class="{active: isActive('/devices')}"><a href="/devices" class="white-color" ng-click="closeAdminMenu()">ĐIỀU KHIỂN</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle style="color:#ffffff">Trang Quản Trị&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin white-color" dropdown-toggle>Quản Trị&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <!-- <li ng-if="isAuthenticated()" class="dropdown-header">Điều khiển thiết bị</li>
+                        <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="/devices">Danh sách thiết bị</a></li>
+                        <li class="divider"></li> -->
                         <li class="dropdown-header">Thiết lập</li>
-                        <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
-                        <li><a href="/admin/categories" ng-click="closeAdminMenu()">Categories</a></li>
+                        <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Quản lý trạng thái</a></li>
+                        <li><a href="/admin/categories" ng-click="closeAdminMenu()">Danh mục</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Quản lý người dùng</li>
-                        <li><a href="/admin/users" ng-click="closeAdminMenu()">Users</a></li>
-                        <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Accounts</a></li>
-                        <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Administrators</a></li>
-                        <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Admin Groups</a></li>
+                        <li><a href="/admin/users" ng-click="closeAdminMenu()">Danh sách người dùng</a></li>
+                        <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Danh sách tài khoản</a></li>
+                        <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Danh sách quản trị</a></li>
+                        <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Cấu hình nhóm</a></li>
                     </ul>
                 </li>
             </ul>
+
             <form name="form" class="navbar-form navbar-right">
                 <div class="dropdown" dropdown is-open="resultIsOpen">
                     <input name="search" type="text" placeholder="Tìm kiếm" class="form-control" ng-model="query" ng-model-options="{ debounce: 500 }" ng-change="update()">
                     <ul class="dropdown-menu">
                         <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">Không có kết quả khớp</li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Users</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Danh sách người dùng</li>
                         <li ng-repeat="user in result.users">
                             <a ng-bind="user.username" ng-href="/admin/users/{{user._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Accounts</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Danh sách tài khoản</li>
                         <li ng-repeat="account in result.accounts">
                             <a ng-bind="account.name.full" ng-href="/admin/accounts/{{account._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Administrators')">Administrators</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Administrators')">Danh sách quản trị</li>
                         <li ng-repeat="admin in result.administrators">
                             <a ng-bind="admin.name.full" ng-href="/admin/administrators/{{admin._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
@@ -96,21 +104,28 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
+                <li ng-class="{active: isActive('/devices')}"><a href="/devices" class="white-color" ng-click="closeAdminMenu()">ĐIỀU KHIỂN THIẾT BỊ</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin xs" dropdown-toggle style="color:#ffffff">Trang Quản Trị&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin xs white-color" dropdown-toggle>Quản Trị&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <!-- <li ng-if="isAuthenticated()" class="dropdown-header">Điều khiển thiết bị</li>
+                        <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="/devices">Danh sách thiết bị</a></li>
+                        <li class="divider"></li> -->
                         <li class="dropdown-header">Thiết lập</li>
-                        <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
-                        <li><a href="/admin/categories" ng-click="closeAdminMenu()">Categories</a></li>
+                        <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Quản lý trạng thái</a></li>
+                        <li><a href="/admin/categories" ng-click="closeAdminMenu()">Danh mục</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Quản lý người dùng</li>
-                        <li><a href="/admin/users" ng-click="closeAdminMenu()">Users</a></li>
-                        <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Accounts</a></li>
-                        <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Administrators</a></li>
-                        <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Admin Groups</a></li>
+                        <li><a href="/admin/users" ng-click="closeAdminMenu()">Danh sách người dùng</a></li>
+                        <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Danh sách tài khoản</a></li>
+                        <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Danh sách quản trị</a></li>
+                        <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Cấu hình nhóm</a></li>
                     </ul>
                 </li>
             </ul>
+
             <form name="form" class="navbar-form navbar-right">
                 <div class="dropdown" dropdown is-open="resultIsOpen">
                     <input name="search" type="text" placeholder="Tìm kiếm" class="form-control" ng-model="query" ng-model-options="{ debounce: 500 }" ng-change="update()">
@@ -124,7 +139,7 @@
                         <li ng-repeat="account in result.accounts">
                             <a ng-bind="account.name.full" ng-href="/admin/accounts/{{account._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Administrators')">Administrators</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Administrators')">Danh sách quản trị</li>
                         <li ng-repeat="admin in result.administrators">
                             <a ng-bind="admin.name.full" ng-href="/admin/administrators/{{admin._id}}" ng-click="closeAdminMenu()"></a>
                         </li>

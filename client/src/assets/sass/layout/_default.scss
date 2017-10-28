@@ -28,3 +28,141 @@ select, textarea, input, .form-control {
   color: #7f7f7f;
   font-size: 20em;
 }
+.white-color {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+.device-label {
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: -1px;
+  margin-top: 10px;
+}
+.project-label, .stat-label {
+  font-size: 1.2em;
+}
+.device-block {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px solid black;
+  color: black;
+  height: 150px;
+  margin-top: 10px;
+}
+.stat-block {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px solid black;
+  color: black;
+  height: 80px;
+  margin-top: 10px;
+}
+.stat-value {
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+.stat-bg {
+ background-color: #9bbe9d;
+}
+.gray-bg {
+  background-color: #cccccc;
+}
+.green-bg {
+  background-color: #529d3d;
+}
+.btn-device-action {
+  margin-top: 10px;
+  width: 100px;
+}
+.mt4 {
+  margin-top: 4px;
+}
+.mt15 {
+  margin-top: 15px !important;
+}
+.mb15 {
+  margin-bottom: 15px !important;
+}
+.device-search {
+  width: 260px;
+}
+#device-search-icon {
+  position: relative;
+  z-index: 1;
+  left: 242px;
+  top: -26px;
+  color: #7B7B7B;
+  cursor: pointer;
+  width: 0;
+}
+.control-device-block {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px solid black;
+  color: black;
+  height: 230px;
+  margin-top: 5px;
+}
+.control-label {
+  font-size: 1.3em;
+  margin-top: 5px;
+}
+.heading-control-label {
+  font-size: 1.1em;
+  text-align: left;
+  margin-left: 7px;
+  margin-top: 10px;
+}
+
+:focus{
+  outline:none;
+}
+.big-radio{
+  -webkit-appearance:button;
+  -moz-appearance:button;
+  appearance:button;
+  border:2px solid #ccc;
+  border-top-color:#bbb;
+  border-left-color:#bbb;
+  border-right-color:#bbb;
+  border-bottom-color:#bbb;
+  background:#fff;
+  width:30px;
+  height:30px;
+  border-radius:100%;
+  margin-top: -7px !important;
+}
+.big-radio:checked{
+  border:10px solid #4099ff;
+}
+
+.radio-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 30px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.radio-txt {
+  margin-left: 15px;
+  width: 30px;
+}
+
+.status-device-txt {
+  margin-left: 15px;
+}
+
+.head-control-txt {
+  width: 100px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+}
