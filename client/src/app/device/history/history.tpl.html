@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mt4">Lịch sử điều khiển Tủ 2</h3>
+                    <h3 class="mt4">Lịch sử điều khiển Tủ {{deviceId}}</h3>
                 </div>
                 <div class="col-sm-6">
                     <input name="deviceSearch" type="text" class="form-control device-search" placeholder="Người điều khiển">
@@ -11,7 +11,35 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Thời gian</th>
+                <th class="stretch">Người điều khiển</th>
+                <th>Nội dung</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="history in histories">
+                <td ng-bind="history.time"></td>
+                <td ng-bind="history.username"></td>
+                <td class="nowrap" ng-bind="history.content"></td>
+            </tr>
+            <tr>
+                <td colspan="3">no documents matched</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="well" ng-if="pages.total > 1">
+            <div class="btn-group pull-left">
+                <button disabled class="btn btn-default">Trang {{pages.current}} / {{pages.total}}</button>
+                <button disabled class="btn btn-default">Dòng {{items.begin}} - {{items.end}} / {{items.total}}</button>
+            </div>
+            <div class="btn-group pull-right">
+                <button class="btn btn-default" ng-class="{disabled: !pages.hasPrev}" ng-click="prev()">Trước</button>
+                <button class="btn btn-default" ng-class="{disabled: !pages.hasNext}" ng-click="next()"> Sau</button>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

@@ -13,4 +13,11 @@ angular.module('device.history.index').config(['$routeProvider', 'securityAuthor
 angular.module('device.history.index').controller('DeviceHistoryCtrl', [ '$scope', '$route',
   function($scope, $route){
     $scope.deviceId = $route.current.params.id;
+    $scope.histories = [
+      {
+        time: "20/10/2017 12:00:30",
+        username: "levantoanbkit@gmail.com",
+        content: "$Q3CCLCT,TL,1,0,0,1,1234,3232<CR><LF>"
+      },
+    ];
   }]);

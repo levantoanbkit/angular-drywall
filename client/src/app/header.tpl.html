@@ -18,9 +18,9 @@
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/about')}"><a href="/about">Tính năng</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/signup')}"><a href="/signup">Đăng ký</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/contact')}"><a href="/contact">Liên hệ</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="/devices">Trạng thái điều khiển</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">Thông tin tài khoản</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Cấu hình tài khoản</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="#" ng-click="openPageReload('/devices')">Điều khiển</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">Tài khoản</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Cấu hình</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="!isAuthenticated()"><a href="/login"><i class="fa fa-user"></i> Đăng nhập</a></li>
@@ -44,7 +44,7 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: isActive('/devices')}"><a href="/devices" class="white-color" ng-click="closeAdminMenu()">ĐIỀU KHIỂN</a></li>
+                <li ng-class="{active: isActive('/devices')}"><a href="#" class="white-color" ng-click="openPageReload('/devices')">ĐIỀU KHIỂN</a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
@@ -104,7 +104,7 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: isActive('/devices')}"><a href="/devices" class="white-color" ng-click="closeAdminMenu()">ĐIỀU KHIỂN THIẾT BỊ</a></li>
+                <li ng-class="{active: isActive('/devices')}"><a href="#" class="white-color" ng-click="openPageReload('/devices')">ĐIỀU KHIỂN</a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">

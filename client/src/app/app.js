@@ -12,7 +12,8 @@ angular.module('app', [
   'security',
   'templates.app',
   'templates.common',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'services.socketIO'
 ]);
 
 
@@ -60,6 +61,7 @@ angular.module('app').run(['$location', '$rootScope', 'security', function($loca
 angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'localizedMessages', function($scope, i18nNotifications, localizedMessages) {
 
   $scope.notifications = i18nNotifications;
+
   angular.element(document).ready(function () {
     $scope.closeToggleWhenClickOutside();
   });

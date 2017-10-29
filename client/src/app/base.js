@@ -1,6 +1,6 @@
 angular.module('base',['ngRoute', 'security', 'services.utility', 'services.accountResource', 'services.adminResource', 'ui.bootstrap']);
-angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security',
-  function ($scope, $location, security) {
+angular.module('base').controller('HeaderCtrl', ['$scope', '$location', '$window', 'security', 'socketIO',
+  function ($scope, $location, $window, security, socketIO) {
     $scope.isAuthenticated = function(){
       return security.isAuthenticated();
     };
@@ -18,10 +18,17 @@ angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'securit
     $scope.isActive = function(viewLocation){
       return $location.path() === viewLocation;
     };
+    $scope.openPageReload = function(page) {
+      if (socketIO.socketObject.connected) {
+        $location.path(page);
+      } else {
+        $window.location.href = page;
+      }
+    };
   }
 ]);
-angular.module('base').controller('AdminHeaderCtrl' ,['$scope', 'adminResource',
-  function($scope, adminResource){
+angular.module('base').controller('AdminHeaderCtrl' ,['$scope', '$location', '$window', 'adminResource', 'socketIO',
+  function($scope, $location, $window, adminResource, socketIO){
 
     var clearSearchDropdown = function(){
       $scope.resultIsOpen = false;
@@ -71,6 +78,15 @@ angular.module('base').controller('AdminHeaderCtrl' ,['$scope', 'adminResource',
 
     $scope.toggleAdminMenu = function(){
       $scope.adminMenuCollapsed = !$scope.adminMenuCollapsed;
+    };
+
+    $scope.openPageReload = function(page) {
+      $scope.adminMenuCollapsed = true;
+      if (socketIO.socketObject.connected) {
+        $location.path(page);
+      } else {
+        $window.location.href = page;
+      }
     };
 
     // set $scope vars initial value

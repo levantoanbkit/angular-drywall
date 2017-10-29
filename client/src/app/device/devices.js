@@ -10,14 +10,19 @@ angular.module('device.index').config(['$routeProvider', 'securityAuthorizationP
       }
     });
 }]);
-angular.module('device.index').controller('DevicesCtrl', [ '$scope', '$location',
-  function($scope, $location){
+angular.module('device.index').controller('DevicesCtrl', ['$rootScope', '$scope', '$location', '$window', 'socketIO',
+  function($rootScope, $scope, $location, $window, socketIO){
+    console.log('socketIO ID:', socketIO.socketObject);
     $scope.openPage = function(page, deviceId) {
       var redirectUrl = '';
       switch (page) {
         case 'control':
           redirectUrl = '/device/control/'+ deviceId;
-          $location.path(redirectUrl);
+          if (socketIO.socketObject.connected) {
+            $location.path(redirectUrl);
+          } else {
+            $window.location.href = redirectUrl;
+          }
           break;
         case 'history':
           redirectUrl = '/device/history/'+ deviceId;

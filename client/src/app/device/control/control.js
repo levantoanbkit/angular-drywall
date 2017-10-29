@@ -10,8 +10,8 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
       }
     });
 }]);
-angular.module('device.control.index').controller('DeviceControlCtrl', [ '$scope', '$route',
-  function($scope, $route){
+angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', 'socketIO',
+  function($rootScope, $scope, $route, $window, socketIO){
     $scope.deviceId = $route.current.params.id;
-    
+    console.log('socketIO ID2:', socketIO.socketObject);
   }]);

@@ -5,12 +5,13 @@ angular.module('security.service', [
   'ui.bootstrap.modal'     // Used to display the login form as a modal dialog.
 ])
 
-.factory('security', ['$http', '$q', '$location', 'securityRetryQueue', '$modal', function($http, $q, $location, queue, $modal) {
+.factory('security', ['$http', '$q', '$location', '$window', 'securityRetryQueue', '$modal', function($http, $q, $location, $window, queue, $modal) {
 
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
     url = url || '/';
-    $location.path(url);
+    // $location.path(url);
+    $window.location.href = url;
   }
 
   // Login form dialog stuff

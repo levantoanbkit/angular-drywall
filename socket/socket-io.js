@@ -5,7 +5,7 @@ exports = module.exports = function(app, io, passportSocketIo, socketIOService) 
     io.on('connection', onConnectSocket);
 
     function onConnectSocket(socket) {
-        // console.log('socket ...:', socket.request.user);
+        console.log('socket ...:', socket.request.user);
         var isValid = checkAuthenticationSocket();
 
         socket.on('data', onReceiveData);
