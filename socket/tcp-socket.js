@@ -22,6 +22,7 @@ exports = module.exports = function(app) {
     console.log('new device connection from %s', remoteAddress);
 
     connection.setEncoding('utf8');
+    connection.setNoDelay(true);
     connection.on('data', onConnData);
     connection.once('close', onConnClose);
     connection.on('error', onConnError);
@@ -32,7 +33,7 @@ exports = module.exports = function(app) {
       var isAuthenDevice = tcpSocketService.checkAuthenDevice(app, connection, parseDataObject);
       if (isAuthenDevice) {
         tcpSocketService.saveConnectionInfo(app, connection, parseDataObject);
-        tcpSocketService.serverAnswerClient(app, connection, data);
+        connection.write(data);
       } else {
         tcpSocketService.forceEndConnection(app, connection, parseDataObject);
       }

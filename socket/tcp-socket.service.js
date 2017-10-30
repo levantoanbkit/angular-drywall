@@ -77,11 +77,6 @@ var tcpSocketService = {
         console.log('app.tcpConnections: ', app.tcpConnections);
     },
 
-    serverAnswerClient: function(app, connection, data) {
-        connection.write(data);
-        connection.pipe(connection);
-    },
-
     forceEndConnection: function(app, connection, parseDataObject) {
         tcpSocketService.removeConnectionInList(app, connection);
         var deviceName = connection.deviceName ? connection.deviceName : parseDataObject.deviceName;
@@ -156,7 +151,7 @@ var tcpSocketService = {
         var connection = app.tcpConnections[deviceName];
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
-            tcpSocketService.serverAnswerClient(app, connection, commandString);
+            connection.write(commandString);
         } else {
             console.log('Connection of deviceName %s is not exist or command is not valid', deviceName);
         }
