@@ -12,13 +12,27 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
 }]);
 angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', 'socketIO',
   function($rootScope, $scope, $route, $window, socketIO){
+  
+    $scope.changeModeBox = function(mode) {
+      socketIO.emit('change:modebox', {
+        modeBox: mode,
+        deviceId: $scope.deviceControl.deviceId,
+        deviceName: $scope.deviceControl.deviceName
+      });
+    };
+
+    socketIO.on('result', function(data) {
+      console.log('result : ', data);
+    });
+
     $scope.deviceControl = {
       deviceId: $route.current.params.id,
+      deviceName: "$Q3CCLCT",
       isConnect: 1,
       temperature: 50,
       humidity: 70,
       site: 'Dự án Tây Hồ Chí Minh',
-      allMode: 1,
+      modeBox: 1,
       modeBtn: 0,
       simMode: 0,
       functions: 'Chống úng cấp 1',

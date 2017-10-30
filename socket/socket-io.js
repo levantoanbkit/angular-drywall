@@ -1,5 +1,7 @@
 'use strict';
 
+var tcpSocketService  = require('./tcp-socket.service');
+
 exports = module.exports = function(app, io, passportSocketIo, socketIOService) {
 
     io.on('connection', onConnectSocket);
@@ -9,13 +11,17 @@ exports = module.exports = function(app, io, passportSocketIo, socketIOService) 
 
         socketIOService.updateUserSocket(app, socket, user);
 
-        socket.on('data', onReceiveData);
+        socket.on('change:modebox', onChangeAllModeBox);
         socket.on('disconnect', onSocketDisconnect);
 
-        function onReceiveData(data) {
-            console.log('onReceiveData on socketId=%s:',socket.id);
-            console.log('onReceiveData data=:',data);
-            socket.emit('data', 'hello client');
+        function onChangeAllModeBox(data) {
+            console.log('onChangeAllModeBox on socketId=%s:',socket.id);
+            console.log('onChangeAllModeBox data=:',data);
+            socket.emit('result', data);
+            var deviceName = data.deviceName;
+            var cmdName = 'MODE';
+            var params = { modeBox: data.modeBox };
+            tcpSocketService.makeRemoteControlCommand(app, deviceName, cmdName, params, socket);
         };
 
         function onSocketDisconnect() {

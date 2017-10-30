@@ -146,9 +146,15 @@ var tcpSocketService = {
         return isValidCommand ? command : '';
     },
 
-    makeRemoteControlCommand: function(app, deviceName, cmdName, params) {
+    makeRemoteControlCommand: function(app, deviceName, cmdName, params, socket) {
         // Get current tcpsocket connection of device has name is deviceName
         var connection = app.tcpConnections[deviceName];
+        if (!connection.socketIOs) {
+            connection.socketIOs = [];
+        }
+
+        connection.socketIOs.push(socket);
+
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
             connection.write(commandString);
