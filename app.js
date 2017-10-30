@@ -99,6 +99,7 @@ app.tcpConnections = {};
 require('./socket/tcp-socket')(app);
 
 //Socket.io
+app.socketIOConnections = {};
 var io = require('socket.io').listen(app.server);
 var passportSocketIo = require("passport.socketio");
 var socketIOService  = require('./socket/socket-io.service');
@@ -110,5 +111,4 @@ io.use(passportSocketIo.authorize({
   fail:         socketIOService.onAuthorizeFail,     // *optional* callback on fail/error - read more below 
 }));
 
-app.socketIOConnections = {};
 require('./socket/socket-io')(app, io, passportSocketIo, socketIOService);

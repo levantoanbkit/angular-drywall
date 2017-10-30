@@ -12,7 +12,23 @@ var socketIOService = {
         console.log('failed connection to socket.io:', message);
         return accept(new Error(message));
     },
-    
+
+    updateUserSocket: function(app, socket, user) {
+        var userSocket = app.socketIOConnections[user.username];
+        if (!userSocket) {
+            _.assignIn(app.socketIOConnections, { [user.username] : {id : socket.id , socket : socket} });
+        } else if (userSocket.id != socket.id) {
+            app.socketIOConnections[user.username] = socket;
+        }
+        console.log('app.socketIOConnections: ', app.socketIOConnections);
+    },
+
+    removeSocket: function(app, socket, user) {
+        if (app.socketIOConnections[user.username]) {
+            app.socketIOConnections = _.omit(app.socketIOConnections, user.username);
+        }
+        console.log('app.socketIOConnections after disconnect: ', app.socketIOConnections);
+    }
 
 };
 module.exports = socketIOService;

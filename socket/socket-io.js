@@ -5,8 +5,9 @@ exports = module.exports = function(app, io, passportSocketIo, socketIOService) 
     io.on('connection', onConnectSocket);
 
     function onConnectSocket(socket) {
-        console.log('socket ...:', socket.request.user);
-        var isValid = checkAuthenticationSocket();
+        var user = socket.request.user;
+
+        socketIOService.updateUserSocket(app, socket, user);
 
         socket.on('data', onReceiveData);
         socket.on('disconnect', onSocketDisconnect);
@@ -19,11 +20,7 @@ exports = module.exports = function(app, io, passportSocketIo, socketIOService) 
 
         function onSocketDisconnect() {
             console.log('onSocketDisconnect: ', socket.id);
-        };
-
-        function checkAuthenticationSocket() {
-            console.log('checkAuthenticationSocket socketId:',socket.id);
-
+            socketIOService.removeSocket(app, socket, user);
         };
 
     }
