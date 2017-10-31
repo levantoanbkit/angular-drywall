@@ -146,18 +146,16 @@ var tcpSocketService = {
         return isValidCommand ? command : '';
     },
 
-    makeRemoteControlCommand: function(app, deviceName, cmdName, params, socket) {
+    makeRemoteControlCommand: function(connection, deviceName, cmdName, params, socket) {
         // Get current tcpsocket connection of device has name is deviceName
-        var connection = app.tcpConnections[deviceName];
-
         connection.socketIOs.push(socket);
-
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
             connection.write(commandString);
         } else {
             console.log('Connection of deviceName %s is not exist or command is not valid', deviceName);
         }
+        return true;
     },
 
     callSocketIoBroadcastUserFunction: function(app, parseDataObject) {

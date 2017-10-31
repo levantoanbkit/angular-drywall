@@ -23,7 +23,6 @@ exports = module.exports = function(app) {
 
     connection.setEncoding('utf8');
     connection.setNoDelay(true);
-    connection.socketIOs = [];
     connection.on('data', onConnData);
     connection.once('close', onConnClose);
     connection.on('error', onConnError);

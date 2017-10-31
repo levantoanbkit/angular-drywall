@@ -11,17 +11,15 @@ exports = module.exports = function(app, io, passportSocketIo, socketIOService) 
 
         socketIOService.updateUserSocket(app, socket, user);
 
-        socket.on('change:modebox', onChangeAllModeBox);
+        socket.on('change:modebox', onChangeModeBox);
         socket.on('disconnect', onSocketDisconnect);
 
-        function onChangeAllModeBox(data) {
-            console.log('onChangeAllModeBox on socketId=%s:',socket.id);
-            console.log('onChangeAllModeBox data=:',data);
-            socket.emit('result', data);
-            var deviceName = data.deviceName;
-            var cmdName = 'MODE';
-            var params = { modeBox: data.modeBox };
-            tcpSocketService.makeRemoteControlCommand(app, deviceName, cmdName, params, socket);
+        function onChangeModeBox(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpConnection.socketIOs = tcpConnection.socketIOs ? tcpConnection.socketIOs : [];
+                tcpSocketService.makeRemoteControlCommand(tcpConnection, data.deviceName, 'MODE', { modeBox: data.modeBox }, socket);
+            }
         };
 
         function onSocketDisconnect() {
