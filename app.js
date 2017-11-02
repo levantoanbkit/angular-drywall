@@ -100,10 +100,10 @@ require('./socket/tcp-socket')(app);
 
 //Socket.io
 app.socketIOConnections = {};
-var io = require('socket.io').listen(app.server);
+app.io = require('socket.io').listen(app.server);
 var passportSocketIo = require("passport.socketio");
 var socketIOService  = require('./socket/socket-io.service');
-io.use(passportSocketIo.authorize({
+app.io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,       // the same middleware you registrer in express 
   secret:       config.cryptoKey,    // the session_secret to parse the cookie 
   store:        sessionStore,        // we NEED to use a sessionstore. no memorystore please 
@@ -111,4 +111,4 @@ io.use(passportSocketIo.authorize({
   fail:         socketIOService.onAuthorizeFail,     // *optional* callback on fail/error - read more below 
 }));
 
-require('./socket/socket-io')(app, io, passportSocketIo, socketIOService);
+require('./socket/socket-io')(app, passportSocketIo, socketIOService);

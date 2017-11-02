@@ -33,9 +33,9 @@ exports = module.exports = function(app) {
       var isAuthenDevice = tcpSocketService.checkAuthenDevice(app, connection, parseDataObject);
       if (isAuthenDevice) {
         tcpSocketService.saveConnectionInfo(app, connection, parseDataObject);
-        if (parseDataObject.cmdName == 'LI') {
-          connection.write(data);
-        }
+        tcpSocketService.replyToDevice(app, connection, data, parseDataObject);
+        tcpSocketService.processAnswerOfClient(app, connection, data, parseDataObject);
+
       } else {
         tcpSocketService.forceEndConnection(app, connection, parseDataObject);
       }

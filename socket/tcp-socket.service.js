@@ -29,7 +29,7 @@ var tcpSocketService = {
             case 'TL':
                 parseDataObject.isWrongSyntax = false;
                 parseDataObject.sttDevice     = parseData[2];
-                if (parseDataObject.sttDevice == 255) {
+                if (parseDataObject.sttDevice != 255) {
                     parseDataObject.statusDevice  = parseData[3];
                     parseDataObject.sensorValue1  = parseData[4];
                     parseDataObject.sensorValue2  = parseData[5];
@@ -146,9 +146,23 @@ var tcpSocketService = {
         return isValidCommand ? command : '';
     },
 
-    makeRemoteControlCommand: function(connection, deviceName, cmdName, params, socket) {
+    replyToDevice: function(app, connection, data, parseDataObject) {
+        if (parseDataObject.cmdName == 'LI' || parseDataObject.cmdName == 'LOGIN') {
+          connection.write(data);
+        }
+    },
+
+    processAnswerOfClient: function(app, connection, data, parseDataObject) {
+        if (parseDataObject.cmdName == 'TL' || parseDataObject.cmdName == 'DK' ||
+            parseDataObject.cmdName == 'MODE' || parseDataObject.cmdName == 'LI' ||
+            parseDataObject.cmdName == 'XO') {
+            app.io.sockets.emit('answer_from_devices', parseDataObject);
+        }
+    },
+
+    makeRemoteControlCommand: function(app, connection, deviceName, cmdName, params, socket) {
         // Get current tcpsocket connection of device has name is deviceName
-        connection.socketIOs.push(socket);
+        // connection.socketIOs.push(socket);
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
             connection.write(commandString);
