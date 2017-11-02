@@ -12,8 +12,8 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
 }]);
 angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', 'socketIO',
   function($rootScope, $scope, $route, $window, socketIO){
-  
     $scope.changeModeBox = function(mode) {
+      console.log('isConnect: ', socketIO.socketObject);
       socketIO.emit('change:modebox', {
         modeBox: mode,
         deviceId: $scope.deviceControl.deviceId,
