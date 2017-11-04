@@ -20,14 +20,14 @@ var socketIOService = {
         } else if (userSocket.id != socket.id) {
             app.socketIOConnections[user.username] = socket;
         }
-        console.log('app.socketIOConnections: ', app.socketIOConnections);
+        // console.log('app.socketIOConnections: ', app.socketIOConnections);
     },
 
     removeSocket: function(app, socket, user) {
         if (app.socketIOConnections[user.username]) {
             app.socketIOConnections = _.omit(app.socketIOConnections, user.username);
         }
-        console.log('app.socketIOConnections after disconnect: ', app.socketIOConnections);
+        // console.log('app.socketIOConnections after disconnect: ', app.socketIOConnections);
     }
 
 };

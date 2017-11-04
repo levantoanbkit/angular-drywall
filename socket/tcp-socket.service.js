@@ -74,7 +74,7 @@ var tcpSocketService = {
         if (!app.tcpConnections[connection.deviceName]) {
             _.assignIn(app.tcpConnections, { [connection.deviceName] : connection });
         }
-        console.log('app.tcpConnections: ', app.tcpConnections);
+        // console.log('app.tcpConnections: ', app.tcpConnections);
     },
 
     forceEndConnection: function(app, connection, parseDataObject) {
