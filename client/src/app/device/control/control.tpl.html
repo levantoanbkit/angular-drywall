@@ -3,20 +3,20 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-5">
-                    <h3 style="margin-top: -5px;">Điều khiển tủ điện {{deviceId}}</h3>
+                    <h3 style="margin-top: -5px;">Điều khiển tủ điện {{data.deviceId}}</h3>
                 </div>
                 <div class="col-sm-7">
                     <div class="row">
-                        <div ng-if="isConnect" class="col-sm-4">Kết nối : <font color="green">Có</font></div>
-                        <div ng-if="!isConnect" class="col-sm-4">Kết nối : <font color="green">Không</font></div>
-                        <div class="col-sm-8">Nhiệt độ : <font color="red">{{temperature}}</font> độ C  &nbsp&nbsp&nbsp   Độ ẩm : <font color="green">{{humidity}}</font> %</div>
+                        <div ng-if="data.isConnect" class="col-sm-4">Trạng thái kết nối : <font color="green">Có</font></div>
+                        <div ng-if="!data.isConnect" class="col-sm-4">Trạng thái kết nối : <font color="green">Không</font></div>
+                        <div class="col-sm-8">Nhiệt độ : <font color="red">{{data.temperature}}</font> độ C  &nbsp&nbsp&nbsp   Độ ẩm : <font color="green">{{data.humidity}}</font> %</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="heading-control-label">Công trường : <b>{{site}}</b></div>
+                <div class="heading-control-label">Công trường : <b>{{data.site}}</b></div>
             </div>
         </div>
         <div class="row mb15">
@@ -24,28 +24,28 @@
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt">Chế độ:</div>
                     <label class="radio-inline" ng-click="changeModeBox(0)">
-                        <input type="radio" class="big-radio" name="rd_control_mode" id="mode_dk_on" ng-checked="modeBox == 0" /><span class="radio-txt">Tự động</span>
+                        <input type="radio" class="big-radio" name="rd_control_mode" id="mode_dk_on" ng-checked="data.modeBox == 0" /><span class="radio-txt">Tự động</span>
                     </label>
                     <label class="radio-inline" ng-click="changeModeBox(1)">
-                        <input type="radio" class="big-radio" name="rd_control_mode" id="mode_dk_off" ng-checked="modeBox == 1" /><span class="radio-txt">Bằng tay</span>
+                        <input type="radio" class="big-radio" name="rd_control_mode" id="mode_dk_off" ng-checked="data.modeBox == 1" /><span class="radio-txt">Bằng tay</span>
                     </label>
                 </div>
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt">Nút Mode:</div>
                     <label class="radio-inline">
-                        <input type="radio" class="big-radio" name="rd_mode_btn" id="modebtn_dk_on" ng-checked="modeBtn == 0" disabled /><span class="radio-txt">Tự động</span>
+                        <input type="radio" class="big-radio" name="rd_mode_btn" id="modebtn_dk_on" ng-checked="data.modeBtn == 0" disabled /><span class="radio-txt">Tự động</span>
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" class="big-radio" name="rd_mode_btn" id="modebtn_dk_off" ng-checked="modeBtn == 1" disabled /><span class="radio-txt">Bằng tay</span>
+                        <input type="radio" class="big-radio" name="rd_mode_btn" id="modebtn_dk_off" ng-checked="data.modeBtn == 1" disabled /><span class="radio-txt">Bằng tay</span>
                     </label>
                 </div>
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt">SIM Mode:</div>
                     <label class="radio-inline">
-                        <input type="radio" class="big-radio" name="rd_sim_mode_btn" id="simmode_dk_on" ng-checked="simMode == 0" disabled /><span class="radio-txt">Chỉ SMS</span>
+                        <input type="radio" class="big-radio" name="rd_sim_mode_btn" id="simmode_dk_on" ng-checked="data.simMode == 0" disabled /><span class="radio-txt">Chỉ SMS</span>
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" class="big-radio" name="rd_sim_mode_btn" id="simmode_dk_off" ng-checked="simMode == 1" disabled/><span class="radio-txt">GPRS</span>
+                        <input type="radio" class="big-radio" name="rd_sim_mode_btn" id="simmode_dk_off" ng-checked="data.simMode == 1" disabled/><span class="radio-txt">GPRS</span>
                     </label>
                 </div>
             </div>
@@ -53,12 +53,12 @@
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt">Chức năng:</div>
                     <div class="input-group">
-                        <input type="text" class="form-control col-sm-3" name="note" style="height: 40px;" ng-value="functions"><span class="input-group-addon green-bg white-color">Lưu</span>
+                        <input type="text" class="form-control col-sm-3" name="note" style="height: 40px;" ng-value="data.functions"><span class="input-group-addon green-bg white-color">Lưu</span>
                     </div>
                 </div>
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt">Mã lỗi:</div>
-                    <div class="head-control-txt" ng-bind="errorCode"></div>
+                    <div class="head-control-txt" ng-bind="data.errorCode"></div>
                 </div>
             </div>
             
@@ -71,20 +71,20 @@
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
                         <label class="radio-inline" ng-click="controlDevice(1, 1)">
-                            <input type="radio" class="big-radio" name="rd_control_device1" id="device_dk_on1" ng-checked="device1.control == 1" /><span class="radio-txt">Bật</span>
+                            <input type="radio" class="big-radio" name="rd_control_device1" id="device_dk_on1" ng-checked="data.device1.control == 1" /><span class="radio-txt">Bật</span>
                         </label>
                         <label class="radio-inline" ng-click="controlDevice(1, 0)">
-                            <input type="radio" class="big-radio" name="rd_control_device1" id="device_dk_off1" ng-checked="device1.control == 0" /><span class="radio-txt">Tắt</span>
+                            <input type="radio" class="big-radio" name="rd_control_device1" id="device_dk_off1" ng-checked="data.device1.control == 0" /><span class="radio-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="device1.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="device1.status == 0">Không bơm</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{device1.sensor1}}</span>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device1.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device1.status == 0">Không bơm</span></div>
+                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device1.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{device1.sensor2}}</span>
+                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device1.sensor2}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{device1.sensor3}} m</span>
+                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device1.sensor3}} m</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{device1.sensor4}} pH</span>
+                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{data.device1.sensor4}} pH</span>
                     </div>
                 </div>
             </div>
@@ -94,20 +94,20 @@
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
                         <label class="radio-inline" ng-click="controlDevice(2, 1)">
-                            <input type="radio" class="big-radio" name="rd_control_device2" id="device_dk_on2" ng-checked="device2.control == 1" /><span class="radio-txt">Bật</span>
+                            <input type="radio" class="big-radio" name="rd_control_device2" id="device_dk_on2" ng-checked="data.device2.control == 1" /><span class="radio-txt">Bật</span>
                         </label>
                         <label class="radio-inline" ng-click="controlDevice(2, 0)">
-                            <input type="radio" class="big-radio" name="rd_control_device2" id="device_dk_off2" ng-checked="device2.control == 0" /><span class="radio-txt">Tắt</span>
+                            <input type="radio" class="big-radio" name="rd_control_device2" id="device_dk_off2" ng-checked="data.device2.control == 0" /><span class="radio-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="device2.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="device2.status == 0">Không bơm</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{device2.sensor1}}</span>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device2.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device2.status == 0">Không bơm</span></div>
+                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device2.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{device2.sensor2}}</span>
+                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device2.sensor2}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{device2.sensor3}} m</span>
+                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device2.sensor3}} m</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{device2.sensor4}} pH</span>
+                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{data.device2.sensor4}} pH</span>
                     </div>
                 </div>
             </div>
@@ -117,20 +117,20 @@
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
                         <label class="radio-inline" ng-click="controlDevice(3, 1)">
-                            <input type="radio" class="big-radio" name="rd_control_device3" id="device_dk_on3" ng-checked="device3.control == 1" /><span class="radio-txt">Bật</span>
+                            <input type="radio" class="big-radio" name="rd_control_device3" id="device_dk_on3" ng-checked="data.device3.control == 1" /><span class="radio-txt">Bật</span>
                         </label>
                         <label class="radio-inline" ng-click="controlDevice(3, 0)">
-                            <input type="radio" class="big-radio" name="rd_control_device3" id="device_dk_off3" ng-checked="device3.control == 0" /><span class="radio-txt">Tắt</span>
+                            <input type="radio" class="big-radio" name="rd_control_device3" id="device_dk_off3" ng-checked="data.device3.control == 0" /><span class="radio-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="device3.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="device3.status == 0">Không bơm</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{device3.sensor1}}</span>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device3.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device3.status == 0">Không bơm</span></div>
+                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device3.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{device3.sensor2}}</span>
+                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device3.sensor2}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{device3.sensor3}} m</span>
+                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device3.sensor3}} m</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{device3.sensor4}} pH</span>
+                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{data.device3.sensor4}} pH</span>
                     </div>
                 </div>
             </div>
@@ -140,20 +140,20 @@
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
                         <label class="radio-inline" ng-click="controlDevice(4, 1)">
-                            <input type="radio" class="big-radio" name="rd_control_device4" id="device_dk_on4" ng-checked="device4.control == 1" /><span class="radio-txt">Bật</span>
+                            <input type="radio" class="big-radio" name="rd_control_device4" id="device_dk_on4" ng-checked="data.device4.control == 1" /><span class="radio-txt">Bật</span>
                         </label>
                         <label class="radio-inline" ng-click="controlDevice(4, 0)">
-                            <input type="radio" class="big-radio" name="rd_control_device4" id="device_dk_off4" ng-checked="device4.control == 0" /><span class="radio-txt">Tắt</span>
+                            <input type="radio" class="big-radio" name="rd_control_device4" id="device_dk_off4" ng-checked="data.device4.control == 0" /><span class="radio-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="device4.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="device4.status == 0">Không bơm</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{device4.sensor1}}</span>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device4.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device4.status == 0">Không bơm</span></div>
+                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device4.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{device4.sensor2}}</span>
+                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device4.sensor2}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{device4.sensor3}} m</span>
+                    <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device4.sensor3}} m</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{device4.sensor4}} pH</span>
+                    <div class="heading-control-label">Cảm biến pH : <span class="status-device-txt">{{data.device4.sensor4}} pH</span>
                     </div>
                 </div>
             </div>

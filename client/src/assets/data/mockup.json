@@ -1,0 +1,137 @@
+{
+    "HCM01" : {
+        "deviceId" : "HCM01",
+        "deviceName" : "$HCM01",
+        "site" : "Dự án Hồ Chí Minh",
+        "isConnect" : 0,
+        "temperature" : "_ _ _",
+        "humidity" : "_ _ _",
+        "modeBox" : "-1",
+        "modeBtn" : "-1",
+        "simMode" : "-1",
+        "functions" : "Chống úng cấp 1",
+        "errorCode" : "_ _ _",
+        "device1" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device2" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device3" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device4" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        }
+    },
+    "HCM02" : {
+        "deviceId" : "HCM02",
+        "deviceName" : "$HCM02",
+        "site" : "Dự án Hồ Chí Minh",
+        "isConnect" : "Không",
+        "temperature" : "_ _ _",
+        "humidity" : "_ _ _",
+        "modeBox" : "-1",
+        "modeBtn" : "-1",
+        "simMode" : "-1",
+        "functions" : "Chống úng cấp 2",
+        "errorCode" : "_ _ _",
+        "device1" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device2" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device3" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device4" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        }
+    },
+    "HN01" : {
+        "deviceId" : "HN01",
+        "deviceName" : "$HN01",
+        "site" : "Dự án Hà Nội",
+        "isConnect" : "Không",
+        "temperature" : "_ _ _",
+        "humidity" : "_ _ _",
+        "modeBox" : "-1",
+        "modeBtn" : "-1",
+        "simMode" : "-1",
+        "functions" : "Chống úng cấp 1",
+        "errorCode" : "_ _ _",
+        "device1" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device2" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device3" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        },
+        "device4" : {
+            "control" : "-1",
+            "status" : "_ _ _",
+            "sensor1" : "_ _ _",
+            "sensor2" : "_ _ _",
+            "sensor3" : "_ _ _",
+            "sensor4" : "_ _ _"
+        }
+    }
+}
