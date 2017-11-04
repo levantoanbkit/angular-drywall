@@ -1,10 +1,18 @@
 'use strict';
 
 var tcpSocketService  = require('./tcp-socket.service');
+var _ = require('lodash');
 
 exports = module.exports = function(app, passportSocketIo, socketIOService) {
 
     app.io.on('connection', onConnectSocket);
+
+    var interval = setInterval(function() {
+        console.log("hello interval...");
+        _.forEach(app.tcpConnections, function(tcpConnection) {
+            tcpSocketService.makeRemoteControlCommand(app, tcpConnection, tcpConnection.deviceName, 'ALL', {});
+        });
+    }, 4000);
 
     function onConnectSocket(socket) {
         var user = socket.request.user;
@@ -22,7 +30,7 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
             var tcpConnection = app.tcpConnections[data.deviceName];
             if (tcpConnection) {
                 // tcpConnection.socketIOs = tcpConnection.socketIOs ? tcpConnection.socketIOs : [];
-                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'MODE', { modeBox: data.modeBox }, socket);
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'MODE', { modeBox: data.modeBox });
             } else {
                 console.log('onChangeModeBox: tcpConnection is disconnected...');
             }
@@ -31,8 +39,7 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
         function onControlDevice(data) {
             var tcpConnection = app.tcpConnections[data.deviceName];
             if (tcpConnection) {
-                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'DK', 
-                    { sttDevice: data.sttDevice, valueControl: data.valueControl }, socket);
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'DK', { sttDevice: data.sttDevice, valueControl: data.valueControl });
             } else {
                 console.log('onControlDevice: tcpConnection is disconnected...');
             }
@@ -41,8 +48,7 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
         function onAskSerialDeviceInfo(data) {
             var tcpConnection = app.tcpConnections[data.deviceName];
             if (tcpConnection) {
-                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'KT', 
-                    { sttDevice: data.sttDevice }, socket);
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'KT', { sttDevice: data.sttDevice });
             } else {
                 console.log('onAskDeviceInfo: tcpConnection is disconnected...');
             }
@@ -51,8 +57,7 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
         function onAskAllInfo(data) {
             var tcpConnection = app.tcpConnections[data.deviceName];
             if (tcpConnection) {
-                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'ALL', 
-                    {}, socket);
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'ALL', {});
             } else {
                 console.log('onAskAllInfo: tcpConnection is disconnected...');
             }
