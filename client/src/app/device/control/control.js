@@ -21,7 +21,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       var intervalPromise = $interval(function() {
         console.log('interval call askAllInfo...');
         askAllInfo();
-      }, 2000);
+      }, 4000);
     });
 
     $scope.changeModeBox = function(mode) {
