@@ -4,7 +4,7 @@ var _ = require('lodash');
 var tcpSocketService = {
     parseDataToObject: function(app, connection, data) {
         var parseDataObject = {};
-        var parseData = data.replace(/(?:\\[rn]|[\r\n]+)+/g, "").split(",");
+        var parseData = data.split(",");
         if (parseData.length < 2) {
             if (connection.deviceName) {
                 tcpSocketService.removeConnectionInList(app, connection);
