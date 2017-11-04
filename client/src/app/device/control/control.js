@@ -121,15 +121,19 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         switch (data.sttDevice) {
           case '1':
             $scope.data.device1.control = data.valueControl;
+            $scope.data.device1.status = data.valueControl;
             break;
           case '2':
             $scope.data.device2.control = data.valueControl;
+            $scope.data.device2.status = data.valueControl;
             break;
           case '3':
             $scope.data.device3.control = data.valueControl;
+            $scope.data.device3.status = data.valueControl;
             break;
           case '4':
             $scope.data.device4.control = data.valueControl;
+            $scope.data.device4.status = data.valueControl;
             break;
           default:
             break;
