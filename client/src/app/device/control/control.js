@@ -18,10 +18,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       $scope.data = result.data[$scope.deviceId];
       console.log('data: ', $scope.data);
       askAllInfo();
-      var intervalPromise = $interval(function() {
-        console.log('interval call askAllInfo...');
-        askAllInfo();
-      }, 4000);
+      // var intervalPromise = $interval(function() {
+      //   console.log('interval call askAllInfo...');
+      //   askAllInfo();
+      // }, 4000);
     });
 
     $scope.changeModeBox = function(mode) {
