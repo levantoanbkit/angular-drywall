@@ -155,6 +155,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     socketIO.on('answer_from_devices', function(data) {
       console.log('answer_from_devices : ', data);
+      var deviceName = '$' + $route.current.params.id;
+      if (data.deviceName != deviceName) {
+        return true;
+      }
       $scope.data.isConnect = 1;
       switch(data.cmdName) {
         case 'TL':
