@@ -17,16 +17,12 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
       console.log('data: ', $scope.data);
-
-      let intervalPromise = $interval(function() {
-        $scope.$applyAsync(function() {
-          console.log('interval call askAllInfo...');
-          $scope.askAllInfo();
-        });
+      askAllInfo();
+      var intervalPromise = $interval(function() {
+        console.log('interval call askAllInfo...');
+        askAllInfo();
       }, 2000);
     });
-
-    $scope.askAllInfo();
 
     $scope.changeModeBox = function(mode) {
       console.log('isConnect changeModeBox: ', socketIO.socketObject);
@@ -56,7 +52,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       });
     };
 
-    $scope.askAllInfo = function() {
+    var askAllInfo = function() {
       console.log('isConnect askAllInfo: ', socketIO.socketObject);
       socketIO.emit('ask:allinfo', {
         deviceId: $scope.data.deviceId,
