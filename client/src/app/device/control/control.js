@@ -16,7 +16,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
       console.log('data: ', $scope.data);
-      askDeviceInfo('ALL');
+      askAllInfo();
     });
     
 
@@ -43,6 +43,14 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       console.log('isConnect askDeviceInfo: ', socketIO.socketObject);
       socketIO.emit('ask:deviceinfo', {
         sttDevice: deviceIndex,
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.data.deviceName
+      });
+    };
+
+    var askAllInfo = function() {
+      console.log('isConnect askAllInfo: ', socketIO.socketObject);
+      socketIO.emit('ask:allinfo', {
         deviceId: $scope.data.deviceId,
         deviceName: $scope.data.deviceName
       });

@@ -95,10 +95,14 @@ var tcpSocketService = {
         var passOfBox = 'dkb2017hcm';
         switch(cmdName) {
             case 'KT':
-                if (params.sttDevice > 0 || params.sttDevice == 'ALL') {
+                if (params.sttDevice > 0) {
                   command += ',' + params.sttDevice + '\r\n';
                   isValidCommand = true;
                 }
+                break;
+            case 'ALL':
+                command += '\r\n';
+                isValidCommand = true;
                 break;
             case 'MODE':
                 if (params.modeBox == 0 || params.modeBox == 1) {

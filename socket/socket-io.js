@@ -13,7 +13,8 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
 
         socket.on('change:modebox', onChangeModeBox);
         socket.on('control:device', onControlDevice);
-        socket.on('ask:deviceinfo', onAskDeviceInfo);
+        socket.on('ask:deviceinfo', onAskSerialDeviceInfo);
+        socket.on('ask:allinfo', onAskAllInfo);
 
         socket.on('disconnect', onSocketDisconnect);
 
@@ -37,13 +38,23 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
             }
         };
 
-        function onAskDeviceInfo(data) {
+        function onAskSerialDeviceInfo(data) {
             var tcpConnection = app.tcpConnections[data.deviceName];
             if (tcpConnection) {
                 tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'KT', 
                     { sttDevice: data.sttDevice }, socket);
             } else {
                 console.log('onAskDeviceInfo: tcpConnection is disconnected...');
+            }
+        };
+
+        function onAskAllInfo(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'ALL', 
+                    {}, socket);
+            } else {
+                console.log('onAskAllInfo: tcpConnection is disconnected...');
             }
         };
 
