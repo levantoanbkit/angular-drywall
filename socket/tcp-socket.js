@@ -3,7 +3,7 @@
 var net     = require('net');
 var config  = require('../config');
 var tcpSocketService  = require('./tcp-socket.service');
-
+var _ = require('lodash');
 exports = module.exports = function(app) {
 
   app.tcpSocketServer = net.createServer();
@@ -27,18 +27,26 @@ exports = module.exports = function(app) {
     connection.once('close', onConnClose);
     connection.on('error', onConnError);
 
-    function onConnData(data) {
-      console.log('connection data from %s: %j', remoteAddress, data);
-      var parseDataObject = tcpSocketService.parseDataToObject(app, connection, data);
-      var isAuthenDevice = tcpSocketService.checkAuthenDevice(app, connection, parseDataObject);
-      if (isAuthenDevice) {
-        tcpSocketService.saveConnectionInfo(app, connection, parseDataObject);
-        tcpSocketService.replyToDevice(app, connection, data, parseDataObject);
-        tcpSocketService.processAnswerOfClient(app, connection, data, parseDataObject);
+    function onConnData(datas) {
+      console.log('connection data from %s: %j', remoteAddress, datas);
+      var dataSplit = datas.split("\r\n");
+      // console.log('parse: ', draftData);
+      _.forEach(dataSplit, function(data) {
+        console.log('tcp data before: ', data);
+        if (data) {
+          console.log('tcp data after: ', data);
+          var parseDataObject = tcpSocketService.parseDataToObject(app, connection, data);
+          var isAuthenDevice = tcpSocketService.checkAuthenDevice(app, connection, parseDataObject);
+          if (isAuthenDevice) {
+            tcpSocketService.saveConnectionInfo(app, connection, parseDataObject);
+            tcpSocketService.replyToDevice(app, connection, data, parseDataObject);
+            tcpSocketService.processAnswerOfClient(app, connection, data, parseDataObject);
 
-      } else {
-        tcpSocketService.forceEndConnection(app, connection, parseDataObject);
-      }
+          } else {
+            tcpSocketService.forceEndConnection(app, connection, parseDataObject);
+          }
+        }
+      });
     };
 
     function onConnClose() {
