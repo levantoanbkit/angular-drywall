@@ -90,7 +90,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             break;
           case '3':
             if ($scope.data.device3.control < 0) {
-              $scope.data.device1.control = data.statusDevice;
+              $scope.data.device3.control = data.statusDevice;
             }
             $scope.data.device3.status = data.statusDevice;
             $scope.data.device3.sensor1 = data.sensorValue1;

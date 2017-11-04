@@ -152,7 +152,7 @@ var tcpSocketService = {
 
     replyToDevice: function(app, connection, data, parseDataObject) {
         if (parseDataObject.cmdName == 'LI' || parseDataObject.cmdName == 'LOGIN') {
-          connection.write(data);
+          connection.write(data+'\r\n');
         }
     },
 
