@@ -10,22 +10,30 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
       }
     });
 }]);
-angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', 'socketIO',
-  function($rootScope, $scope, $route, $window, $http, socketIO) {
+angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', 'socketIO',
+  function($rootScope, $scope, $route, $window, $http, $interval, socketIO) {
+    var deviceName = '$' + $route.current.params.id;
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
       console.log('data: ', $scope.data);
-      askAllInfo();
+
+      let intervalPromise = $interval(function() {
+        $scope.$applyAsync(function() {
+          console.log('interval call askAllInfo...');
+          $scope.askAllInfo();
+        });
+      }, 2000);
     });
-    
+
+    $scope.askAllInfo();
 
     $scope.changeModeBox = function(mode) {
       console.log('isConnect changeModeBox: ', socketIO.socketObject);
       socketIO.emit('change:modebox', {
         modeBox: mode,
         deviceId: $scope.data.deviceId,
-        deviceName: $scope.data.deviceName
+        deviceName: deviceName
       });
     };
 
@@ -35,7 +43,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         sttDevice: deviceIndex,
         valueControl: mode,
         deviceId: $scope.data.deviceId,
-        deviceName: $scope.data.deviceName
+        deviceName: deviceName
       });
     };
 
@@ -44,15 +52,15 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       socketIO.emit('ask:deviceinfo', {
         sttDevice: deviceIndex,
         deviceId: $scope.data.deviceId,
-        deviceName: $scope.data.deviceName
+        deviceName: deviceName
       });
     };
 
-    var askAllInfo = function() {
+    $scope.askAllInfo = function() {
       console.log('isConnect askAllInfo: ', socketIO.socketObject);
       socketIO.emit('ask:allinfo', {
         deviceId: $scope.data.deviceId,
-        deviceName: $scope.data.deviceName
+        deviceName: deviceName
       });
     };
 
@@ -155,7 +163,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     socketIO.on('answer_from_devices', function(data) {
       console.log('answer_from_devices : ', data);
-      var deviceName = '$' + $route.current.params.id;
       if (data.deviceName != deviceName) {
         return true;
       }
