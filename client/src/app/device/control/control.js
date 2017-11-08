@@ -75,7 +75,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             if ($scope.data.device1.control < 0) {
               $scope.data.device1.control = data.statusDevice;
             }
-            $scope.data.device1.control = data.statusDevice;
             $scope.data.device1.status = data.statusDevice;
             $scope.data.device1.sensor1 = data.sensorValue1;
             $scope.data.device1.sensor2 = data.sensorValue2;
@@ -158,10 +157,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     };
 
     socketIO.on('answer_from_devices', function(data) {
-      console.log('answer_from_devices : ', data);
       if (data.deviceName != deviceName) {
         return true;
       }
+      console.log('answer_from_devices : ', data);
       $scope.data.isConnect = 1;
       switch(data.cmdName) {
         case 'TL':
