@@ -10,21 +10,22 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
       }
     });
 }]);
-angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', 'socketIO',
-  function($rootScope, $scope, $route, $window, $http, $interval, socketIO) {
+angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', 'socketIO', 'ngDialog',
+  function($rootScope, $scope, $route, $window, $http, $interval, socketIO, ngDialog) {
+
     var deviceName = '$' + $route.current.params.id;
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
       console.log('data: ', $scope.data);
       askAllInfo();
-      // var intervalPromise = $interval(function() {
-      //   console.log('interval call askAllInfo...');
-      //   askAllInfo();
-      // }, 4000);
     });
 
     $scope.changeModeBox = function(mode) {
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
       console.log('isConnect changeModeBox: ', socketIO.socketObject);
       socketIO.emit('change:modebox', {
         modeBox: mode,
@@ -34,12 +35,73 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     };
 
     $scope.controlDevice = function(deviceIndex, mode) {
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      checkEmptyWaterDevice(deviceIndex, mode);
       console.log('isConnect controlDevice: ', socketIO.socketObject);
       socketIO.emit('control:device', {
         sttDevice: deviceIndex,
         valueControl: mode,
         deviceId: $scope.data.deviceId,
         deviceName: deviceName
+      });
+    };
+
+    var checkEmptyWaterDevice = function(deviceIndex, mode) {
+      switch (deviceIndex) {
+        case 1:
+          handleEmptyWater($scope.data.device1, mode);
+          break;
+        case 2:
+          handleEmptyWater($scope.data.device2, mode);
+          break;
+        case 3:
+          handleEmptyWater($scope.data.device3, mode);
+          break;
+        case 4:
+          handleEmptyWater($scope.data.device4, mode);
+          break;
+        default:
+          break;
+      }
+    };
+
+    var handleEmptyWater = function(deviceData, mode) {
+      var sensor1 = deviceData.sensor1;
+      var sensor2 = deviceData.sensor2;
+      if (sensor1 == sensor2 && sensor1 == 0 && mode == 1) {
+        openWarningEmptyWaterDialog();
+      }
+
+      if (sensor1 == "_ _ _" ||  sensor2 == "_ _ _" || sensor3 == "_ _ _" || sensor4 == "_ _ _") {
+        openWarningNoSensorDataDialog();
+      }
+
+    };
+
+    var openWarningEmptyWaterDialog = function() {
+      ngDialog.open({
+        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p><p style="font-weight: bold;">Hiện tại không còn nước để bơm!</p>',
+        plain: true,
+        height: 100
+      });
+    };
+
+    var openWarningNoSensorDataDialog = function() {
+      ngDialog.open({
+        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p><p style="font-weight: bold;">Trạng thái cảm biến của thiết bị này hiện không xác định!</p>',
+        plain: true,
+        height: 100
+      });
+    };
+
+    var openWarningConnectionDialog = function() {
+      ngDialog.open({
+        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p><p style="font-weight: bold;">Hiện tại kết nối bị ngắt!</p>',
+        plain: true,
+        height: 100
       });
     };
 
@@ -72,9 +134,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
         switch(data.sttDevice) {
           case '1':
-            if ($scope.data.device1.control < 0) {
-              $scope.data.device1.control = data.statusDevice;
-            }
             $scope.data.device1.status = data.statusDevice;
             $scope.data.device1.sensor1 = data.sensorValue1;
             $scope.data.device1.sensor2 = data.sensorValue2;
@@ -82,9 +141,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             $scope.data.device1.sensor4 = data.sensorValue4;
             break;
           case '2':
-            if ($scope.data.device2.control < 0) {
-              $scope.data.device2.control = data.statusDevice;
-            }
             $scope.data.device2.status = data.statusDevice;
             $scope.data.device2.sensor1 = data.sensorValue1;
             $scope.data.device2.sensor2 = data.sensorValue2;
@@ -92,9 +148,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             $scope.data.device2.sensor4 = data.sensorValue4;
             break;
           case '3':
-            if ($scope.data.device3.control < 0) {
-              $scope.data.device3.control = data.statusDevice;
-            }
             $scope.data.device3.status = data.statusDevice;
             $scope.data.device3.sensor1 = data.sensorValue1;
             $scope.data.device3.sensor2 = data.sensorValue2;
@@ -102,9 +155,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             $scope.data.device3.sensor4 = data.sensorValue4;
             break;
           case '4':
-            if ($scope.data.device4.control < 0) {
-              $scope.data.device4.control = data.statusDevice;
-            }
             $scope.data.device4.status = data.statusDevice;
             $scope.data.device4.sensor1 = data.sensorValue1;
             $scope.data.device4.sensor2 = data.sensorValue2;
@@ -118,42 +168,15 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     };
 
     var handleDKCommand = function(data) {
-      if (data.sttDevice == 255) {
-        $scope.data.modeBox = data.valueControl;
-      } else {
-        switch (data.sttDevice) {
-          case '1':
-            $scope.data.device1.control = data.valueControl;
-            $scope.data.device1.status = data.valueControl;
-            break;
-          case '2':
-            $scope.data.device2.control = data.valueControl;
-            $scope.data.device2.status = data.valueControl;
-            break;
-          case '3':
-            $scope.data.device3.control = data.valueControl;
-            $scope.data.device3.status = data.valueControl;
-            break;
-          case '4':
-            $scope.data.device4.control = data.valueControl;
-            $scope.data.device4.status = data.valueControl;
-            break;
-          default:
-            break;
-        }
-      }
     };
 
     var handleMODECommand = function(data) {
-      $scope.data.modeBox = data.modeBox;
     };
 
     var handleLICommand = function(data) {
-      $scope.data.isConnect = 1;
     };
 
     var handleXOCommand = function(data) {
-
     };
 
     socketIO.on('answer_from_devices', function(data) {

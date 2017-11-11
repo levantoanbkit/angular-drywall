@@ -29,7 +29,7 @@ exports = module.exports = function(app) {
 
     function onConnData(datas) {
       console.log('connection data from %s: %j', remoteAddress, datas);
-      var dataSplit = datas.split("\r\n");
+      var dataSplit = datas.split("\\r\n");
       // console.log('parse: ', draftData);
       _.forEach(dataSplit, function(data) {
         console.log('tcp data before: ', data);

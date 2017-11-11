@@ -57,6 +57,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'client/bower_components/moment/',
             src: ['moment.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
+            expand: true, cwd: 'client/bower_components/ng-dialog/js/',
+            src: ['ngDialog.min.js'], dest: '<%= distdir %>/vendor/'
           }
         ]
       },
@@ -121,7 +125,9 @@ module.exports = function(grunt) {
           loadPath: '.'
         },
         files: {
-          '<%= distdir %>/css/style.css': 'client/src/assets/sass/style.scss'
+          '<%= distdir %>/css/style.css': 'client/src/assets/sass/style.scss',
+          '<%= distdir %>/css/ngDialog.min.css': 'client/bower_components/ng-dialog/css/ngDialog.min.css',
+          '<%= distdir %>/css/ngDialog-theme-default.min.css': 'client/bower_components/ng-dialog/css/ngDialog-theme-default.min.css',
         }
       }
     },

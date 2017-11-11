@@ -13,7 +13,8 @@ angular.module('app', [
   'templates.app',
   'templates.common',
   'ui.bootstrap',
-  'services.socketIO'
+  'services.socketIO',
+  'ngDialog'
 ]);
 
 
@@ -22,11 +23,13 @@ angular.module('app').config(['$httpProvider', 'XSRF_COOKIE_NAME', function($htt
   $httpProvider.defaults.xsrfCookieName = XSRF_COOKIE_NAME;
 }]);
 
-angular.module('app').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+angular.module('app').config(['$routeProvider', '$locationProvider', 'ngDialogProvider', function ($routeProvider, $locationProvider, ngDialogProvider) {
+  
   $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
   });
+
   $routeProvider
     .when('/', {
       templateUrl: 'main.tpl.html',
@@ -45,6 +48,15 @@ angular.module('app').config(['$routeProvider', '$locationProvider', function ($
       templateUrl: '404.tpl.html',
       title: 'Page Not Found'
     });
+
+  ngDialogProvider.setDefaults({
+        className: "ngdialog-theme-default",
+        plain: false,
+        showClose: true,
+        closeByDocument: true,
+        closeByEscape: true,
+        appendTo: false
+    });
 }]);
 
 angular.module('app').run(['$location', '$rootScope', 'security', function($location, $rootScope, security) {
@@ -54,7 +66,7 @@ angular.module('app').run(['$location', '$rootScope', 'security', function($loca
 
   // add a listener to $routeChangeSuccess
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-    $rootScope.title = current.$$route && current.$$route.title? current.$$route.title: 'IoT system';
+    $rootScope.title = current.$$route && current.$$route.title? current.$$route.title: 'MACS-SSFG system';
   });
 }]);
 
