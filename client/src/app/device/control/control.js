@@ -75,9 +75,9 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         openWarningEmptyWaterDialog();
       }
 
-      if (sensor1 == "_ _ _" ||  sensor2 == "_ _ _" || sensor3 == "_ _ _" || sensor4 == "_ _ _") {
-        openWarningNoSensorDataDialog();
-      }
+      // if (sensor1 == "_ _ _" ||  sensor2 == "_ _ _" || sensor3 == "_ _ _" || sensor4 == "_ _ _") {
+      //   openWarningNoSensorDataDialog();
+      // }
 
     };
 
