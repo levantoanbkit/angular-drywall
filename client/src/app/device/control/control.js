@@ -10,8 +10,8 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
       }
     });
 }]);
-angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', 'socketIO', 'ngDialog',
-  function($rootScope, $scope, $route, $window, $http, $interval, socketIO, ngDialog) {
+angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', '$location', 'socketIO', 'ngDialog',
+  function($rootScope, $scope, $route, $window, $http, $interval, $location, socketIO, ngDialog) {
 
     var deviceName = '$' + $route.current.params.id;
     $http.get('/data/mockup.json').then(function(result) {
@@ -47,6 +47,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         deviceId: $scope.data.deviceId,
         deviceName: deviceName
       });
+    };
+
+    $scope.goToHistory = function() {
+      $location.path('/device/history/'+ $route.current.params.id);
     };
 
     var checkEmptyWaterDevice = function(deviceIndex, mode) {
