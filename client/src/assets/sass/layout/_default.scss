@@ -187,3 +187,21 @@ select, textarea, input, .form-control {
 button[disabled] {
   opacity: 1 !important;
 }
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .active > a {
+  color: black !important;
+  background-color: #fcd768;
+  background-image: linear-gradient(to bottom, #fcd768 0%, #fcd768 100%);
+}
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom, #3187c6 0%, #3187c6 100%);
+}
+
+.dropdown-header {
+  color: black;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+  color: white;
+}
