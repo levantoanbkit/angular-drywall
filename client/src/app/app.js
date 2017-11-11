@@ -79,7 +79,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
   });
 
   $scope.closeToggleWhenClickOutside = function() {
-    angular.element(document).click(function (event) {
+    $(document).click(function (event) {
       var clickOver = angular.element(event.target);          
       var opened = angular.element(".navbar-collapse").hasClass("in");
       var parentNode = clickOver.eq(0).parent();
