@@ -169,6 +169,7 @@ var tcpSocketService = {
         // connection.socketIOs.push(socket);
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
+            console.log('commandString: ', commandString);
             connection.write(commandString);
         } else {
             console.log('Connection of deviceName %s is not exist or command is not valid', deviceName);
