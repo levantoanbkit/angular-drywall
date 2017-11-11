@@ -206,6 +206,11 @@ button[disabled] {
   color: white;
 }
 
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
+  background-color: #fcd768;
+  color: black;
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
