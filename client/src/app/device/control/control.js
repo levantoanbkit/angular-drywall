@@ -22,11 +22,11 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     });
 
     $scope.changeModeBox = function(mode) {
+      console.log('isConnect changeModeBox: ', socketIO.socketObject);
       if ($scope.data.isConnect != 1) {
         openWarningConnectionDialog();
         return false;
       }
-      console.log('isConnect changeModeBox: ', socketIO.socketObject);
       socketIO.emit('change:modebox', {
         modeBox: mode,
         deviceId: $scope.data.deviceId,
@@ -35,18 +35,12 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     };
 
     $scope.controlDevice = function(deviceIndex, mode) {
+      console.log('isConnect controlDevice: ', socketIO.socketObject);
       if ($scope.data.isConnect != 1) {
         openWarningConnectionDialog();
         return false;
       }
       checkEmptyWaterDevice(deviceIndex, mode);
-      console.log('isConnect controlDevice: ', socketIO.socketObject);
-      socketIO.emit('control:device', {
-        sttDevice: deviceIndex,
-        valueControl: mode,
-        deviceId: $scope.data.deviceId,
-        deviceName: deviceName
-      });
     };
 
     $scope.goToHistory = function() {
@@ -56,27 +50,34 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     var checkEmptyWaterDevice = function(deviceIndex, mode) {
       switch (deviceIndex) {
         case 1:
-          handleEmptyWater($scope.data.device1, mode);
+          handleEmptyWater($scope.data.device1, deviceIndex, mode);
           break;
         case 2:
-          handleEmptyWater($scope.data.device2, mode);
+          handleEmptyWater($scope.data.device2, deviceIndex, mode);
           break;
         case 3:
-          handleEmptyWater($scope.data.device3, mode);
+          handleEmptyWater($scope.data.device3, deviceIndex, mode);
           break;
         case 4:
-          handleEmptyWater($scope.data.device4, mode);
+          handleEmptyWater($scope.data.device4, deviceIndex, mode);
           break;
         default:
           break;
       }
     };
 
-    var handleEmptyWater = function(deviceData, mode) {
+    var handleEmptyWater = function(deviceData, deviceIndex, mode) {
       var sensor1 = deviceData.sensor1;
       var sensor2 = deviceData.sensor2;
       if (sensor1 == sensor2 && sensor1 == 0 && mode == 1) {
         openWarningEmptyWaterDialog();
+      } else {
+        socketIO.emit('control:device', {
+          sttDevice: deviceIndex,
+          valueControl: mode,
+          deviceId: $scope.data.deviceId,
+          deviceName: deviceName
+        });
       }
 
       // if (sensor1 == "_ _ _" ||  sensor2 == "_ _ _" || sensor3 == "_ _ _" || sensor4 == "_ _ _") {
@@ -85,11 +86,30 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     };
 
-    var openWarningEmptyWaterDialog = function() {
-      ngDialog.open({
-        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p><p style="font-weight: bold;">Hiện tại không còn nước để bơm!</p>',
+    var openWarningEmptyWaterDialog = function(deviceIndex, mode) {
+      var dialog = ngDialog.open({
+        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p>\
+                  <p>Hiện tại không còn nước để bơm!</p>\
+                  <p style="font-weight: bold;">Bạn có muốn bật không?</p>\
+                  <div class="ngdialog-buttons">\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">No</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(2)">Yes</button>\
+                  </div>',
         plain: true,
-        height: 100
+        height: 150,
+        $scope: $scope
+      });
+      dialog.closePromise.then(function (data) {
+        if (data.value == 2) {
+          socketIO.emit('control:device', {
+            sttDevice: deviceIndex,
+            valueControl: mode,
+            deviceId: $scope.data.deviceId,
+            deviceName: deviceName
+          });
+        } else {
+          return false;
+        }
       });
     };
 

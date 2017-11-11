@@ -8,8 +8,8 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
     app.io.on('connection', onConnectSocket);
 
     var interval = setInterval(function() {
-        console.log("hello interval...");
         _.forEach(app.tcpConnections, function(tcpConnection) {
+            console.log("hello interval...: ",tcpConnection.deviceName);
             tcpSocketService.makeRemoteControlCommand(app, tcpConnection, tcpConnection.deviceName, 'ALL', {});
         });
     }, 4000);

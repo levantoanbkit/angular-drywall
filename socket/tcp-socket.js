@@ -23,6 +23,11 @@ exports = module.exports = function(app) {
 
     connection.setEncoding('utf8');
     connection.setNoDelay(true);
+    connection.setTimeout(10000, function() {
+      console.log('connection destroy timeout 10000....');
+      tcpSocketService.removeConnectionInList(app, connection);
+      connection.destroy();
+    });
     connection.on('data', onConnData);
     connection.once('close', onConnClose);
     connection.on('error', onConnError);
@@ -30,11 +35,9 @@ exports = module.exports = function(app) {
     function onConnData(datas) {
       console.log('connection data from %s: %j', remoteAddress, datas);
       var dataSplit = datas.split("\r\n");
-      // console.log('parse: ', draftData);
       _.forEach(dataSplit, function(data) {
-        console.log('tcp data before: ', data);
         if (data) {
-          console.log('tcp data after: ', data);
+          console.log('connection TCP Data: ', data);
           var parseDataObject = tcpSocketService.parseDataToObject(app, connection, data);
           var isAuthenDevice = tcpSocketService.checkAuthenDevice(app, connection, parseDataObject);
           if (isAuthenDevice) {

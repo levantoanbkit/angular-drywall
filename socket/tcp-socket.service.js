@@ -71,9 +71,7 @@ var tcpSocketService = {
 
     saveConnectionInfo: function(app, connection, parseDataObject) {
         connection.deviceName = parseDataObject.deviceName;
-        if (!app.tcpConnections[connection.deviceName]) {
-            _.assignIn(app.tcpConnections, { [connection.deviceName] : connection });
-        }
+        _.assignIn(app.tcpConnections, { [connection.deviceName] : connection });
         // console.log('app.tcpConnections: ', app.tcpConnections);
     },
 
@@ -84,9 +82,7 @@ var tcpSocketService = {
     },
 
     removeConnectionInList: function(app, connection) {
-        if (app.tcpConnections[connection.deviceName]) {
-            app.tcpConnections = _.omit(app.tcpConnections, connection.deviceName);
-        }
+        app.tcpConnections = _.omit(app.tcpConnections, connection.deviceName);
     },
 
     buildControlCommand: function(deviceName, cmdName, params) {
@@ -170,6 +166,7 @@ var tcpSocketService = {
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
             console.log('commandString: ', commandString);
+            // console.log('connection command: ', connection);
             connection.write(commandString);
         } else {
             console.log('Connection of deviceName %s is not exist or command is not valid', deviceName);
