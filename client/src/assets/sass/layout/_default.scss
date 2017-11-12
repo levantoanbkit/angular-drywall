@@ -37,7 +37,13 @@ select, textarea, input, .form-control {
   font-weight: bold;
   letter-spacing: -1px;
   margin-top: 10px;
+  color: white;
 }
+
+.gray-bg > .device-label {
+  color: black;
+}
+
 .project-label, .stat-label {
   font-size: 1.2em;
 }
@@ -71,11 +77,13 @@ select, textarea, input, .form-control {
   background-color: #cccccc;
 }
 .green-bg {
-  background-color: #529d3d;
+  background-color: #3087c7;
 }
 .btn-device-action {
   margin-top: 10px;
   width: 100px;
+  background-color: #fcd768;
+  color: black;
 }
 .mt4 {
   margin-top: 4px;

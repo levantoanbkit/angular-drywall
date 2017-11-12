@@ -10,8 +10,10 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
       }
     });
 }]);
-angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', '$location', 'socketIO', 'ngDialog',
-  function($rootScope, $scope, $route, $window, $http, $interval, $location, socketIO, ngDialog) {
+angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', '$location', 'security', 'socketIO', 'ngDialog',
+  function($rootScope, $scope, $route, $window, $http, $interval, $location, security, socketIO, ngDialog) {
+
+    $scope.isAdmin = security.isAdmin();
 
     var deviceName = '$' + $route.current.params.id;
     $http.get('/data/mockup.json').then(function(result) {
@@ -23,6 +25,12 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     $scope.changeModeBox = function(mode) {
       console.log('isConnect changeModeBox: ', socketIO.socketObject);
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | changeModeBox');
+        openWarningAdminDialog();
+        return false;
+      }
+
       if ($scope.data.isConnect != 1) {
         openWarningConnectionDialog();
         return false;
@@ -36,6 +44,11 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     $scope.controlDevice = function(deviceIndex, mode) {
       console.log('isConnect controlDevice: ', socketIO.socketObject);
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | controlDevice');
+        openWarningAdminDialog();
+        return false;
+      }
       if ($scope.data.isConnect != 1) {
         openWarningConnectionDialog();
         return false;
@@ -115,9 +128,9 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       });
     };
 
-    var openWarningNoSensorDataDialog = function() {
+    var openWarningAdminDialog = function() {
       ngDialog.open({
-        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p><p style="font-weight: bold;">Trạng thái cảm biến của thiết bị này hiện không xác định!</p>',
+        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p><p style="font-weight: bold;">Bạn không phải là Admin, do vậy không thể thực hiện thao tác điều khiển này !</p>',
         plain: true,
         height: 100
       });
