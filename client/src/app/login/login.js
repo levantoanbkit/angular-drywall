@@ -10,7 +10,7 @@ angular.module('login.index').config(['$routeProvider', function($routeProvider)
           var promise = securityAuthorization.requireUnauthenticatedUser()
             .catch(function(){
               // user is authenticated, redirect
-              $location.path('/account');
+              $location.path('/');
               return $q.reject();
             });
           return promise;

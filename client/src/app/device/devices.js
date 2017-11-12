@@ -1,4 +1,4 @@
-angular.module('device.index', ['ngRoute', 'security.authorization']);
+angular.module('device.index', ['ngRoute', 'security.authorization', 'security.service']);
 angular.module('device.index').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
     .when('/devices', {
@@ -10,9 +10,10 @@ angular.module('device.index').config(['$routeProvider', 'securityAuthorizationP
       }
     });
 }]);
-angular.module('device.index').controller('DevicesCtrl', ['$rootScope', '$scope', '$location', '$window', 'socketIO',
-  function($rootScope, $scope, $location, $window, socketIO){
+angular.module('device.index').controller('DevicesCtrl', ['$rootScope', '$scope', '$location', '$window', 'socketIO', 'security',
+  function($rootScope, $scope, $location, $window, socketIO, security){
     console.log('socketIO ID:', socketIO.socketObject);
+    $scope.isAdmin = security.isAdmin();
     $scope.openPage = function(page, deviceId) {
       var redirectUrl = '';
       switch (page) {
