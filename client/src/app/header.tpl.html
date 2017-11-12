@@ -19,8 +19,8 @@
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/signup')}"><a href="/signup">Đăng ký</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/contact')}"><a href="/contact">Liên hệ</a></li>
                 <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="#" ng-click="openPageReload('/devices')">Điều khiển</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">Tài khoản</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Cấu hình</a></li>
+                <!-- <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">Tài khoản</a></li> -->
+                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Cấu hình tài khoản</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="!isAuthenticated()"><a href="/login"><i class="fa fa-user"></i> Đăng nhập</a></li>
@@ -56,7 +56,7 @@
                         <li class="dropdown-header">Tài khoản của bạn</li>
                         <!-- <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Quản lý trạng thái</a></li>
                         <li><a href="/admin/categories" ng-click="closeAdminMenu()">Danh mục</a></li> -->
-                        <li><a href="/account" ng-click="closeAdminMenu()">Tài khoản</a></li>
+                        <!-- <li><a href="/account" ng-click="closeAdminMenu()">Tài khoản</a></li> -->
                         <li><a href="/account/settings" ng-click="closeAdminMenu()">Cấu hình tài khoản</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Quản lý người dùng</li>
@@ -118,7 +118,7 @@
                         <li class="dropdown-header">Tài khoản của bạn</li>
                         <!-- <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Quản lý trạng thái</a></li>
                         <li><a href="/admin/categories" ng-click="closeAdminMenu()">Danh mục</a></li> -->
-                        <li><a href="/account" ng-click="closeAdminMenu()">Tài khoản</a></li>
+                        <!-- <li><a href="/account" ng-click="closeAdminMenu()">Tài khoản</a></li> -->
                         <li><a href="/account/settings" ng-click="closeAdminMenu()">Cấu hình tài khoản</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Quản lý người dùng</li>
