@@ -21,11 +21,11 @@
             </thead>
             <tbody>
             <tr ng-repeat="history in histories">
-                <td ng-bind="history.time"></td>
+                <td>{{history.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                 <td ng-bind="history.username"></td>
-                <td class="nowrap" ng-bind="history.content"></td>
+                <td class="nowrap" ng-bind="history.command"></td>
             </tr>
-            <tr>
+            <tr ng-show="histories.length == 0">
                 <td colspan="3">no documents matched</td>
             </tr>
             </tbody>

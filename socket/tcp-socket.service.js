@@ -156,7 +156,7 @@ var tcpSocketService = {
         if (parseDataObject.cmdName == 'TL' || parseDataObject.cmdName == 'DK' ||
             parseDataObject.cmdName == 'MODE' || parseDataObject.cmdName == 'LI' ||
             parseDataObject.cmdName == 'XO') {
-            app.io.sockets.emit('answer_from_devices', parseDataObject);
+            app.io.sockets.emit('answer_from_devices', { data: parseDataObject, cmd: data });
         }
     },
 

@@ -1,4 +1,4 @@
-angular.module('device.history.index', ['ngRoute', 'security.authorization']);
+angular.module('device.history.index', ['ngRoute', 'security.authorization', 'services.controlLogResource']);
 angular.module('device.history.index').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
     .when('/device/history/:id', {
@@ -6,18 +6,43 @@ angular.module('device.history.index').config(['$routeProvider', 'securityAuthor
       controller: 'DeviceHistoryCtrl',
       title: 'Lịch sử điều khiển',
       resolve: {
-        authenticatedUser: securityAuthorizationProvider.requireAuthenticatedUser
+        authenticatedUser: securityAuthorizationProvider.requireAuthenticatedUser,
       }
     });
 }]);
-angular.module('device.history.index').controller('DeviceHistoryCtrl', [ '$scope', '$route',
-  function($scope, $route){
+angular.module('device.history.index').controller('DeviceHistoryCtrl', [ '$scope', '$route', '$location', '$log', 'controlLogResource',
+  function($scope, $route, $location, $log, controlLogResource){
+
     $scope.deviceId = $route.current.params.id;
-    $scope.histories = [
-      {
-        time: "20/10/2017 12:00:30",
-        username: "levantoanbkit@gmail.com",
-        content: "$Q3CCLCT,TL,1,0,0,1,1234,3232<CR><LF>"
-      },
-    ];
+
+    $scope.filters = {
+      device: $route.current.params.id
+    };
+
+    var deserializeData = function(data) {
+      $scope.items = data.items;
+      $scope.pages = data.pages;
+      $scope.filters = data.filters;
+      $scope.histories = data.data;
+    };
+
+    var fetchControlLogs = function(){
+      controlLogResource.findControlLogs($scope.filters).then(function(data){
+        console.log('data fetchControlLogs: ', data);
+        deserializeData(data);
+
+      }, function(e){
+        $log.error(e);
+      });
+    };
+
+    $scope.prev = function(){
+      $scope.filters.page = $scope.pages.prev;
+      fetchControlLogs();
+    };
+    $scope.next = function(){
+      $scope.filters.page = $scope.pages.next;
+      fetchControlLogs();
+    };
+    fetchControlLogs();
   }]);

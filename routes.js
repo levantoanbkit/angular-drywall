@@ -11,6 +11,8 @@ var adminGroup = require('./service/admin/admin-group');
 var adminStatus = require('./service/admin/status');
 var adminCategory = require('./service/admin/category');
 
+var controlLog = require('./service/control-log');
+
 function useAngular(req, res, next){
   res.sendFile(require('path').join(__dirname, './client/dist/index.html'));
 }
@@ -149,6 +151,12 @@ exports = module.exports = function(app, passport) {
 
   //admin > search
   app.get('/api/admin/search', admin.search);
+
+  //Control Device Logs
+  app.get('/api/controlLogs', controlLog.find);
+  // app.get('/api/controlLogs/:id', controlLog.read);
+  app.post('/api/controlLogs', controlLog.create);
+  app.delete('/api/controlLogs/:id', controlLog.delete);
 
   //******** END OF NEW JSON API ********
 

@@ -24,9 +24,7 @@ var socketIOService = {
     },
 
     removeSocket: function(app, socket, user) {
-        if (app.socketIOConnections[user.username]) {
-            app.socketIOConnections = _.omit(app.socketIOConnections, user.username);
-        }
+        app.socketIOConnections = _.omit(app.socketIOConnections, user.username);
         // console.log('app.socketIOConnections after disconnect: ', app.socketIOConnections);
     }
 

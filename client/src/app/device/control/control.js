@@ -1,4 +1,4 @@
-angular.module('device.control.index', ['ngRoute', 'security.authorization']);
+angular.module('device.control.index', ['ngRoute', 'security.authorization', 'services.controlLogResource', 'security.service']);
 angular.module('device.control.index').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
     .when('/device/control/:id', {
@@ -10,12 +10,14 @@ angular.module('device.control.index').config(['$routeProvider', 'securityAuthor
       }
     });
 }]);
-angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', '$location', 'security', 'socketIO', 'ngDialog',
-  function($rootScope, $scope, $route, $window, $http, $interval, $location, security, socketIO, ngDialog) {
+angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootScope', '$scope', '$route', '$window', '$http', '$interval', '$location', 'security', 'socketIO', 'ngDialog', 'controlLogResource',
+  function($rootScope, $scope, $route, $window, $http, $interval, $location, security, socketIO, ngDialog, controlLogResource) {
 
     $scope.isAdmin = security.isAdmin();
-
+    $scope.currentUser = security.currentUser;
+    
     var deviceName = '$' + $route.current.params.id;
+
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
@@ -35,29 +37,40 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         openWarningConnectionDialog();
         return false;
       }
+      $scope.commandChangeModeBox = deviceName + ",MODE," + mode + "\r\n";
       socketIO.emit('change:modebox', {
         modeBox: mode,
         deviceId: $scope.data.deviceId,
         deviceName: deviceName
       });
+      saveControlLog($scope.commandChangeModeBox);
     };
 
     $scope.controlDevice = function(deviceIndex, mode) {
       console.log('isConnect controlDevice: ', socketIO.socketObject);
-      if (!$scope.isAdmin) {
-        console.log('Tài khoản này không phải là Admin | controlDevice');
-        openWarningAdminDialog();
-        return false;
-      }
-      if ($scope.data.isConnect != 1) {
-        openWarningConnectionDialog();
-        return false;
-      }
+      // if (!$scope.isAdmin) {
+      //   console.log('Tài khoản này không phải là Admin | controlDevice');
+      //   openWarningAdminDialog();
+      //   return false;
+      // }
+      // if ($scope.data.isConnect != 1) {
+      //   openWarningConnectionDialog();
+      //   return false;
+      // }
+      $scope.commandControlDevice = deviceName + ",DK," + deviceIndex + ","+ mode + "\r\n";
       checkEmptyWaterDevice(deviceIndex, mode);
     };
 
     $scope.goToHistory = function() {
       $location.path('/device/history/'+ $route.current.params.id);
+    };
+
+    var saveControlLog = function(command) {
+      var deviceId = $route.current.params.id;
+      var username = $scope.currentUser.username;
+      controlLogResource.addUControlLog(deviceId, username, command).then(function(data) {
+        console.log('saveControlLog: ', data);
+      });
     };
 
     var checkEmptyWaterDevice = function(deviceIndex, mode) {
@@ -92,12 +105,8 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           deviceId: $scope.data.deviceId,
           deviceName: deviceName
         });
+        saveControlLog($scope.commandControlDevice);
       }
-
-      // if (sensor1 == "_ _ _" ||  sensor2 == "_ _ _" || sensor3 == "_ _ _" || sensor4 == "_ _ _") {
-      //   openWarningNoSensorDataDialog();
-      // }
-
     };
 
     var openWarningEmptyWaterDialog = function(deviceIndex, mode) {
@@ -122,6 +131,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             deviceId: $scope.data.deviceId,
             deviceName: deviceName
           });
+          saveControlLog($scope.commandControlDevice);
         } else {
           return false;
         }
@@ -218,7 +228,9 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     var handleXOCommand = function(data) {
     };
 
-    socketIO.on('answer_from_devices', function(data) {
+    socketIO.on('answer_from_devices', function(messageData) {
+      var data = messageData.data;
+      var command = messageData.cmd;
       if (data.deviceName != deviceName) {
         return true;
       }
@@ -230,15 +242,18 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           break;
         case 'DK':
           handleDKCommand(data);
+          // saveControlLog(command);
           break;
         case 'MODE':
           handleMODECommand(data);
+          // saveControlLog(command);
           break;
         case 'LI':
           handleLICommand(data);
           break;
         case 'XO':
           handleXOCommand(data);
+          // saveControlLog(command);
           break;
         default:
           break;
