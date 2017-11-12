@@ -86,6 +86,9 @@ select, textarea, input, .form-control {
 .mb15 {
   margin-bottom: 15px !important;
 }
+.pl30 {
+  padding-left: 30px;
+}
 .device-search {
   width: 260px;
 }
@@ -141,7 +144,7 @@ select, textarea, input, .form-control {
   border:10px solid #4099ff;
 }
 
-.radio-inline, button-inline {
+.radio-inline {
   position: relative;
   display: inline-block;
   padding-left: 25px;
@@ -149,6 +152,26 @@ select, textarea, input, .form-control {
   vertical-align: middle;
   font-weight: normal;
   cursor: pointer;
+}
+
+.button-inline-clickable {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+  margin-left: -5px;
+}
+
+.button-inline {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: not-allowed;
+  margin-left: -5px;
 }
 
 .radio-txt {
@@ -174,13 +197,13 @@ select, textarea, input, .form-control {
 }
 
 .btn-circle {
-  width: 30px;
-  height: 30px;
+  width: 42px;
+  height: 42px;
   text-align: center;
   padding: 6px 0;
   font-size: 12px;
   line-height: 1.428571429;
-  border-radius: 15px;
+  border-radius: 25px;
   margin-left: 10px;
 }
 

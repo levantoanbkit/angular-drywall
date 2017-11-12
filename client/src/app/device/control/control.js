@@ -70,8 +70,9 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       var sensor1 = deviceData.sensor1;
       var sensor2 = deviceData.sensor2;
       if (sensor1 == sensor2 && sensor1 == 0 && mode == 1) {
-        openWarningEmptyWaterDialog();
+        openWarningEmptyWaterDialog(deviceIndex, mode);
       } else {
+        console.log('emit DK Device...');
         socketIO.emit('control:device', {
           sttDevice: deviceIndex,
           valueControl: mode,
@@ -92,15 +93,16 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
                   <p>Hiện tại không còn nước để bơm!</p>\
                   <p style="font-weight: bold;">Bạn có muốn bật không?</p>\
                   <div class="ngdialog-buttons">\
-                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">No</button>\
-                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(2)">Yes</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">Không</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(2)">Có</button>\
                   </div>',
         plain: true,
-        height: 150,
-        $scope: $scope
+        height: 150
       });
       dialog.closePromise.then(function (data) {
+        console.log('dialog data: ', data);
         if (data.value == 2) {
+          console.log('emit DK Device dialog...');
           socketIO.emit('control:device', {
             sttDevice: deviceIndex,
             valueControl: mode,
