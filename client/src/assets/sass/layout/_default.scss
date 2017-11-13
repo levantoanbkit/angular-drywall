@@ -218,6 +218,10 @@ select, textarea, input, .form-control {
   margin-left: 10px;
 }
 
+.button-inline .btn-circle {
+  cursor: not-allowed !important;
+}
+
 button[disabled] {
   opacity: 1 !important;
 }

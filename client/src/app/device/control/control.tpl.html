@@ -22,7 +22,8 @@
         <div class="row mb15">
             <div class="col-lg-6 col-md-6">
                 <div class="heading-control-label mt15">
-                    <div class="head-control-txt">Chọn Mode:</div>
+                    <div class="head-control-txt hidden-xs">Chọn Mode:</div>
+                    <div class="head-control-txt visible-xs">Chọn Mode:<br></div>
                     <label class="button-inline-clickable" ng-click="changeModeBox(1)">
                         <button type="button" class="btn btn-primary btn-circle"></button><span class="btn-txt">Tự động</span>
                     </label>
@@ -31,30 +32,51 @@
                     </label>
                 </div>
                 <div class="heading-control-label mt15">
-                    <div class="head-control-txt">Mode hiện tại:</div>
+                    <div class="head-control-txt hidden-xs">Mode hiện tại:</div>
+                    <div class="head-control-txt visible-xs">Mode hiện tại:<br></div>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-circle" ng-class="{'btn-primary': data.modeBox == 1}" disabled></button><span class="btn-txt">Tự động</span>
+                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBox == 1"></button>
+                        <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBox != 1"></button>
+                        <span class="btn-txt" ng-show="data.modeBox == 1"><b>Tự động</b></span>
+                        <span class="btn-txt" ng-show="data.modeBox != 1">Tự động</span>
                     </label>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-circle" ng-class="{'btn-primary': data.modeBox == 0}" disabled></button><span class="btn-txt">Bằng tay</span>
-                    </label>
-                </div>
-                <div class="heading-control-label mt15">
-                    <div class="head-control-txt">Nút Mode tủ:</div>
-                    <label class="button-inline">
-                        <button type="button" class="btn btn-circle" ng-class="{'btn-primary': data.modeBtn == 1}" disabled></button><span class="btn-txt">Tự động</span>
-                    </label>
-                    <label class="button-inline">
-                        <button type="button" class="btn btn-circle" ng-class="{'btn-primary': data.modeBtn == 0}" disabled></button><span class="btn-txt">Bằng tay</span>
+                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBox == 0"></button>
+                        <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBox != 0"></button>
+                        <span class="btn-txt" ng-show="data.modeBox == 0"><b>Bằng tay</b></span>
+                        <span class="btn-txt" ng-show="data.modeBox != 0">Bằng tay</span>
                     </label>
                 </div>
                 <div class="heading-control-label mt15">
-                    <div class="head-control-txt">SIM Mode tủ:</div>
+                    <div class="head-control-txt hidden-xs">Nút Mode tủ:</div>
+                    <div class="head-control-txt visible-xs">Nút Mode tủ:<br></div>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-circle" ng-class="{'btn-primary': data.simMode == 0}" disabled></button><span class="btn-txt">Chỉ SMS</span>
+                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBtn == 1"></button>
+                        <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBtn != 1"></button>
+                        <span class="btn-txt" ng-show="data.modeBtn == 1"><b>Tự động</b></span>
+                        <span class="btn-txt" ng-show="data.modeBtn != 1">Tự động</span>
                     </label>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-circle" ng-class="{'btn-primary': data.simMode == 1}" disabled></button><span class="btn-txt">GPRS</span>
+                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBtn == 0"></button>
+                        <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBtn != 0"></button>
+                        <span class="btn-txt" ng-show="data.modeBtn == 0"><b>Bằng tay</b></span>
+                        <span class="btn-txt" ng-show="data.modeBtn != 0">Bằng tay</span>
+                    </label>
+                </div>
+                <div class="heading-control-label mt15">
+                    <div class="head-control-txt hidden-xs">SIM Mode tủ:</div>
+                    <div class="head-control-txt visible-xs">SIM Mode tủ:<br></div>
+                    <label class="button-inline">
+                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.simMode == 0"></button>
+                        <button type="button" class="btn btn-default btn-circle" ng-show="data.simMode != 0"></button>
+                        <span class="btn-txt" ng-show="data.simMode == 0"><b>Chỉ SMS</b></span>
+                        <span class="btn-txt" ng-show="data.simMode != 0">Chỉ SMS</span>
+                    </label>
+                    <label class="button-inline">
+                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.simMode == 1"></button>
+                        <button type="button" class="btn btn-default btn-circle" ng-show="data.simMode != 1"></button>
+                        <span class="btn-txt" ng-show="data.simMode == 1"><b>GPRS</b></span>
+                        <span class="btn-txt" ng-show="data.simMode != 1">GPRS</span>
                     </label>
                 </div>
             </div>

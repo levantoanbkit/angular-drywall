@@ -48,15 +48,15 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     $scope.controlDevice = function(deviceIndex, mode) {
       console.log('isConnect controlDevice: ', socketIO.socketObject);
-      // if (!$scope.isAdmin) {
-      //   console.log('Tài khoản này không phải là Admin | controlDevice');
-      //   openWarningAdminDialog();
-      //   return false;
-      // }
-      // if ($scope.data.isConnect != 1) {
-      //   openWarningConnectionDialog();
-      //   return false;
-      // }
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | controlDevice');
+        openWarningAdminDialog();
+        return false;
+      }
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
       $scope.commandControlDevice = deviceName + ",DK," + deviceIndex + ","+ mode + "\r\n";
       checkEmptyWaterDevice(deviceIndex, mode);
     };
