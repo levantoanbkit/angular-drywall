@@ -277,8 +277,9 @@ li > a {
     color: white !important;
 }
 
-li > a:hover {
+li > a:hover, li > a:hover {
     color: black !important;
+    font-weight: bold !important;
 }
 
 .normal-text {
@@ -300,9 +301,6 @@ li > a:hover {
 .footer-a {
   color: black !important;
 }
-.footer-a:hover {
-  font-weight: bold !important;
-}
-.footer-a:focus {
+.footer-a:hover, .footer-a:focus {
   font-weight: bold !important;
 }
