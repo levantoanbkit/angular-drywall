@@ -225,6 +225,7 @@ button[disabled] {
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .active > a {
   color: black !important;
   background-color: #fcd768;
+  font-weight: bold !important;
   background-image: linear-gradient(to bottom, #fcd768 0%, #fcd768 100%);
 }
 
