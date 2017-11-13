@@ -269,6 +269,7 @@ button[disabled] {
 
 li.ng-scope.active > a {
     color: black !important;
+    font-weight: bold !important;
     background-image: linear-gradient(to bottom, #fcd768 0%, #fcd768 100%) !important;
 }
 
@@ -295,4 +296,13 @@ li > a:hover {
 }
 .btn-warning.disabled:hover {
   font-weight: unset !important;
+}
+.footer-a {
+  color: black !important;
+}
+.footer-a:hover {
+  font-weight: bold !important;
+}
+.footer-a:focus {
+  font-weight: bold !important;
 }
