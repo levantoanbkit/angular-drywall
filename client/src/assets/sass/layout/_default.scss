@@ -266,3 +266,33 @@ button[disabled] {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
 }
+
+li.ng-scope.active > a {
+    color: black !important;
+    background-image: linear-gradient(to bottom, #fcd768 0%, #fcd768 100%) !important;
+}
+
+li > a {
+    color: white !important;
+}
+
+li > a:hover {
+    color: black !important;
+}
+
+.normal-text {
+  text-transform: unset !important;
+  font-weight: unset !important;
+}
+
+.btn-warning {
+  background-color: #fcd768 !important;
+  color: black !important;
+}
+
+.btn-warning:hover {
+  font-weight: bold !important;
+}
+.btn-warning.disabled:hover {
+  font-weight: unset !important;
+}

@@ -1,11 +1,11 @@
 <div ng-controller="HeaderCtrl">
-<div class="navbar navbar-default navbar-fixed-top" ng-if="!isAdmin()">
+<div class="navbar navbar-default navbar-fixed-top" ng-if="!isAdmin()" style="background-image: linear-gradient(to bottom, #3087c7 0%, #3087c7 100%);">
     <div class="container xs">
-        <div class="navbar-header xs">
+        <div class="navbar-header xs" style="background-color: #3087c7;">
             <a href="/" class="navbar-brand">
                 <img src="/img/logo.png" class="navbar-logo">
-                <span class="navbar-brand-label hidden-xs">Monitoring & Control System</span>
-                <span class="navbar-brand-label visible-xs">MACS-SSFG SYSTEM</span>
+                <span class="navbar-brand-label hidden-xs white-color">Monitoring & Control System</span>
+                <span class="navbar-brand-label visible-xs white-color">MACS-SSFG System</span>
             </a>
             <button class="navbar-toggle btn navbar-btn xs" ng-init="menuCollapsed = true" ng-click="menuCollapsed = !menuCollapsed">
                 <span class="icon-bar"></span>
@@ -35,8 +35,8 @@
         <div class="navbar-header">
             <a href="/admin/" class="navbar-brand-admin">
                 <img src="/img/logo.png" class="navbar-logo">
-                <span class="navbar-brand-label hidden-xs">Monitoring & Control System</span>
-                <span class="navbar-brand-label visible-xs">MACS-SSFG SYSTEM</span>
+                <span class="navbar-brand-label hidden-xs white-color">Monitoring & Control System</span>
+                <span class="navbar-brand-label visible-xs white-color">MACS-SSFG System</span>
             </a>
             <button class="navbar-toggle btn navbar-btn" ng-click="toggleAdminMenu()">
                 <span class="icon-bar"></span>
@@ -46,11 +46,11 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: isActive('/devices')}"><a href="#" class="white-color" ng-click="openPageReload('/devices')">ĐIỀU KHIỂN</a></li>
+                <li ng-class="{active: isActive('/devices')}"><a href="#" ng-click="openPageReload('/devices')">Điều Khiển</a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin white-color" dropdown-toggle>Quản Trị&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin normal-text" dropdown-toggle>Quản Trị&nbsp<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <!-- <li ng-if="isAuthenticated()" class="dropdown-header">Điều khiển thiết bị</li>
                         <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="/devices">Danh sách thiết bị</a></li>
@@ -75,11 +75,11 @@
                     <input name="search" type="text" placeholder="Tìm kiếm" class="form-control width170" ng-model="query" ng-model-options="{ debounce: 500 }" ng-change="update()">
                     <ul class="dropdown-menu">
                         <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">Không có kết quả khớp</li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Danh sách người dùng</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Người dùng</li>
                         <li ng-repeat="user in result.users">
                             <a ng-bind="user.username" ng-href="/admin/users/{{user._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Danh sách tài khoản</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Tài khoản</li>
                         <li ng-repeat="account in result.accounts">
                             <a ng-bind="account.name.full" ng-href="/admin/accounts/{{account._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
@@ -98,8 +98,8 @@
         <div class="navbar-header xs" style="background-color: #3087c7;">
             <a href="/admin/" class="navbar-brand-admin">
                 <img src="/img/logo.png" class="navbar-logo">
-                <span class="navbar-brand-label hidden-xs">Monitoring & Control System</span>
-                <span class="navbar-brand-label visible-xs">MACS-SSFG SYSTEM</span>
+                <span class="navbar-brand-label hidden-xs white-color">Monitoring & Control System</span>
+                <span class="navbar-brand-label visible-xs white-color">MACS-SSFG System</span>
             </a>
             <button class="navbar-toggle btn navbar-btn xs" ng-click="toggleAdminMenu()">
                 <span class="icon-bar"></span>
@@ -109,11 +109,11 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: isActive('/devices')}"><a href="#" class="white-color" ng-click="openPageReload('/devices')">ĐIỀU KHIỂN</a></li>
+                <li ng-class="{active: isActive('/devices')}"><a href="#" ng-click="openPageReload('/devices')">Điều Khiển</a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin xs white-color" dropdown-toggle>Quản Trị&nbsp;<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin xs normal-text" dropdown-toggle>Quản Trị&nbsp<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <!-- <li ng-if="isAuthenticated()" class="dropdown-header">Điều khiển thiết bị</li>
                         <li ng-if="isAuthenticated()" ng-class="{active: isActive('/devices')}"><a href="/devices">Danh sách thiết bị</a></li>
@@ -138,11 +138,11 @@
                     <input name="search" type="text" placeholder="Tìm kiếm" class="form-control width170" ng-model="query" ng-model-options="{ debounce: 500 }" ng-change="update()">
                     <ul class="dropdown-menu">
                         <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">Không có kết quả khớp</li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Users</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Người dùng</li>
                         <li ng-repeat="user in result.users">
                             <a ng-bind="user.username" ng-href="/admin/users/{{user._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
-                        <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Accounts</li>
+                        <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Tài khoản</li>
                         <li ng-repeat="account in result.accounts">
                             <a ng-bind="account.name.full" ng-href="/admin/accounts/{{account._id}}" ng-click="closeAdminMenu()"></a>
                         </li>
