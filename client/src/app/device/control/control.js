@@ -22,7 +22,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
       console.log('data: ', $scope.data);
-      askAllInfo();
+      // askAllInfo();
     });
 
     $scope.changeModeBox = function(mode) {
@@ -37,13 +37,13 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         openWarningConnectionDialog();
         return false;
       }
-      $scope.commandChangeModeBox = deviceName + ",MODE," + mode + "\r\n";
       socketIO.emit('change:modebox', {
         modeBox: mode,
         deviceId: $scope.data.deviceId,
         deviceName: deviceName
       });
-      saveControlLog($scope.commandChangeModeBox);
+      $scope.contentModeBox = mappingCommandToContent('MODE', { modeBox: mode });
+      saveControlLog($scope.contentModeBox);
     };
 
     $scope.controlDevice = function(deviceIndex, mode) {
@@ -57,7 +57,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         openWarningConnectionDialog();
         return false;
       }
-      $scope.commandControlDevice = deviceName + ",DK," + deviceIndex + ","+ mode + "\r\n";
+      $scope.contentControlDevice = mappingCommandToContent('DK', { sttDevice: deviceIndex, status: mode });
       checkEmptyWaterDevice(deviceIndex, mode);
     };
 
@@ -65,12 +65,57 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       $location.path('/device/history/'+ $route.current.params.id);
     };
 
-    var saveControlLog = function(command) {
+    var saveControlLog = function(content) {
       var deviceId = $route.current.params.id;
       var username = $scope.currentUser.username;
-      controlLogResource.addUControlLog(deviceId, username, command).then(function(data) {
+      controlLogResource.addUControlLog(deviceId, username, content).then(function(data) {
         console.log('saveControlLog: ', data);
       });
+    };
+
+    var mappingCommandToContent = function(cmdName, data) {
+      var content = "";
+      switch (cmdName) {
+        case 'MODE':
+          if (data.modeBox == 1) {
+            content = "Set Mode tự động";
+          }
+          if (data.modeBox == 0) {
+            content = "Set Mode bằng tay";
+          }
+          break;
+        case 'DK':
+          if (data.status == 1) {
+            content = "Bật bơm "+ data.sttDevice;
+          }
+          if (data.status == 0) {
+            content = "Tắt bơm " + data.sttDevice;
+          }
+          break;
+        case 'XO':
+          if (data.sttDevice == 255) {
+            content = "Reset cảm biến tủ điện";
+          }
+          if (data.sttDevice >=1 && data.sttDevice <=4) {
+            content = "Reset cảm biến bơm " + data.sttDevice;
+          }
+          break;
+        case 'IPS':
+          content = "Thay đổi IP của tủ điện"
+          break;
+        case 'PORTS':
+          content = "Thay đổi Port của tủ điện"
+          break;
+        case 'ID':
+          content = "Thay đổi tên của tủ điện"
+          break;
+        case 'RSTPW':
+          content = "Reset tủ điều khiển"
+          break;
+        default:
+          break;
+      }
+      return content;
     };
 
     var checkEmptyWaterDevice = function(deviceIndex, mode) {
@@ -98,14 +143,13 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       if (sensor1 == sensor2 && sensor1 == 0 && mode == 1) {
         openWarningEmptyWaterDialog(deviceIndex, mode);
       } else {
-        console.log('emit DK Device...');
         socketIO.emit('control:device', {
           sttDevice: deviceIndex,
           valueControl: mode,
           deviceId: $scope.data.deviceId,
           deviceName: deviceName
         });
-        saveControlLog($scope.commandControlDevice);
+        saveControlLog($scope.contentControlDevice);
       }
     };
 
@@ -124,14 +168,13 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       dialog.closePromise.then(function (data) {
         console.log('dialog data: ', data);
         if (data.value == 2) {
-          console.log('emit DK Device dialog...');
           socketIO.emit('control:device', {
             sttDevice: deviceIndex,
             valueControl: mode,
             deviceId: $scope.data.deviceId,
             deviceName: deviceName
           });
-          saveControlLog($scope.commandControlDevice);
+          saveControlLog($scope.contentControlDevice);
         } else {
           return false;
         }
