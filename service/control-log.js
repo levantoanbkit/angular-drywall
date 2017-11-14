@@ -47,10 +47,11 @@ var controlLog = {
     var workflow = req.app.utility.workflow(req, res);
 
     workflow.on('validate', function() {
-      if (!req.user.roles.admin.isMemberOf('root')) {
-        workflow.outcome.errors.push('You may not create controlLogs.');
-        return workflow.emit('response');
-      }
+      // console.log('validate----:', req.user.roles.admin);
+      // if (!req.user.roles.admin.isMemberOf('root')) {
+      //   workflow.outcome.errors.push('You may not create controlLogs.');
+      //   return workflow.emit('response');
+      // }
 
       if (!req.body.device) {
         workflow.outcome.errors.push('A device is required.');
