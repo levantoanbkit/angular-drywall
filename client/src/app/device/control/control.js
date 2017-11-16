@@ -59,6 +59,20 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       checkEmptyWaterDevice(deviceIndex, mode);
     };
 
+    $scope.resetSensor = function(sttDevice) {
+      console.log('isConnect resetSensor: ', socketIO.socketObject);
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | controlDevice');
+        openWarningAdminDialog();
+        return false;
+      }
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      openResetSensorDialog(sttDevice);
+    };
+
     $scope.goToHistory = function() {
       $location.path('/device/history/'+ $route.current.params.id);
     };
@@ -177,6 +191,46 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           return false;
         }
       });
+    };
+
+    var openResetSensorDialog = function(sttDevice) {
+      var templateHtml = '';
+      if (sttDevice == 255) {
+        templateHtml = '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p>\
+                  <p style="font-weight: bold;">Bạn có chắc chắn reset cảm biến của Tủ điện không?</p>\
+                  <div class="ngdialog-buttons">\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">Không</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(2)">Có</button>\
+                  </div>';
+      } else if (sttDevice >= 1 && sttDevice <=4) {
+        templateHtml = '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p>\
+                  <p style="font-weight: bold;">Bạn có chắc chắn reset cảm biến của Bơm '+ sttDevice +'?</p>\
+                  <div class="ngdialog-buttons">\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">Không</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(2)">Có</button>\
+                  </div>';
+      }
+      if (templateHtml) {
+        var dialog = ngDialog.open({
+          template: templateHtml,
+          plain: true,
+          height: 150
+        });
+        dialog.closePromise.then(function (data) {
+          if (data.value == 2) {
+            socketIO.emit('xo:resetSensor', {
+              sttDevice: sttDevice,
+              deviceId: $scope.data.deviceId,
+              deviceName: deviceName
+            });
+            $scope.contentXO = mappingCommandToContent('XO', { sttDevice: sttDevice });
+            saveControlLog($scope.contentXO);
+          } else {
+            return false;
+          }
+        });
+      }
+      
     };
 
     var openWarningAdminDialog = function() {

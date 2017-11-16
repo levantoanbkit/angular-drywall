@@ -26,6 +26,7 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
         socket.on('control:device', onControlDevice);
         socket.on('ask:deviceinfo', onAskSerialDeviceInfo);
         socket.on('ask:allinfo', onAskAllInfo);
+        socket.on('xo:resetSensor', onResetSensor);
 
         socket.on('disconnect', onSocketDisconnect);
 
@@ -63,6 +64,15 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
                 tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'ALL', {});
             } else {
                 console.log('onAskAllInfo: tcpConnection is disconnected...');
+            }
+        };
+
+        function onResetSensor(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'XO', { sttDevice: data.sttDevice });
+            } else {
+                console.log('onResetSensor: tcpConnection is disconnected...');
             }
         };
 
