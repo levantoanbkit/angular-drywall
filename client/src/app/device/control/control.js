@@ -301,8 +301,20 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       }
     });
 
-    socketIO.on('result:deviceinfo', function(data) {
-      console.log('result:deviceinfo : ', data);
+    socketIO.on('info:ping_live_devices', function(data) {
+      var liveDeviceNames = data.deviceNames;
+      console.log('info:ping_live_devices : ', data.deviceNames);
+      if(liveDeviceNames.indexOf(deviceName) !== -1) {
+        console.log('connected...');
+        $scope.data.isConnect = 1;
+      } else if ($scope.data.isConnect == 1) {
+        console.log('disconnected...');
+        $scope.data.isConnect = 0;
+        $http.get('/data/mockup.json').then(function(result) {
+          $scope.data.isConnect = 0;
+          $scope.data = result.data[$scope.deviceId];
+        });
+      }
     });
 
   }]);
