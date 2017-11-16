@@ -21,8 +21,6 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
-      console.log('data: ', $scope.data);
-      // askAllInfo();
     });
 
     $scope.changeModeBox = function(mode) {

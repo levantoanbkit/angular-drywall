@@ -24,24 +24,24 @@
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt hidden-xs">Chọn Mode:</div>
                     <div class="head-control-txt visible-xs">Chọn Mode:<br></div>
-                    <label class="button-inline-clickable" ng-click="changeModeBox(1)">
-                        <button type="button" class="btn btn-primary btn-circle"></button><span class="btn-txt">Tự động</span>
+                    <label class="button-inline-clickable">
+                        <button type="button" class="btn btn-success btn-circle" ng-click="changeModeBox(1)"></button><span class="btn-txt">Tự động</span>
                     </label>
-                    <label class="button-inline-clickable" ng-click="changeModeBox(0)">
-                        <button type="button" class="btn btn-danger btn-circle"></button><span class="btn-txt">Bằng tay</span>
+                    <label class="button-inline-clickable">
+                        <button type="button" class="btn btn-danger btn-circle" ng-click="changeModeBox(0)"></button><span class="btn-txt">Bằng tay</span>
                     </label>
                 </div>
                 <div class="heading-control-label mt15">
                     <div class="head-control-txt hidden-xs">Mode hiện tại:</div>
                     <div class="head-control-txt visible-xs">Mode hiện tại:<br></div>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBox == 1"></button>
+                        <button type="button" class="btn btn-success btn-circle" ng-show="data.modeBox == 1"></button>
                         <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBox != 1"></button>
                         <span class="btn-txt" ng-show="data.modeBox == 1"><b>Tự động</b></span>
                         <span class="btn-txt" ng-show="data.modeBox != 1">Tự động</span>
                     </label>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBox == 0"></button>
+                        <button type="button" class="btn btn-success btn-circle" ng-show="data.modeBox == 0"></button>
                         <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBox != 0"></button>
                         <span class="btn-txt" ng-show="data.modeBox == 0"><b>Bằng tay</b></span>
                         <span class="btn-txt" ng-show="data.modeBox != 0">Bằng tay</span>
@@ -51,13 +51,13 @@
                     <div class="head-control-txt hidden-xs">Nút Mode tủ:</div>
                     <div class="head-control-txt visible-xs">Nút Mode tủ:<br></div>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBtn == 1"></button>
+                        <button type="button" class="btn btn-success btn-circle" ng-show="data.modeBtn == 1"></button>
                         <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBtn != 1"></button>
                         <span class="btn-txt" ng-show="data.modeBtn == 1"><b>Tự động</b></span>
                         <span class="btn-txt" ng-show="data.modeBtn != 1">Tự động</span>
                     </label>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.modeBtn == 0"></button>
+                        <button type="button" class="btn btn-success btn-circle" ng-show="data.modeBtn == 0"></button>
                         <button type="button" class="btn btn-default btn-circle" ng-show="data.modeBtn != 0"></button>
                         <span class="btn-txt" ng-show="data.modeBtn == 0"><b>Bằng tay</b></span>
                         <span class="btn-txt" ng-show="data.modeBtn != 0">Bằng tay</span>
@@ -67,13 +67,13 @@
                     <div class="head-control-txt hidden-xs">SIM Mode tủ:</div>
                     <div class="head-control-txt visible-xs">SIM Mode tủ:<br></div>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.simMode == 0"></button>
+                        <button type="button" class="btn btn-success btn-circle" ng-show="data.simMode == 0"></button>
                         <button type="button" class="btn btn-default btn-circle" ng-show="data.simMode != 0"></button>
                         <span class="btn-txt" ng-show="data.simMode == 0"><b>Chỉ SMS</b></span>
                         <span class="btn-txt" ng-show="data.simMode != 0">Chỉ SMS</span>
                     </label>
                     <label class="button-inline">
-                        <button type="button" class="btn btn-primary btn-circle" ng-show="data.simMode == 1"></button>
+                        <button type="button" class="btn btn-success btn-circle" ng-show="data.simMode == 1"></button>
                         <button type="button" class="btn btn-default btn-circle" ng-show="data.simMode != 1"></button>
                         <span class="btn-txt" ng-show="data.simMode == 1"><b>GPRS</b></span>
                         <span class="btn-txt" ng-show="data.simMode != 1">GPRS</span>
@@ -92,7 +92,7 @@
                     <div class="head-control-txt" ng-bind="data.errorCode"></div>
                 </div>
                 <div class="heading-control-label mt15">
-                    <button type="button" class="btn btn-primary" ng-click="goToHistory()">Xem lịch sử điều khiển</button>
+                    <button type="button" class="btn btn-success" ng-click="goToHistory()">Xem lịch sử điều khiển</button>
                 </div>
             </div>
             
@@ -104,14 +104,14 @@
                     <div class="control-device-label">Thiết bị 1</div>
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
-                        <label class="button-inline-clickable" ng-click="controlDevice(1, 1)">
-                            <button type="button" class="btn btn-primary btn-circle"></button><span class="btn-txt">Bật</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-success btn-circle" ng-click="controlDevice(1, 1)"></button><span class="btn-txt">Bật</span>
                         </label>
-                        <label class="button-inline-clickable" ng-click="controlDevice(1, 0)">
-                            <button type="button" class="btn btn-danger btn-circle"></button><span class="btn-txt">Tắt</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(1, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device1.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device1.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device1.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device1.status == 1">Đang bơm</span><span class="status-device-txt red-color" ng-show="data.device1.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device1.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device1.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device1.sensor2}}</span>
@@ -127,14 +127,14 @@
                     <div class="control-device-label">Thiết bị 2</div>
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
-                        <label class="button-inline-clickable" ng-click="controlDevice(2, 1)">
-                            <button type="button" class="btn btn-primary btn-circle"></button><span class="btn-txt">Bật</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-success btn-circle" ng-click="controlDevice(2, 1)"></button><span class="btn-txt">Bật</span>
                         </label>
-                        <label class="button-inline-clickable" ng-click="controlDevice(2, 0)">
-                            <button type="button" class="btn btn-danger btn-circle"></button><span class="btn-txt">Tắt</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(2, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device2.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device2.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device2.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device2.status == 1">Đang bơm</span><span class="status-device-txt red-color" ng-show="data.device2.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device2.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device2.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device2.sensor2}}</span>
@@ -150,14 +150,14 @@
                     <div class="control-device-label">Thiết bị 3</div>
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
-                        <label class="button-inline-clickable" ng-click="controlDevice(3, 1)">
-                            <button type="button" class="btn btn-primary btn-circle"></button><span class="btn-txt">Bật</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-success btn-circle" ng-click="controlDevice(3, 1)"></button><span class="btn-txt">Bật</span>
                         </label>
-                        <label class="button-inline-clickable" ng-click="controlDevice(3, 0)">
-                            <button type="button" class="btn btn-danger btn-circle"></button><span class="btn-txt">Tắt</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(3, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device3.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device3.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device3.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device3.status == 1">Đang bơm</span><span class="status-device-txt red-color" ng-show="data.device3.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device3.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device3.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device3.sensor2}}</span>
@@ -173,14 +173,14 @@
                     <div class="control-device-label">Thiết bị 4</div>
                     <div class="heading-control-label">
                         <span>Điều khiển : </span>
-                        <label class="button-inline-clickable" ng-click="controlDevice(4, 1)">
-                            <button type="button" class="btn btn-primary btn-circle"></button><span class="btn-txt">Bật</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-success btn-circle" ng-click="controlDevice(4, 1)"></button><span class="btn-txt">Bật</span>
                         </label>
-                        <label class="button-inline-clickable" ng-click="controlDevice(4, 0)">
-                            <button type="button" class="btn btn-danger btn-circle"></button><span class="btn-txt">Tắt</span>
+                        <label class="button-inline-clickable">
+                            <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(4, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt" ng-show="data.device4.status == 1">Đang bơm</span><span class="status-device-txt" ng-show="data.device4.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device4.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device4.status == 1">Đang bơm</span><span class="status-device-txt red-color" ng-show="data.device4.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device4.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device4.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device4.sensor2}}</span>

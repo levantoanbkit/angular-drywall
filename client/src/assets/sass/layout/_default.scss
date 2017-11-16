@@ -79,6 +79,12 @@ select, textarea, input, .form-control {
 .green-bg {
   background-color: #3087c7;
 }
+.green-color {
+  color: green !important;
+}
+.red-color {
+  color: red !important;
+}
 .btn-device-action {
   margin-top: 10px;
   width: 100px;
@@ -308,4 +314,19 @@ li > a:hover, li > a:hover {
 }
 .footer-a:hover, .footer-a:focus {
   font-weight: bold !important;
+}
+.btn-danger {
+  background-color: #f44336 !important;
+  border-color: #f44336 !important;
+  background-image: linear-gradient(to bottom, #f44336 0%, #f44336 100%) !important;
+}
+.button-inline .btn-circle {
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 10px;
+  margin-left: 10px;
 }
