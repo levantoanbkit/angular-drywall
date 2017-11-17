@@ -16,7 +16,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     $scope.isAdmin = security.isAdmin();
     $scope.currentUser = security.currentUser;
     
-    var deviceName = '$' + $route.current.params.id;
+    $scope.deviceName = '$' + $route.current.params.id;
 
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
@@ -38,7 +38,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       socketIO.emit('change:modebox', {
         modeBox: mode,
         deviceId: $scope.data.deviceId,
-        deviceName: deviceName
+        deviceName: $scope.deviceName
       });
       $scope.contentModeBox = mappingCommandToContent('MODE', { modeBox: mode });
       saveControlLog($scope.contentModeBox);
@@ -159,7 +159,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           sttDevice: deviceIndex,
           valueControl: mode,
           deviceId: $scope.data.deviceId,
-          deviceName: deviceName
+          deviceName: $scope.deviceName
         });
         saveControlLog($scope.contentControlDevice);
       }
@@ -184,7 +184,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             sttDevice: deviceIndex,
             valueControl: mode,
             deviceId: $scope.data.deviceId,
-            deviceName: deviceName
+            deviceName: $scope.deviceName
           });
           saveControlLog($scope.contentControlDevice);
         } else {
@@ -221,7 +221,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             socketIO.emit('xo:resetSensor', {
               sttDevice: sttDevice,
               deviceId: $scope.data.deviceId,
-              deviceName: deviceName
+              deviceName: $scope.deviceName
             });
             $scope.contentXO = mappingCommandToContent('XO', { sttDevice: sttDevice });
             saveControlLog($scope.contentXO);
@@ -254,7 +254,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       socketIO.emit('ask:deviceinfo', {
         sttDevice: deviceIndex,
         deviceId: $scope.data.deviceId,
-        deviceName: deviceName
+        deviceName: $scope.deviceName
       });
     };
 
@@ -262,7 +262,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       console.log('isConnect askAllInfo: ', socketIO.socketObject);
       socketIO.emit('ask:allinfo', {
         deviceId: $scope.data.deviceId,
-        deviceName: deviceName
+        deviceName: $scope.deviceName
       });
     };
 
@@ -326,39 +326,40 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     socketIO.on('answer_from_devices', function(messageData) {
       var data = messageData.data;
       var command = messageData.cmd;
-      if (data.deviceName != deviceName) {
-        return true;
+      if (data.deviceName == $scope.deviceName) {
+        console.log('answer_from_devices : ', data);
+        console.log('answer_from_devices deviceName: ', $scope.deviceName);
+        $scope.data.isConnect = 1;
+        switch(data.cmdName) {
+          case 'TL':
+            handleTLCommand(data);
+            break;
+          case 'DK':
+            handleDKCommand(data);
+            // saveControlLog(command);
+            break;
+          case 'MODE':
+            handleMODECommand(data);
+            // saveControlLog(command);
+            break;
+          case 'LI':
+            handleLICommand(data);
+            break;
+          case 'XO':
+            handleXOCommand(data);
+            // saveControlLog(command);
+            break;
+          default:
+            break;
+        }
       }
-      console.log('answer_from_devices : ', data);
-      $scope.data.isConnect = 1;
-      switch(data.cmdName) {
-        case 'TL':
-          handleTLCommand(data);
-          break;
-        case 'DK':
-          handleDKCommand(data);
-          // saveControlLog(command);
-          break;
-        case 'MODE':
-          handleMODECommand(data);
-          // saveControlLog(command);
-          break;
-        case 'LI':
-          handleLICommand(data);
-          break;
-        case 'XO':
-          handleXOCommand(data);
-          // saveControlLog(command);
-          break;
-        default:
-          break;
-      }
+      
     });
 
     socketIO.on('info:ping_live_devices', function(data) {
       var liveDeviceNames = data.deviceNames;
       console.log('info:ping_live_devices : ', data.deviceNames);
-      if(liveDeviceNames.indexOf(deviceName) !== -1) {
+      if(liveDeviceNames.indexOf($scope.deviceName) !== -1) {
         console.log('connected...');
         $scope.data.isConnect = 1;
       } else if ($scope.data.isConnect == 1) {
