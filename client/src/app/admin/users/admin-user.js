@@ -122,7 +122,7 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
       adminResource.updateUser($scope.user._id, data).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model
-          $scope.identityAlerts.push({ type: 'info', msg: 'Changes have been saved.'});
+          $scope.identityAlerts.push({ type: 'info', msg: 'Cập nhật thành công.'});
         }else{
           $scope.errfor = result.errfor;
           angular.forEach(result.errfor, function(err, field){
@@ -135,7 +135,7 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
       }, function(x){
         $scope.identityAlerts.push({
           type: 'danger',
-          msg: 'Error updating user identity: ' + x
+          msg: 'Có lỗi trong quá trình cập nhật: ' + x
         });
       });
     };
@@ -171,7 +171,7 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
     };
     $scope.deleteUser = function(){
       $scope.deleteAlerts =[];
-      if(confirm('Are you sure?')){
+      if(confirm('Bạn có chắc không?')){
         adminResource.deleteUser($scope.user._id).then(function(result){
           if(result.success){
             // redirect to admin users index page

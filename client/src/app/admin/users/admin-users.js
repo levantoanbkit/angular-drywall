@@ -84,8 +84,8 @@ angular.module('admin.users.index').controller('UsersIndexCtrl', ['$scope', '$ro
 
     // $scope vars
     //select elements and their associating options
-    $scope.roles = [{label: "any", value: ""}, {label: "admin", value: "admin"}, {label: "account", value: "account"}];
-    $scope.isActives =[{label: "either", value: ""}, {label: "yes", value: "yes"}, {label: "no", value: "no"}];
+    $scope.roles = [{label: "Tất cả", value: ""}, {label: "Quản trị", value: "admin"}, {label: "Tài khoản", value: "account"}];
+    $scope.isActives =[{label: "Tất cả", value: ""}, {label: "Kích hoạt", value: "yes"}, {label: "Chưa kích hoạt", value: "no"}];
     $scope.sorts = [
       {label: "id \u25B2", value: "_id"},
       {label: "id \u25BC", value: "-_id"},

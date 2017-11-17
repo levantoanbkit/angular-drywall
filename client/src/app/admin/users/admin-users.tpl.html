@@ -9,29 +9,29 @@
             </form>
             <h1>Người dùng</h1>
         </div>
-        <!-- <form class="filters">
+        <form class="filters">
             <div class="row">
                 <div class="col-sm-3">
-                    <label>Username Search</label>
+                    <label>Tên đăng nhập</label>
                     <input name="username" type="text" class="form-control" ng-model="filters.username" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <label>Can Play Role</label>
                     <select name="roles" class="form-control" ng-model="filters.roles" ng-model-options="{ debounce: 500 }" ng-options="role.value as role.label for role in roles"  ng-change="filtersUpdated()"> -->
                         <!--<option value="">any</option>-->
                         <!--<option value="admin">admin</option>-->
                         <!--<option value="account">account</option>-->
                     <!-- </select>
-                </div>
-                <div class="col-sm-2">
-                    <label>Is Active</label>
-                    <select name="isActive" class="form-control" ng-model="filters.isActive" ng-model-options="{ debounce: 500 }" ng-options="isActive.value as isActive.label for isActive in isActives" ng-change="filtersUpdated()"> -->
+                </div> -->
+                <div class="col-sm-3">
+                    <label>Trạng thái</label>
+                    <select name="isActive" class="form-control" ng-model="filters.isActive" ng-model-options="{ debounce: 500 }" ng-options="isActive.value as isActive.label for isActive in isActives" ng-change="filtersUpdated()">
                         <!--<option value="">either</option>-->
                         <!--<option value="yes">yes</option>-->
                         <!--<option value="no">no</option>-->
-                    <!-- </select>
+                    </select>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <label>Sort By</label>
                     <select name="sort" class="form-control" ng-model="filters.sort" ng-model-options="{ debounce: 500 }" ng-options="sort.value as sort.label for sort in sorts" ng-change="filtersUpdated()"> -->
                         <!--<option value="_id">id &#9650;</option>-->
@@ -50,16 +50,16 @@
                         <!--<option value="50">50 items</option>-->
                         <!--<option value="100">100 items</option>-->
                     <!-- </select>
-                </div>
+                </div> -->
             </div>
-        </form> -->
+        </form>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th></th>
-                    <th>username</th>
-                    <th class="stretch">email</th>
-                    <th>active</th>
+                    <th>Tên đăng nhập</th>
+                    <th>email</th>
+                    <th>Trạng thái</th>
                     <!-- <th>id</th> -->
                 </tr>
             </thead>
@@ -68,11 +68,14 @@
                     <td><a class="btn btn-default btn-sm" ng-href="/admin/users/{{user._id}}">Sửa</a></td>
                     <td ng-bind="user.username"></td>
                     <td ng-bind="user.email"></td>
-                    <td ng-bind="user.isActive"></td>
+                    <td>
+                        <span ng-if="user.isActive == 'yes'">Kích hoạt</span>
+                        <span ng-if="user.isActive == 'no'">Chưa kích hoạt</span>
+                    </td>
                     <!-- <td ng-bind="user._id"></td> -->
                 </tr>
                 <tr ng-show="users.length === 0">
-                    <td colspan="5">Không có người dùng nào</td>
+                    <td colspan="5">Không có kết quả nào</td>
                 </tr>
             </tbody>
         </table>

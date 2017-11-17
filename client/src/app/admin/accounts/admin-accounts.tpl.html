@@ -9,13 +9,13 @@
             </form>
             <h1>Tài khoản</h1>
         </div>
-        <!-- <form class="filters">
+        <form class="filters">
             <div class="row">
                 <div class="col-sm-3">
-                    <label>Search</label>
+                    <label>Tìm kiếm</label>
                     <input name="search" type="text" class="form-control" ng-model="filters.search" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <label>Status</label>
                     <select name="status" class="form-control" ng-model="filters.status" ng-model-options="{ debounce: 500 }" ng-options="status._id as status.name for status in statuses" ng-change="filtersUpdated()">
                         <option value="">-- any --</option>
@@ -40,27 +40,27 @@
                         <!--<option value="50">50 items</option>-->
                         <!--<option value="100">100 items</option>-->
                     <!-- </select>
-                </div>
+                </div> -->
             </div>
-        </form> -->
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th></th>
-                <th>Tên<span class="pull-right">Tuổi</span></th>
+                <th>Tên người dùng</th>
                 <th>SĐT</th>
-                <th>Trạng thái</th>
+                <!-- <th>Trạng thái</th> -->
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="account in accounts">
+            <tr ng-repeat="account in accounts" ng-if="account.name.full">
                 <td><a class="btn btn-default btn-sm" ng-href="/admin/accounts/{{account._id}}">Sửa</a></td>
-                <td class="stretch"><span class="badge badge-clear pull-right" ng-bind="formatTime(account.userCreated.time, 'old')"></span>{{account.name.full}}</td>
+                <td>{{account.name.full}}</td>
                 <td class="nowrap" ng-bind="account.phone"></td>
-                <td class="nowrap">
+        <!--         <td class="nowrap">
                     <div ng-bind="account.status.name"></div>
                     <div ng-bind="formatTime(account.status.userCreated.time)"></div>
-                </td>
+                </td> -->
             </tr>
             <tr ng-show="accounts.length === 0">
                 <td colspan="4">Không có tài khoản nào</td>
