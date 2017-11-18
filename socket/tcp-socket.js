@@ -23,8 +23,8 @@ exports = module.exports = function(app) {
 
     connection.setEncoding('utf8');
     connection.setNoDelay(true);
-    connection.setTimeout(10000, function() {
-      console.log('connection destroy timeout 10s....');
+    connection.setTimeout(13000, function() {
+      console.log('connection destroy timeout 13s....');
       tcpSocketService.removeConnectionInList(app, connection);
       connection.destroy();
     });
