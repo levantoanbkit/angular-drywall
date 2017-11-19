@@ -21,6 +21,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
+      $scope.undefineData = result.data[$scope.deviceId];
     });
 
     $scope.changeModeBox = function(mode) {
@@ -360,6 +361,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           $scope.data.isConnect = 0;
           $http.get('/data/mockup.json').then(function(result) {
             $scope.data = result.data[$scope.deviceId];
+          }).catch(function (error) {
+            console.log('error load mockup: ', error);
+            console.log('scope.undefineData: ', $scope.undefineData);
+            $scope.data = $scope.undefineData;
           });
         });
       }, 10000);
