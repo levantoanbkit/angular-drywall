@@ -8,13 +8,10 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
     app.io.on('connection', onConnectSocket);
 
     var interval = setInterval(function() {
-        var liveDeviceNames = [];
         _.forEach(app.tcpConnections, function(tcpConnection) {
             console.log("hello interval...: ",tcpConnection.deviceName);
             tcpSocketService.makeRemoteControlCommand(app, tcpConnection, tcpConnection.deviceName, 'ALL', {});
-            liveDeviceNames.push(tcpConnection.deviceName);
         });
-        app.io.sockets.emit('info:ping_live_devices', { deviceNames: liveDeviceNames });
     }, 4000);
 
     function onConnectSocket(socket) {

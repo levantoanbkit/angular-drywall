@@ -328,7 +328,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       var command = messageData.cmd;
       if (data.deviceName == $scope.deviceName) {
         console.log('answer_from_devices : ', data);
-        console.log('answer_from_devices deviceName: ', $scope.deviceName);
+        $interval.cancel($scope.promiseInterval);
         $scope.data.isConnect = 1;
         switch(data.cmdName) {
           case 'TL':
@@ -336,40 +336,35 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
             break;
           case 'DK':
             handleDKCommand(data);
-            // saveControlLog(command);
             break;
           case 'MODE':
             handleMODECommand(data);
-            // saveControlLog(command);
             break;
           case 'LI':
             handleLICommand(data);
             break;
           case 'XO':
             handleXOCommand(data);
-            // saveControlLog(command);
             break;
           default:
             break;
         }
       }
-      
+      $scope.raisePromiseInterval();
     });
 
-    socketIO.on('info:ping_live_devices', function(data) {
-      var liveDeviceNames = data.deviceNames;
-      console.log('info:ping_live_devices : ', data.deviceNames);
-      if(liveDeviceNames.indexOf($scope.deviceName) !== -1) {
-        console.log('connected...');
-        $scope.data.isConnect = 1;
-      } else if ($scope.data.isConnect == 1) {
-        console.log('disconnected...');
-        $scope.data.isConnect = 0;
-        $http.get('/data/mockup.json').then(function(result) {
+    $scope.raisePromiseInterval = function() {
+      $scope.promiseInterval = $interval(function() {
+        console.log('promiseIntervals running...');
+        $scope.$applyAsync(function() {
           $scope.data.isConnect = 0;
-          $scope.data = result.data[$scope.deviceId];
+          $http.get('/data/mockup.json').then(function(result) {
+            $scope.data = result.data[$scope.deviceId];
+          });
         });
-      }
-    });
+      }, 10000);
+    };
+
+    $scope.raisePromiseInterval();
 
   }]);
