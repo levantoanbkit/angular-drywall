@@ -24,10 +24,11 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       $scope.undefineData = result.data[$scope.deviceId];
     });
 
-    $scope.startDate1 = $window.sessionStorage.getItem('device_running_timer_key1');
-    $scope.startDate2 = $window.sessionStorage.getItem('device_running_timer_key2');
-    $scope.startDate3 = $window.sessionStorage.getItem('device_running_timer_key3');
-    $scope.startDate4 = $window.sessionStorage.getItem('device_running_timer_key4');
+    $scope.baseKeyTimer = 'device' + $scope.deviceName + '_running_timer_key';
+    $scope.startDate1 = $window.sessionStorage.getItem($scope.baseKeyTimer + '1');
+    $scope.startDate2 = $window.sessionStorage.getItem($scope.baseKeyTimer + '2');
+    $scope.startDate3 = $window.sessionStorage.getItem($scope.baseKeyTimer + '3');
+    $scope.startDate4 = $window.sessionStorage.getItem($scope.baseKeyTimer + '4');
 
     $scope.changeModeBox = function(mode) {
       console.log('isConnect changeModeBox: ', socketIO.socketObject);
@@ -274,14 +275,14 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
 
     var handleTimer = function(newStatusDevice, oldStatusDevice, sttDevice) {
       var currentDateTime = new Date();
-      var deviceStorageTimer = $window.sessionStorage.getItem('device_running_timer_key' + sttDevice);
+      var deviceStorageTimer = $window.sessionStorage.getItem($scope.baseKeyTimer + '' + sttDevice);
       if (newStatusDevice == 1 && !deviceStorageTimer) {
-        $window.sessionStorage.setItem('device_running_timer_key' + sttDevice, currentDateTime);
+        $window.sessionStorage.setItem($scope.baseKeyTimer + '' + sttDevice, currentDateTime);
         return currentDateTime;
       } else if (newStatusDevice == 1 && deviceStorageTimer) {
         return deviceStorageTimer;
       } else if (newStatusDevice == 0) {
-        $window.sessionStorage.removeItem('device_running_timer_key' + sttDevice);
+        $window.sessionStorage.removeItem($scope.baseKeyTimer + '' + sttDevice);
         return undefined;
       }
     };
