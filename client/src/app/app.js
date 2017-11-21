@@ -14,7 +14,8 @@ angular.module('app', [
   'templates.common',
   'ui.bootstrap',
   'services.socketIO',
-  'ngDialog'
+  'ngDialog',
+  'timer'
 ]);
 
 

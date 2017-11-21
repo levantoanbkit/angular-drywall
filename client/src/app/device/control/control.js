@@ -1,4 +1,4 @@
-angular.module('device.control.index', ['ngRoute', 'security.authorization', 'services.controlLogResource', 'security.service']);
+angular.module('device.control.index', ['ngRoute', 'security.authorization', 'services.controlLogResource', 'security.service', 'timer']);
 angular.module('device.control.index').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
     .when('/device/control/:id', {

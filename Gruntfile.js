@@ -61,6 +61,22 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'client/bower_components/ng-dialog/js/',
             src: ['ngDialog.min.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
+            expand: true, cwd: 'client/bower_components/humanize-duration/',
+            src: ['humanize-duration.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
+            expand: true, cwd: 'client/bower_components/angular-timer/dist/',
+            src: ['angular-timer.min.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
+            expand: true, cwd: 'client/bower_components/moment/min/',
+            src: ['locales.min.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
+            expand: true, cwd: 'client/bower_components/moment/min/',
+            src: ['moment.min.js'], dest: '<%= distdir %>/vendor/'
           }
         ]
       },
