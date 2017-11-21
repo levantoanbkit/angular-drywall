@@ -111,7 +111,7 @@
                             <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(1, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device1.status == 1">Đang bơm</span><timer ng-if="data.device1.status == 1" interval="1000">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device1.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device1.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device1.status == 1">Đang bơm</span><timer ng-if="data.device1.status == 1" interval="1000" start-time="startDate1">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device1.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device1.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device1.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device1.sensor2}}</span>
@@ -134,7 +134,7 @@
                             <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(2, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device2.status == 1">Đang bơm</span><timer ng-if="data.device2.status == 1" interval="1000">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device2.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device2.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device2.status == 1">Đang bơm</span><timer ng-if="data.device2.status == 1" interval="1000" start-time="startDate2">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device2.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device2.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device2.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device2.sensor2}}</span>
@@ -157,7 +157,7 @@
                             <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(3, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device3.status == 1">Đang bơm</span><timer ng-if="data.device3.status == 1" interval="1000">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device3.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device3.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device3.status == 1">Đang bơm</span><timer ng-if="data.device3.status == 1" interval="1000" start-time="startDate3">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device3.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device3.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device3.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device3.sensor2}}</span>
@@ -180,7 +180,7 @@
                             <button type="button" class="btn btn-danger btn-circle" ng-click="controlDevice(4, 0)"></button><span class="btn-txt">Tắt</span>
                         </label>
                     </div>
-                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device4.status == 1">Đang bơm</span><timer ng-if="data.device4.status == 1" interval="1000">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device4.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device4.status == -1">_ _ _</span></div>
+                    <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device4.status == 1">Đang bơm</span><timer ng-if="data.device4.status == 1" interval="1000" start-time="startDate4">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device4.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device4.status == -1">_ _ _</span></div>
                     <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device4.sensor1}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device4.sensor2}}</span>
