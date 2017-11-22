@@ -1,0 +1,74 @@
+[
+    {
+        "deviceId" : "HCM01",
+        "siteId" : "1",
+        "siteName" : "Dự án Hồ Chí Minh",
+        "status" : "1"
+    },
+    {
+        "deviceId" : "HCM02",
+        "siteId" : "1",
+        "siteName" : "Dự án Hồ Chí Minh",
+        "status" : "1"
+    },
+    {
+        "deviceId" : "HN01",
+        "siteId" : "2",
+        "siteName" : "Dự án Hà Nội",
+        "status" : "1"
+    },
+    {
+        "deviceId" : "HN02",
+        "siteId" : "2",
+        "siteName" : "Dự án Hà Nội",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "PY01",
+        "siteId" : "3",
+        "siteName" : "Dự án Phú Yên",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "BD01",
+        "siteId" : "4",
+        "siteName" : "Dự án Bình Định",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "BD02",
+        "siteId" : "4",
+        "siteName" : "Dự án Bình Định",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "BD03",
+        "siteId" : "4",
+        "siteName" : "Dự án Bình Định",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "KH01",
+        "siteId" : "5",
+        "siteName" : "Dự án Khánh Hoà",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "KH02",
+        "siteId" : "5",
+        "siteName" : "Dự án Khánh Hoà",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "KH03",
+        "siteId" : "5",
+        "siteName" : "Dự án Khánh Hoà",
+        "status" : "0"
+    },
+    {
+        "deviceId" : "DN01",
+        "siteId" : "6",
+        "siteName" : "Dự án Đà Nẵng",
+        "status" : "0"
+    }
+]
