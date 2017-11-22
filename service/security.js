@@ -28,7 +28,7 @@ var socialLogin = function(provider, req, res, next){
       }
 
       if (!info || !info.profile) {
-        workflow.outcome.errors.push(provider + ' user not found');
+        workflow.outcome.errors.push(provider + ' không tìm thấy người dùng');
         return workflow.emit('response');
         //return res.redirect('/login/');
       }
@@ -358,7 +358,9 @@ var security = {
             return workflow.emit('exception', err);
           }
 
-          workflow.emit('sendWelcomeEmail');
+          // workflow.emit('sendWelcomeEmail');
+          workflow.outcome.defaultReturnUrl = '/login';
+          workflow.emit('response');
         });
       });
     });
@@ -393,7 +395,7 @@ var security = {
         }
 
         if (!user) {
-          workflow.outcome.errors.push('Login failed. That is strange.');
+          workflow.outcome.errors.push('Đăng nhập không thành công.');
           return workflow.emit('response');
         }
         else {
@@ -459,7 +461,7 @@ var security = {
         }
 
         if (results.ip >= req.app.config.loginAttempts.forIp || results.ipUser >= req.app.config.loginAttempts.forIpAndUser) {
-          workflow.outcome.errors.push('You\'ve reached the maximum number of login attempts. Please try again later.');
+          workflow.outcome.errors.push('Bạn đã đạt tối đa số lần đăng nhập thất bại, vui lòng đăng nhập lại sau.');
           return workflow.emit('response');
         }
         else {
@@ -483,7 +485,7 @@ var security = {
               return workflow.emit('exception', err);
             }
 
-            workflow.outcome.errors.push('Username and password combination not found or your account is inactive.');
+            workflow.outcome.errors.push('Tên đăng nhập và mật khẩu không đúng hoặc tài khoản của bạn chưa được kích hoạt.');
             return workflow.emit('response');
           });
         }
@@ -577,7 +579,7 @@ var security = {
           workflow.emit('response');
         },
         error: function(err) {
-          workflow.outcome.errors.push('Error Sending: '+ err);
+          workflow.outcome.errors.push('Lỗi khi gửi Email: '+ err);
           workflow.emit('response');
         }
       });
@@ -598,7 +600,7 @@ var security = {
       }
 
       if (req.body.password !== req.body.confirm) {
-        workflow.outcome.errors.push('Passwords do not match.');
+        workflow.outcome.errors.push('Mật khẩu không đúng.');
       }
 
       if (workflow.hasErrors()) {
@@ -619,7 +621,7 @@ var security = {
         }
 
         if (!user) {
-          workflow.outcome.errors.push('Invalid request.');
+          workflow.outcome.errors.push('Yêu cầu không hợp lệ.');
           return workflow.emit('response');
         }
 
@@ -629,7 +631,7 @@ var security = {
           }
 
           if (!isValid) {
-            workflow.outcome.errors.push('Invalid request.');
+            workflow.outcome.errors.push('Yêu cầu không hợp lệ.');
             return workflow.emit('response');
           }
 
