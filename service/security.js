@@ -313,7 +313,7 @@ var security = {
         }
 
         var fieldsToSet = {
-          isActive: 'yes',
+          isActive: 'no',
           username: req.body.username,
           email: req.body.email.toLowerCase(),
           password: hash,
