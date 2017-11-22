@@ -4,10 +4,10 @@ exports.hostname = process.env.hostname || 'localhost';
 exports.port = process.env.PORT || 3000;
 exports.tcpSocketPort = process.env.PORT || 9000;
 exports.mongodb = {
-  uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/socketdb'
+  uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/iotdb'
 };
-exports.companyName = 'levantoanbkit@gmail.com';
-exports.projectName = 'IoT System Project';
+exports.companyName = 'bktechteam';
+exports.projectName = 'IoT Project';
 exports.systemEmail = 'levantoanbkit@gmail.com';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
