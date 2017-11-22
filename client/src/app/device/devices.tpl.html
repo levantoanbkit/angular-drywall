@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="device in data">
                 <div class="device-block green-bg" ng-if="device.status == 1">
-                    <div class="device-label">{{device.deviceId}}</div>
+                    <div class="device-label">Tủ {{device.deviceId}}</div>
                     <div class="project-label">({{device.siteName}})</div>
                     <button type="button" class="btn btn-warning active btn-device-action" ng-click="openPage('control', device.deviceId)">Điều khiển</button>
                     <button type="button" class="btn btn-warning active btn-device-action" ng-click="openPage('history', device.deviceId)">Lịch sử</button>
