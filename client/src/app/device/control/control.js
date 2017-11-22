@@ -25,10 +25,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     });
 
     $scope.baseKeyTimer = 'device' + $scope.deviceName + '_running_timer_key';
-    $scope.startDate1 = $window.sessionStorage.getItem($scope.baseKeyTimer + '1');
-    $scope.startDate2 = $window.sessionStorage.getItem($scope.baseKeyTimer + '2');
-    $scope.startDate3 = $window.sessionStorage.getItem($scope.baseKeyTimer + '3');
-    $scope.startDate4 = $window.sessionStorage.getItem($scope.baseKeyTimer + '4');
+    // $scope.startDate1 = $window.sessionStorage.getItem($scope.baseKeyTimer + '1');
+    // $scope.startDate2 = $window.sessionStorage.getItem($scope.baseKeyTimer + '2');
+    // $scope.startDate3 = $window.sessionStorage.getItem($scope.baseKeyTimer + '3');
+    // $scope.startDate4 = $window.sessionStorage.getItem($scope.baseKeyTimer + '4');
 
     $scope.changeModeBox = function(mode) {
       console.log('isConnect changeModeBox: ', socketIO.socketObject);
@@ -273,19 +273,19 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       });
     };
 
-    var handleTimer = function(newStatusDevice, oldStatusDevice, sttDevice) {
-      var currentDateTime = new Date();
-      var deviceStorageTimer = $window.sessionStorage.getItem($scope.baseKeyTimer + '' + sttDevice);
-      if (newStatusDevice == 1 && !deviceStorageTimer) {
-        $window.sessionStorage.setItem($scope.baseKeyTimer + '' + sttDevice, currentDateTime);
-        return currentDateTime;
-      } else if (newStatusDevice == 1 && deviceStorageTimer) {
-        return deviceStorageTimer;
-      } else if (newStatusDevice == 0) {
-        $window.sessionStorage.removeItem($scope.baseKeyTimer + '' + sttDevice);
-        return undefined;
-      }
-    };
+    // var handleTimer = function(newStatusDevice, oldStatusDevice, sttDevice) {
+    //   var currentDateTime = new Date();
+    //   var deviceStorageTimer = $window.sessionStorage.getItem($scope.baseKeyTimer + '' + sttDevice);
+    //   if (newStatusDevice == 1 && !deviceStorageTimer) {
+    //     $window.sessionStorage.setItem($scope.baseKeyTimer + '' + sttDevice, currentDateTime);
+    //     return currentDateTime;
+    //   } else if (newStatusDevice == 1 && deviceStorageTimer) {
+    //     return deviceStorageTimer;
+    //   } else if (newStatusDevice == 0) {
+    //     $window.sessionStorage.removeItem($scope.baseKeyTimer + '' + sttDevice);
+    //     return undefined;
+    //   }
+    // };
 
     var handleTLCommand = function(data) {
       if (data.sttDevice == 255) {
@@ -295,39 +295,44 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         $scope.data.errorCode = data.errorCode;
         $scope.data.temperature = data.temperatureBox;
         $scope.data.humidity = data.humidityBox;
-      } else {    
+      } else {
+        var offsetTimer = 10000;
         switch(data.sttDevice) {
           case '1':
-            $scope.startDate1 = handleTimer(data.statusDevice, $scope.data.device1.status, data.sttDevice);
+            // $scope.startDate1 = handleTimer(data.statusDevice, $scope.data.device1.status, data.sttDevice);
             $scope.data.device1.status = data.statusDevice;
             $scope.data.device1.sensor1 = data.sensorValue1;
             $scope.data.device1.sensor2 = data.sensorValue2;
             $scope.data.device1.sensor3 = data.sensorValue3;
             $scope.data.device1.sensor4 = data.sensorValue4;
+            $scope.startDate1 = data.timerDevice ? (data.timerDevice + offsetTimer) : undefined;
             break;
           case '2':
-            $scope.startDate2 = handleTimer(data.statusDevice, $scope.data.device2.status, data.sttDevice);
+            // $scope.startDate2 = handleTimer(data.statusDevice, $scope.data.device2.status, data.sttDevice);
             $scope.data.device2.status = data.statusDevice;
             $scope.data.device2.sensor1 = data.sensorValue1;
             $scope.data.device2.sensor2 = data.sensorValue2;
             $scope.data.device2.sensor3 = data.sensorValue3;
             $scope.data.device2.sensor4 = data.sensorValue4;
+            $scope.startDate2 = data.timerDevice ? (data.timerDevice + offsetTimer) : undefined;
             break;
           case '3':
-            $scope.startDate3 = handleTimer(data.statusDevice, $scope.data.device3.status, data.sttDevice);
+            // $scope.startDate3 = handleTimer(data.statusDevice, $scope.data.device3.status, data.sttDevice);
             $scope.data.device3.status = data.statusDevice;
             $scope.data.device3.sensor1 = data.sensorValue1;
             $scope.data.device3.sensor2 = data.sensorValue2;
             $scope.data.device3.sensor3 = data.sensorValue3;
             $scope.data.device3.sensor4 = data.sensorValue4;
+            $scope.startDate3 = data.timerDevice ? (data.timerDevice + offsetTimer) : undefined;
             break;
           case '4':
-            $scope.startDate4 = handleTimer(data.statusDevice, $scope.data.device4.status, data.sttDevice);
+            // $scope.startDate4 = handleTimer(data.statusDevice, $scope.data.device4.status, data.sttDevice);
             $scope.data.device4.status = data.statusDevice;
             $scope.data.device4.sensor1 = data.sensorValue1;
             $scope.data.device4.sensor2 = data.sensorValue2;
             $scope.data.device4.sensor3 = data.sensorValue3;
             $scope.data.device4.sensor4 = data.sensorValue4;
+            $scope.startDate4 = data.timerDevice ? (data.timerDevice + offsetTimer) : undefined;
             break;
           default:
             break;

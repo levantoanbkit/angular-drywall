@@ -1,6 +1,9 @@
 'use strict';
 var _ = require('lodash');
 
+const NodeCache = require( "node-cache" );
+const timerCache = new NodeCache();
+
 var tcpSocketService = {
     parseDataToObject: function(app, connection, data) {
         var parseDataObject = {};
@@ -35,6 +38,7 @@ var tcpSocketService = {
                     parseDataObject.sensorValue2  = parseData[5];
                     parseDataObject.sensorValue3  = parseData[6];
                     parseDataObject.sensorValue4  = parseData[7];
+                    tcpSocketService.handleTimer(parseDataObject.deviceName, parseDataObject.sttDevice, parseDataObject.statusDevice, parseDataObject);
                 } else {
                     parseDataObject.currentActiveModeBox = parseData[3];
                     parseDataObject.statusModeBtnOnBox   = parseData[4];
@@ -59,6 +63,26 @@ var tcpSocketService = {
         }
         return parseDataObject;
     },
+
+    handleTimer: function(deviceName, sttDevice, statusDevice, parseDataObject) {
+        var timerKey = deviceName + '_' + sttDevice;
+        timerCache.get(timerKey, function( err, value ) {
+          if( !err ) {
+            if (value == undefined && statusDevice == 1) {
+                var currentDateTime = _.now();
+                timerCache.set(timerKey, currentDateTime);
+                parseDataObject.timerDevice = currentDateTime;
+            } else if (value && statusDevice == 1) {
+                parseDataObject.timerDevice = value;
+            } else if (value && statusDevice == 0) {
+                timerCache.del(timerKey, function( errDel, count ) {
+                    parseDataObject.timerDevice = undefined;
+                });
+            }
+          }
+        });
+    },
+
     checkAuthenDevice: function(app, connection, parseDataObject) {
         var deviceName  = parseDataObject.deviceName;
         var cmdName     = parseDataObject.cmdName;
