@@ -292,9 +292,10 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         $scope.data.modeBox = data.currentActiveModeBox;
         $scope.data.modeBtn = data.statusModeBtnOnBox;
         $scope.data.simMode = data.statusModeSIMonBox;
-        $scope.data.errorCode = data.errorCode;
+        // $scope.data.errorCode = data.errorCode;
         $scope.data.temperature = data.temperatureBox;
         $scope.data.humidity = data.humidityBox;
+        mappingErrorCodeToText(data.errorCode);
       } else {
         var offsetTimer = 10000;
         switch(data.sttDevice) {
@@ -396,6 +397,12 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           });
         });
       }, 10000);
+    };
+
+    var mappingErrorCodeToText = function(errorCode) {
+      $http.get('/data/error-code.json').then(function(result) {
+        $scope.data.errorCode = result.data[errorCode];
+      });
     };
 
     $scope.raisePromiseInterval();

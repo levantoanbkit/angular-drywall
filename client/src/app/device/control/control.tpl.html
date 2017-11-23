@@ -87,9 +87,9 @@
                         <input type="text" class="form-control col-sm-3" name="note" style="height: 40px;" ng-value="data.functions" readonly><span class="input-group-addon gray-bg white-color">Lưu</span>
                     </div>
                 </div>
-                <div class="heading-control-label mt15">
-                    <div class="head-control-txt">Mã lỗi:</div>
-                    <div class="head-control-txt" ng-bind="data.errorCode"></div>
+                <div class="heading-control-label mt15" ng-show="data.errorCode">
+                    <div class="head-control-txt red-color-unbold">Cảnh báo lỗi:</div>
+                    <div class="head-control-txt red-color" ng-bind="data.errorCode"></div>
                 </div>
                 <div class="heading-control-label mt15">
                     <button type="button" class="btn btn-success" ng-click="goToHistory()">Xem lịch sử điều khiển</button>

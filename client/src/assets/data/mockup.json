@@ -10,7 +10,7 @@
         "modeBtn" : "-1",
         "simMode" : "-1",
         "functions" : "Chống úng cấp 1",
-        "errorCode" : "_ _ _",
+        "errorCode" : "",
         "device1" : {
             "control" : "-1",
             "status" : "-1",
@@ -55,7 +55,7 @@
         "modeBtn" : "-1",
         "simMode" : "-1",
         "functions" : "Chống úng cấp 2",
-        "errorCode" : "_ _ _",
+        "errorCode" : "",
         "device1" : {
             "control" : "-1",
             "status" : "-1",
@@ -100,7 +100,7 @@
         "modeBtn" : "-1",
         "simMode" : "-1",
         "functions" : "Chống úng cấp 1",
-        "errorCode" : "_ _ _",
+        "errorCode" : "",
         "device1" : {
             "control" : "-1",
             "status" : "-1",
