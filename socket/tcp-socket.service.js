@@ -180,7 +180,8 @@ var tcpSocketService = {
         if (parseDataObject.cmdName == 'TL' || parseDataObject.cmdName == 'DK' ||
             parseDataObject.cmdName == 'MODE' || parseDataObject.cmdName == 'LI' ||
             parseDataObject.cmdName == 'XO') {
-            app.io.sockets.emit('answer_from_devices', { data: parseDataObject, cmd: data });
+            var socketIOBoxName = 'answer_from_devices' + parseDataObject.deviceName;
+            app.io.sockets.emit(socketIOBoxName, { data: parseDataObject, cmd: data });
         }
     },
 

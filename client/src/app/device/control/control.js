@@ -18,6 +18,8 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     
     $scope.deviceName = '$' + $route.current.params.id;
 
+    $scope.socketIOBoxName = 'answer_from_devices' + $scope.deviceName;
+
     $http.get('/data/mockup.json').then(function(result) {
       $scope.deviceId = $route.current.params.id;
       $scope.data = result.data[$scope.deviceId];
@@ -297,7 +299,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         $scope.data.humidity = data.humidityBox;
         mappingErrorCodeToText(data.errorCode);
       } else {
-        var offsetTimer = 10000;
+        var offsetTimer = 0;
         switch(data.sttDevice) {
           case '1':
             // $scope.startDate1 = handleTimer(data.statusDevice, $scope.data.device1.status, data.sttDevice);
@@ -353,7 +355,7 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     var handleXOCommand = function(data) {
     };
 
-    socketIO.on('answer_from_devices', function(messageData) {
+    socketIO.on($scope.socketIOBoxName, function(messageData) {
       var data = messageData.data;
       var command = messageData.cmd;
       if (data.deviceName == $scope.deviceName) {
