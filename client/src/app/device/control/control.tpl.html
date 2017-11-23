@@ -112,9 +112,15 @@
                         </label>
                     </div>
                     <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device1.status == 1">Đang bơm</span><timer ng-if="data.device1.status == 1" interval="1000" start-time="startDate1">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device1.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device1.status == -1">_ _ _</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device1.sensor1}}</span>
+                    <div class="heading-control-label">CB rọ bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device1.sensor1 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device1.sensor1 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device1.sensor1 != 0 && data.device1.sensor1 != 1">{{data.device1.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device1.sensor2}}</span>
+                    <div class="heading-control-label">CB ngưỡng bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device1.sensor2 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device1.sensor2 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device1.sensor2 != 0 && data.device1.sensor2 != 1">{{data.device1.sensor2}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device1.sensor3}} m</span>
                     </div>
@@ -135,9 +141,15 @@
                         </label>
                     </div>
                     <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device2.status == 1">Đang bơm</span><timer ng-if="data.device2.status == 1" interval="1000" start-time="startDate2">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device2.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device2.status == -1">_ _ _</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device2.sensor1}}</span>
+                    <div class="heading-control-label">CB rọ bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device2.sensor1 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device2.sensor1 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device2.sensor1 != 0 && data.device2.sensor1 != 1">{{data.device2.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device2.sensor2}}</span>
+                    <div class="heading-control-label">CB ngưỡng bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device2.sensor2 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device2.sensor2 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device2.sensor2 != 0 && data.device2.sensor2 != 1">{{data.device2.sensor2}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device2.sensor3}} m</span>
                     </div>
@@ -158,9 +170,15 @@
                         </label>
                     </div>
                     <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device3.status == 1">Đang bơm</span><timer ng-if="data.device3.status == 1" interval="1000" start-time="startDate3">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device3.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device3.status == -1">_ _ _</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device3.sensor1}}</span>
+                    <div class="heading-control-label">CB rọ bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device3.sensor1 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device3.sensor1 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device3.sensor1 != 0 && data.device3.sensor1 != 1">{{data.device3.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device3.sensor2}}</span>
+                    <div class="heading-control-label">CB ngưỡng bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device3.sensor2 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device3.sensor2 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device3.sensor2 != 0 && data.device3.sensor2 != 1">{{data.device3.sensor2}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device3.sensor3}} m</span>
                     </div>
@@ -181,9 +199,15 @@
                         </label>
                     </div>
                     <div class="heading-control-label">Trạng thái : <span class="status-device-txt green-color" ng-show="data.device4.status == 1">Đang bơm</span><timer ng-if="data.device4.status == 1" interval="1000" start-time="startDate4">&nbsp&nbsp{{hhours}}:{{mminutes}}:{{sseconds}}</timer><span class="status-device-txt red-color" ng-show="data.device4.status == 0">Không bơm</span><span class="status-device-txt" ng-show="data.device4.status == -1">_ _ _</span></div>
-                    <div class="heading-control-label">Cảm biến rọ bơm : <span class="status-device-txt">{{data.device4.sensor1}}</span>
+                    <div class="heading-control-label">CB rọ bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device4.sensor1 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device4.sensor1 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device4.sensor1 != 0 && data.device4.sensor1 != 1">{{data.device4.sensor1}}</span>
                     </div>
-                    <div class="heading-control-label">Cảm biến ngưỡng bơm : <span class="status-device-txt">{{data.device4.sensor2}}</span>
+                    <div class="heading-control-label">CB ngưỡng bơm : 
+                        <span class="status-device-txt red-color" ng-show="data.device4.sensor2 == 0">Hết nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device4.sensor2 == 1">Còn nước</span>
+                        <span class="status-device-txt green-color" ng-show="data.device4.sensor2 != 0 && data.device4.sensor2 != 1">{{data.device4.sensor2}}</span>
                     </div>
                     <div class="heading-control-label">Cảm biến độ sâu : <span class="status-device-txt">{{data.device4.sensor3}} m</span>
                     </div>
