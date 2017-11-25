@@ -3,6 +3,7 @@ var _ = require('lodash');
 
 const NodeCache = require( "node-cache" );
 const timerCache = new NodeCache();
+const loadJsonFile = require('load-json-file');
 
 var tcpSocketService = {
     parseDataToObject: function(app, connection, data) {
@@ -171,8 +172,13 @@ var tcpSocketService = {
     },
 
     replyToDevice: function(app, connection, data, parseDataObject) {
-        if (parseDataObject.cmdName == 'LI' || parseDataObject.cmdName == 'LOGIN') {
+        if (parseDataObject.cmdName == 'LI') {
           connection.write(data+'\r\n');
+        } else if (parseDataObject.cmdName == 'LOGIN') {
+            connection.write(data+'\r\n');
+            loadJsonFile('./socket/cfgt.config.json').then(cfgtConfig => {
+                connection.write(cfgtConfig[parseDataObject.deviceName]);
+            });
         }
     },
 
