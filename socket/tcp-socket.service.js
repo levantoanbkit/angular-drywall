@@ -58,6 +58,11 @@ var tcpSocketService = {
                 parseDataObject.isWrongSyntax = false;
                 parseDataObject.sttDevice     = parseData[2];
                 break;
+            case 'TLTEL':
+                parseDataObject.isWrongSyntax = false;
+                parseDataObject.sttTel = parseData[2];
+                parseDataObject.mobileNumber = parseData[3];
+                break;
             default:
                 parseDataObject.isWrongSyntax = true;
                 break;
@@ -167,6 +172,16 @@ var tcpSocketService = {
                   isValidCommand = true;
                 }
                 break;
+            case 'SETTEL':
+                if (params.stt && params.mobileNumber) {
+                  command += ',' + params.stt + ',' + params.mobileNumber + '\r\n';
+                  isValidCommand = true;
+                }
+                break;
+            case 'GETTEL':
+                command += ',ALL\r\n';
+                isValidCommand = true;
+                break;
         }
         return isValidCommand ? command : '';
     },
@@ -185,7 +200,7 @@ var tcpSocketService = {
     processAnswerOfClient: function(app, connection, data, parseDataObject) {
         if (parseDataObject.cmdName == 'TL' || parseDataObject.cmdName == 'DK' ||
             parseDataObject.cmdName == 'MODE' || parseDataObject.cmdName == 'LI' ||
-            parseDataObject.cmdName == 'XO') {
+            parseDataObject.cmdName == 'XO' || parseDataObject.cmdName == 'TLTEL') {
             var socketIOBoxName = 'answer_from_devices' + parseDataObject.deviceName;
             app.io.sockets.emit(socketIOBoxName, { data: parseDataObject, cmd: data });
         }

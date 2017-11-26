@@ -24,13 +24,14 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
         socket.on('ask:deviceinfo', onAskSerialDeviceInfo);
         socket.on('ask:allinfo', onAskAllInfo);
         socket.on('xo:resetSensor', onResetSensor);
+        socket.on('set:mobileNumber', onSetMobileNumber);
+        socket.on('get:allMobileNumbers', onGetAllMobileNumbers);
 
         socket.on('disconnect', onSocketDisconnect);
 
         function onChangeModeBox(data) {
             var tcpConnection = app.tcpConnections[data.deviceName];
             if (tcpConnection) {
-                // tcpConnection.socketIOs = tcpConnection.socketIOs ? tcpConnection.socketIOs : [];
                 tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'MODE', { modeBox: data.modeBox });
             } else {
                 console.log('onChangeModeBox: tcpConnection is disconnected...');
@@ -70,6 +71,24 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
                 tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'XO', { sttDevice: data.sttDevice });
             } else {
                 console.log('onResetSensor: tcpConnection is disconnected...');
+            }
+        };
+
+        function onSetMobileNumber(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'SETTEL', { stt: data.stt, mobileNumber: data.mobileNumber });
+            } else {
+                console.log('onSetMobileNumber: tcpConnection is disconnected...');
+            }
+        };
+
+        function onGetAllMobileNumbers(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'GETTEL', {});
+            } else {
+                console.log('onGetAllMobileNumbers: tcpConnection is disconnected...');
             }
         };
 

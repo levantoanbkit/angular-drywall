@@ -44,7 +44,6 @@ exports = module.exports = function(app) {
             tcpSocketService.saveConnectionInfo(app, connection, parseDataObject);
             tcpSocketService.replyToDevice(app, connection, data, parseDataObject);
             tcpSocketService.processAnswerOfClient(app, connection, data, parseDataObject);
-
           } else {
             tcpSocketService.forceEndConnection(app, connection, parseDataObject);
           }

@@ -122,16 +122,22 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           }
           break;
         case 'IPS':
-          content = "Thay đổi IP của tủ điện"
+          content = "Thay đổi IP của tủ điện";
           break;
         case 'PORTS':
-          content = "Thay đổi Port của tủ điện"
+          content = "Thay đổi Port của tủ điện";
           break;
         case 'ID':
-          content = "Thay đổi tên của tủ điện"
+          content = "Thay đổi tên của tủ điện";
           break;
         case 'RSTPW':
-          content = "Reset tủ điều khiển"
+          content = "Reset tủ điều khiển";
+          break;
+        case 'SETTEL':
+          content = "Ghi SĐT " + data.mobileNumber + " vào vị trí " + data.stt;
+          break;
+        case 'GETTEL_ALL':
+          content = "Xem danh sách SĐT điều khiển";
           break;
         default:
           break;
@@ -343,6 +349,17 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       }
     };
 
+    var handleTLTELCommand = function(data) {
+      console.log('log data handleTLTEL:', data);
+      if (data.sttTel == 1) {
+        $scope.data.mobileNumber1 = data.mobileNumber;
+      } else if (data.sttTel == 2) {
+        $scope.data.mobileNumber2 = data.mobileNumber;
+      } else if (data.sttTel == 3) {
+        $scope.data.mobileNumber3 = data.mobileNumber;
+      }
+    };
+
     var handleDKCommand = function(data) {
     };
 
@@ -378,6 +395,9 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           case 'XO':
             handleXOCommand(data);
             break;
+          case 'TLTEL':
+            handleTLTELCommand(data);
+            break;
           default:
             break;
         }
@@ -408,5 +428,83 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
     };
 
     $scope.raisePromiseInterval();
+
+    $scope.saveMobileNumber = function(sttNumber, mobileNumber) {
+      console.log('isConnect saveMobileNumber: ', socketIO.socketObject);
+      socketIO.emit('set:mobileNumber', {
+        stt: sttNumber,
+        mobileNumber: mobileNumber,
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.deviceName
+      });
+      $scope.contentMobileNumber = mappingCommandToContent('SETTEL', { stt: sttNumber, mobileNumber: mobileNumber });
+      saveControlLog($scope.contentMobileNumber);
+    };
+
+    var openMobileNumberDialog = function() {
+      var dialog = ngDialog.open({
+        template: '<p style="color: red;"><i class="fa fa-warning"></i> Cảnh báo</p>\
+                  <p>Bạn có chắc chắn lưu SĐT vừa nhập ?</p>\
+                  <div class="ngdialog-buttons">\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">Không</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(2)">Có</button>\
+                  </div>',
+        plain: true,
+        height: 150
+      });
+      dialog.closePromise.then(function (data) {
+        if (data.value == 2) {
+          if ($scope.mobileNumbers[0]) {
+            $scope.saveMobileNumber(1, $scope.mobileNumbers[0]);
+          }
+          if ($scope.mobileNumbers[1]) {
+            $scope.saveMobileNumber(2, $scope.mobileNumbers[1]);
+          }
+          if ($scope.mobileNumbers[2]) {
+            $scope.saveMobileNumber(3, $scope.mobileNumbers[2]);
+          }
+          return true;
+        } else {
+          return false;
+        }
+      });
+    };
+
+    $scope.setMobileNumber = function() {
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | setMobileNumber');
+        openWarningAdminDialog();
+        return false;
+      }
+
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      $scope.mobileNumbers = $scope.data.mobileNumberStr.split(",");
+      openMobileNumberDialog();
+    };
+
+    $scope.viewMobileNumbers = function() {
+      console.log('isConnect viewMobileNumbers: ', socketIO.socketObject);
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | viewMobileNumbers');
+        openWarningAdminDialog();
+        return false;
+      }
+
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      socketIO.emit('get:allMobileNumbers', {
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.deviceName
+      });
+      $scope.contentGetMobileNumber = mappingCommandToContent('GETTEL_ALL', {});
+      saveControlLog($scope.contentGetMobileNumber);
+    };
+
+
 
   }]);
