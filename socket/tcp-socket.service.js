@@ -74,10 +74,12 @@ var tcpSocketService = {
         var timerKey = deviceName + '_' + sttDevice;
         timerCache.get(timerKey, function( err, value ) {
           if( !err ) {
+            parseDataObject.isNewTimer = 0;
             if (value == undefined && statusDevice == 1) {
                 var currentDateTime = _.now();
                 timerCache.set(timerKey, currentDateTime);
                 parseDataObject.timerDevice = currentDateTime;
+                parseDataObject.isNewTimer = 1;
             } else if (value && statusDevice == 1) {
                 parseDataObject.timerDevice = value;
             } else if (value && statusDevice == 0) {

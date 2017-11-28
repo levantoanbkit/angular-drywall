@@ -300,12 +300,20 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
         $scope.data.modeBox = data.currentActiveModeBox;
         $scope.data.modeBtn = data.statusModeBtnOnBox;
         $scope.data.simMode = data.statusModeSIMonBox;
-        // $scope.data.errorCode = data.errorCode;
         $scope.data.temperature = data.temperatureBox;
         $scope.data.humidity = data.humidityBox;
-        mappingErrorCodeToText(data.errorCode);
+        if (data.errorCode) {
+          mappingErrorCodeToText(data.errorCode);
+        }
       } else {
-        var offsetTimer = 0;
+        var offset = Date.now() - data.timerDevice - 4000;
+        var defaultOffsetTimer = offset >= 16000 ? 16000 : (offset >= 10000 ? 10000 : 8000);
+        if (data.isNewTimer) {
+          $window.sessionStorage.setItem($scope.baseKeyTimer + '' + data.sttDevice, offset);
+        }
+        var offsetTimer = parseInt($window.sessionStorage.getItem($scope.baseKeyTimer + '' + data.sttDevice)) || defaultOffsetTimer;
+        console.log("defaultOffsetTimer : ", defaultOffsetTimer);
+        console.log("offsetTimer : ", offsetTimer);
         switch(data.sttDevice) {
           case '1':
             // $scope.startDate1 = handleTimer(data.statusDevice, $scope.data.device1.status, data.sttDevice);
