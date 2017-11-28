@@ -151,20 +151,20 @@ var tcpSocketService = {
                 }
                 break;
             case 'ID':
-                if (params.newDeviceName && params.passOfBox == passOfBox) {
-                  command += ',' + params.newDeviceName + ',' + params.passOfBox + '\r\n';
+                if (params.newBoxName && params.passOfBox == passOfBox) {
+                  command += ',' + params.newBoxName + ',' + params.passOfBox + '\r\n';
                   isValidCommand = true;
                 }
                 break;
             case 'IPS':
-                if (params.newIPServer && params.passOfBox == passOfBox) {
-                  command += ',' + params.newIPServer + ',' + params.passOfBox + '\r\n';
+                if (params.newIP && params.passOfBox == passOfBox) {
+                  command += ',' + params.newIP + ',' + params.passOfBox + '\r\n';
                   isValidCommand = true;
                 }
                 break;
             case 'PORTS':
-                if (params.newPortServer && params.passOfBox == passOfBox) {
-                  command += ',' + params.newPortServer + ',' + params.passOfBox + '\r\n';
+                if (params.newPort && params.passOfBox == passOfBox) {
+                  command += ',' + params.newPort + ',' + params.passOfBox + '\r\n';
                   isValidCommand = true;
                 }
                 break;
@@ -209,21 +209,14 @@ var tcpSocketService = {
     },
 
     makeRemoteControlCommand: function(app, connection, deviceName, cmdName, params) {
-        // Get current tcpsocket connection of device has name is deviceName
-        // connection.socketIOs.push(socket);
         var commandString = tcpSocketService.buildControlCommand(deviceName, cmdName, params);
         if (connection && commandString) {
             console.log('commandString: ', commandString);
-            // console.log('connection command: ', connection);
             connection.write(commandString);
         } else {
             console.log('Connection of deviceName %s is not exist or command is not valid', deviceName);
         }
         return true;
-    },
-
-    callSocketIoBroadcastUserFunction: function(app, parseDataObject) {
-        // Implemet Socket.io in here to broadcast control data of devices to User WebApp
     }
 
 };

@@ -122,13 +122,13 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
           }
           break;
         case 'IPS':
-          content = "Thay đổi IP của tủ điện";
+          content = "Đổi IP =" + data.newIP;
           break;
         case 'PORTS':
-          content = "Thay đổi Port của tủ điện";
+          content = "Đổi Port =" + data.newPort;
           break;
         case 'ID':
-          content = "Thay đổi tên của tủ điện";
+          content = "Đổi tên tủ điện thành: " + data.newBoxName;
           break;
         case 'RSTPW':
           content = "Reset tủ điều khiển";
@@ -513,6 +513,96 @@ angular.module('device.control.index').controller('DeviceControlCtrl', [ '$rootS
       saveControlLog($scope.contentGetMobileNumber);
     };
 
+    $scope.setNewBoxName = function() {
+      console.log("newBoxName: ", $scope.data.newBoxName);
+      if (!$scope.data.newBoxName) {
+        return false;
+      }
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | setMobileNumber');
+        openWarningAdminDialog();
+        return false;
+      }
 
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      socketIO.emit('set:newBoxName', {
+        newBoxName: $scope.data.newBoxName,
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.deviceName
+      });
+      $scope.contentNewBoxName = mappingCommandToContent('ID', { newBoxName: $scope.data.newBoxName });
+      saveControlLog($scope.contentNewBoxName);
+    };
+
+    $scope.setNewIP = function() {
+      console.log("newIP: ", $scope.data.newIP);
+      if (!$scope.data.newIP) {
+        return false;
+      }
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | setMobileNumber');
+        openWarningAdminDialog();
+        return false;
+      }
+
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      socketIO.emit('set:newIP', {
+        newIP: $scope.data.newIP,
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.deviceName
+      });
+      $scope.contentNewIP = mappingCommandToContent('IPS', { newIP: $scope.data.newIP });
+      saveControlLog($scope.contentNewIP);
+    };
+
+    $scope.setNewPort = function() {
+      console.log("newPort: ", $scope.data.newPort);
+      if (parseInt($scope.data.newPort) <= 0 || !$scope.data.newPort) {
+        return false;
+      }
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | setMobileNumber');
+        openWarningAdminDialog();
+        return false;
+      }
+
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      socketIO.emit('set:newPort', {
+        newPort: $scope.data.newPort,
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.deviceName
+      });
+      $scope.contentNewPort = mappingCommandToContent('PORTS', { newPort: $scope.data.newPort });
+      saveControlLog($scope.contentNewPort);
+    };
+    
+    $scope.resetBox = function() {
+      console.log("resetBox");
+      if (!$scope.isAdmin) {
+        console.log('Tài khoản này không phải là Admin | setMobileNumber');
+        openWarningAdminDialog();
+        return false;
+      }
+
+      if ($scope.data.isConnect != 1) {
+        openWarningConnectionDialog();
+        return false;
+      }
+      socketIO.emit('reset:box', {
+        deviceId: $scope.data.deviceId,
+        deviceName: $scope.deviceName
+      });
+      $scope.contentResetBox = mappingCommandToContent('RSTPW', {});
+      saveControlLog($scope.contentResetBox);
+    };
 
   }]);

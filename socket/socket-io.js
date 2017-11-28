@@ -27,6 +27,11 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
         socket.on('set:mobileNumber', onSetMobileNumber);
         socket.on('get:allMobileNumbers', onGetAllMobileNumbers);
 
+        socket.on('set:newBoxName', onSetNewBoxName);
+        socket.on('set:newIP', onSetNewIP);
+        socket.on('set:newPort', onSetNewPort);
+        socket.on('reset:box', onResetBox);
+
         socket.on('disconnect', onSocketDisconnect);
 
         function onChangeModeBox(data) {
@@ -89,6 +94,42 @@ exports = module.exports = function(app, passportSocketIo, socketIOService) {
                 tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'GETTEL', {});
             } else {
                 console.log('onGetAllMobileNumbers: tcpConnection is disconnected...');
+            }
+        };
+
+        function onSetNewBoxName(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'ID', { newBoxName: data.newBoxName, passOfBox: 'dkb2017hcm' });
+            } else {
+                console.log('onSetNewBoxName: tcpConnection is disconnected...');
+            }
+        };
+
+        function onSetNewIP(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'IPS', { newIP: data.newIP, passOfBox: 'dkb2017hcm' });
+            } else {
+                console.log('onSetNewIP: tcpConnection is disconnected...');
+            }
+        };
+
+        function onSetNewPort(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'PORTS', { newPort: data.newPort, passOfBox: 'dkb2017hcm' });
+            } else {
+                console.log('onSetNewPort: tcpConnection is disconnected...');
+            }
+        };
+
+        function onResetBox(data) {
+            var tcpConnection = app.tcpConnections[data.deviceName];
+            if (tcpConnection) {
+                tcpSocketService.makeRemoteControlCommand(app, tcpConnection, data.deviceName, 'RSTPW', { passOfBox: 'dkb2017hcm' });
+            } else {
+                console.log('onResetBox: tcpConnection is disconnected...');
             }
         };
 

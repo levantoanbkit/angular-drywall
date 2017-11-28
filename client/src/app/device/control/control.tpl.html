@@ -227,12 +227,15 @@
         </div>
         <div class="row mt15">
             <div class="col-lg-12">
-                <div class="heading-reset-sensor"><i class="fa fa-refresh" aria-hidden="true"></i> <b>Nút Reset trạng thái cảm biến</b></div>
+                <div class="heading-reset-sensor"><i class="fa fa-refresh" aria-hidden="true"></i> <b>Nút Reset Tủ & trạng thái các cảm biến</b></div>
             </div>
         </div>
         <div class="row mt15 visible-xs">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(255)">Reset Tủ</button>
+                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetBox()">Reset Tủ</button>
+            </div>
+            <div class="col-xs-6">
+                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(255)">Reset CB Tủ</button>
             </div>
         </div>
         <div class="row mt15 visible-xs">
@@ -253,7 +256,10 @@
         </div>
         <div class="row mt15 hidden-xs visible-lg">
             <div class="col-lg-2">
-                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(255)">Reset Tủ</button>
+                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetBox()">Reset Tủ</button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(255)">Reset CB Tủ</button>
             </div>
             <div class="col-lg-2">
                 <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(1)">Reset Bơm 1</button>
@@ -271,22 +277,60 @@
         </div>
         <div class="row mt15 hidden-xs hidden-lg visible-md visible-sm">
             <div class="col-md-4 col-sm-4">
+                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetBox()">Reset Tủ</button>
+            </div>
+            <div class="col-md-4 col-sm-4">
                 <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(1)">Reset Bơm 1</button>
             </div>
             <div class="col-md-4 col-sm-4">
                 <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(3)">Reset Bơm 3</button>
             </div>
-            <div class="col-md-4 col-sm-4">
-                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(255)">Reset Tủ</button>
-            </div>
         </div>
         <div class="row mt15 hidden-xs hidden-lg visible-md visible-sm">
+            <div class="col-md-4 col-sm-4">
+                <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(255)">Reset CB Tủ</button>
+            </div>
             <div class="col-md-4 col-sm-4">
                 <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(2)">Reset Bơm 2</button>
             </div>
             
             <div class="col-md-4 col-sm-4">
                 <button type="button" class="btn btn-danger reset-sensor-button" ng-click="resetSensor(4)">Reset Bơm 4</button>
+            </div>
+        </div>
+        <div class="row mt15">
+            <div class="col-lg-12">
+                <div class="heading-reset-sensor"><i class="fa fa-pencil" aria-hidden="true"></i> <b>Thay đổi tên tủ</b></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="heading-control-label mt4" ng-if="isAdmin">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="boxName" style="height: 40px;" ng-model="data.newBoxName" placeholder="Nhập tên mới cho tủ"><span class="input-group-addon green-bg white-color" ng-click="setNewBoxName()">Lưu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt15">
+            <div class="col-lg-12">
+                <div class="heading-reset-sensor"><i class="fa fa-cog" aria-hidden="true"></i> <b>Thay đổi IP, Port</b></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                <div class="heading-control-label mt4" ng-if="isAdmin">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="newIP" style="height: 40px;" ng-model="data.newIP" placeholder="Nhập IP mới"><span class="input-group-addon green-bg white-color" ng-click="setNewIP()">Lưu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                <div class="heading-control-label mt4" ng-if="isAdmin">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="newPort" style="height: 40px;" ng-model="data.newPort" placeholder="Nhập Port mới"><span class="input-group-addon green-bg white-color" ng-click="setNewPort()">Lưu</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
